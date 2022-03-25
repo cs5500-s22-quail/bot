@@ -35,5 +35,6 @@ public class SayCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /say");
         event.reply(event.getOption("content").getAsString()).queue();
+        
     }
 }
