@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      BOT_TOKEN: "OTQyOTk3NTkzMzU5NzkwMTQx.Ygso8g.pmCG1F0o_9lb7oAbIAK0zbPJi7E"
+      BOT_TOKEN: "test"
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
