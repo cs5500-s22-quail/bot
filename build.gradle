@@ -17,6 +17,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'src/main/libs'
+    }
     jcenter()
     maven {
         name 'm2-dv8tion'
@@ -60,6 +63,9 @@ dependencies {
 
     // MongoDB for data storage
     implementation 'org.mongodb:mongo-java-driver:_'
+
+    // local pokemon api since no remote repositories exist
+    implementation name: 'pokedex-java'
 
 }
 
