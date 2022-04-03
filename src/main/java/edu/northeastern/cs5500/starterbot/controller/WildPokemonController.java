@@ -21,7 +21,7 @@ public class WildPokemonController {
 
         Random rand = new Random();
         int pokemonID = rand.nextInt(MAX_POKEMON_ID + 1);
-        String officialArtworkUrl = new ExitendedPokemon(pokemonID).getOfficialArtworkUrl();
+        String officialArtworkUrl = new ExtendedPokemon(pokemonID).getOfficialArtworkUrl();
 
         return eb.setImage(officialArtworkUrl);
     }
