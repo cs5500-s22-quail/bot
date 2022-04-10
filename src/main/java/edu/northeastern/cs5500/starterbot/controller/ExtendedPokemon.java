@@ -4,33 +4,35 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import eu.iamgio.pokedex.connection.HttpConnection;
 import eu.iamgio.pokedex.exception.PokedexException;
+import javax.annotation.Nonnull;
+import lombok.Data;
 
 /**
  * The JAVA API we use does not process certain json objects that we might use, This class is a list
  * of extended functions to get data we need on https://pokeapi.co/
  */
+@Data
 public class ExtendedPokemon {
     JsonObject pokemonJson;
+    private static final int MAX_POKEMON_ID = 898;
 
-    public ExtendedPokemon(String name) {
-        this.pokemonJson = this.fromName(name);
+    private ExtendedPokemon(JsonObject pokemonJson) {
+        this.pokemonJson = pokemonJson;
     }
 
-    public ExtendedPokemon(Number ID) {
-        this.pokemonJson = this.fromID(ID);
-    }
-
-    private JsonObject fromName(String name) {
+    public static ExtendedPokemon fromName(String name) {
         JsonObject json;
         try {
             json = (new HttpConnection("pokemon/" + name + "/")).getJson();
         } catch (RuntimeException var10) {
             throw new PokedexException("Could not find Pokémon with name/ID " + name);
         }
-        return json;
+        ExtendedPokemon extendedPokemon = new ExtendedPokemon(json);
+
+        return extendedPokemon;
     }
 
-    private JsonObject fromID(Number ID) throws PokedexException {
+    public static ExtendedPokemon fromID(Number ID) throws PokedexException {
         return fromName(String.valueOf(ID));
     }
 
@@ -40,14 +42,21 @@ public class ExtendedPokemon {
      *
      * @return return the url of the official artworks pictures of a respective Pokemon
      */
+    @Nonnull
     public String getOfficialArtworkUrl() {
 
-        JsonElement urlElement =
+        JsonElement jsonElement =
                 this.pokemonJson
                         .getAsJsonObject("sprites")
                         .getAsJsonObject("other")
                         .getAsJsonObject("official-artwork")
                         .get("front_default");
-        return urlElement.getAsString();
+        return jsonElement.getAsString();
+    }
+
+    @Nonnull
+    public String getSpeciesName() {
+        JsonElement jsonElement = this.pokemonJson.getAsJsonObject("species").get("name");
+        return jsonElement.getAsString();
     }
 }
