@@ -29,5 +29,10 @@ public class CommandModule {
     @IntoSet
     public Command provideFishCommand(FishCommand fishCommand) {
         return fishCommand;
+
+    @Provides
+    @IntoSet
+    public Command provideProfileCommand(ProfileCommand profileCommand) {
+        return profileCommand;
     }
 }

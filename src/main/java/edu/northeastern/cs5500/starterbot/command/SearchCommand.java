@@ -5,9 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 @Singleton
 @Slf4j
@@ -25,19 +23,17 @@ public class SearchCommand implements Command {
     @Override
     public CommandData getCommandData() {
         // /search
-        return new CommandData(getName(), "Search nearby wild pokemon")
-                .addOptions(
-                        new OptionData(
-                                        OptionType.STRING,
-                                        "content",
-                                        "The bot will reply to your command with the provided text")
-                                .setRequired(true));
+        return new CommandData(getName(), "Search nearby wild pokemon");
     }
 
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /search");
 
-        event.replyEmbeds(wildPokemonController.getOneRandomPokemon().build()).queue();
+        wildPokemonController.setRandomPokemonID();
+
+        event.replyEmbeds(wildPokemonController.wildPokemonUserInterface().build()).queue();
+
+        wildPokemonController.updateWildPokemonForChannel(event.getMessageChannel().getId());
     }
 }
