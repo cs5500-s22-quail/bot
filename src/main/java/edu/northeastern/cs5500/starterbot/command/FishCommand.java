@@ -8,6 +8,10 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
+/*
+Huiying:
+use "/fish" command to get some credits(random range from 0 - 100)
+*/
 @Singleton
 @Slf4j
 public class FishCommand implements Command {
@@ -22,13 +26,7 @@ public class FishCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Ask the bot to go fishing");
-        // .addOptions(
-        //         new OptionData(
-        //                         OptionType.STRING,
-        //                         "content",
-        //                         "The bot will go fishing and bring something back")
-        //                 .setRequired(false));
+        return new CommandData(getName(), "Ask the bot to go fishing treasure");
     }
 
     @Override
@@ -40,7 +38,7 @@ public class FishCommand implements Command {
                 "https://cdn.discordapp.com/attachments/890889580021157918/928700605311119380/e8ef393b431d0a4ce738f13af0e9d022.gif");
         event.replyEmbeds(eb.build()).queue();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }

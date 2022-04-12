@@ -29,6 +29,7 @@ public class CommandModule {
     @IntoSet
     public Command provideFishCommand(FishCommand fishCommand) {
         return fishCommand;
+    }
 
     @Provides
     @IntoSet
