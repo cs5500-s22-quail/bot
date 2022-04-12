@@ -24,4 +24,10 @@ public class CommandModule {
     public Command provideSearchCommand(SearchCommand searchCommand) {
         return searchCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideFishCommand(FishCommand fishCommand) {
+        return fishCommand;
+    }
 }
