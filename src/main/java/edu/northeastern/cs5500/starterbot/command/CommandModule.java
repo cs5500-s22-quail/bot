@@ -36,4 +36,10 @@ public class CommandModule {
     public Command provideProfileCommand(ProfileCommand profileCommand) {
         return profileCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideShopCommand(ShopCommand shopCommand) {
+        return shopCommand;
+    }
 }
