@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.northeastern.cs5500.starterbot.model.UserBalance;
 import edu.northeastern.cs5500.starterbot.model.UserPreference;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 
@@ -28,6 +29,12 @@ public class RepositoryModule {
     }
 
     @Provides
+    public GenericRepository<UserBalance> provideShopRepository(
+            MongoDBRepository<UserBalance> repository) {
+        return repository;
+    }
+
+    @Provides
     public Class<UserPreference> provideUserPreference() {
         return UserPreference.class;
     }
@@ -35,5 +42,10 @@ public class RepositoryModule {
     @Provides
     public Class<WildPokemon> provideWildPokemon() {
         return WildPokemon.class;
+    }
+
+    @Provides
+    public Class<UserBalance> provideUserBalance() {
+        return UserBalance.class;
     }
 }
