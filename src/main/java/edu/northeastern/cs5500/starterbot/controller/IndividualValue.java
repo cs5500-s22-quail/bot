@@ -5,22 +5,23 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.Data;
 
-/** use generateIV() to Initialize a random IV: */
 @Data
 public class IndividualValue {
+
+    Integer hp;
+    Integer attack;
+    Integer defense;
+    Integer specialAttack;
+    Integer specialDefense;
+    Integer speed;
+    Double IVPercentage;
+    String IVPercentageFormat;
+
     private static final Integer MAX_IV = 31;
     private static final Integer MAX_POSSIBLE_IV = 30;
     private static final Integer MIN_POSSIBLE_IV = 5;
     private static final Integer NUMBER_OF_STATS = 6;
     private static final Integer DECIMAL_PLACES = 2;
-    private Integer hp;
-    private Integer attack;
-    private Integer defense;
-    private Integer specialAttack;
-    private Integer specialDefense;
-    private Integer speed;
-    private Double IVPercentage;
-    private String IVPercentageFormat;
 
     private IndividualValue(
             Integer hp,

@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 public class UserPokemon implements Model {
     ObjectId id;
 
-    ArrayList<String> PokemonID;
+    ArrayList<WildPokemon> PokemonID;
 
     String userID;
 }

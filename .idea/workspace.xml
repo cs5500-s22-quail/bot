@@ -5,18 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61dc957d-cfc5-4eb5-bbd8-55cb206b30a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/IndividualValue.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/UserPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/UserPokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/WildPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/WildPokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/RepositoryModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/RepositoryModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/APIExtensionTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/IndividualValueTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -24,15 +33,25 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="edu.northeastern.cs5500.starterbot" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,20 +93,22 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="edu.northeastern.cs5500.starterbot.model" />
       <recent name="edu.northeastern.cs5500.starterbot.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.northeastern.cs5500.starterbot.controller" />
       <recent name="edu.northeastern.cs5500.starterbot.model" />
       <recent name="edu.northeastern.cs5500.starterbot.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.WildPokemonControllerTest">
-    <configuration name="ExtendedPokemonTest.constructorFromIDTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.PokemonIVTest">
+    <configuration name="ExtendedPokemonTest.getStat" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.ExtendedPokemonTest.constructorFromIDTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.ExtendedPokemonTest.getStat&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -103,12 +124,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="IndividualValueTest.testPercentage" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PokemonIVTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.IndividualValueTest.testPercentage&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.model.PokemonIVTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -124,33 +145,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="IndividualValueTest.testPercentageFormat" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'edu.northeastern.cs5500.starterbot'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.IndividualValueTest.testPercentageFormat&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="IndividualValueTest.testRandom" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.IndividualValueTest.testRandom&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.*&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -187,13 +187,34 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="WildPokemonControllerTest.wildPokemonUserInterface" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.WildPokemonControllerTest.wildPokemonUserInterface&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PokemonIVTest" />
+        <item itemvalue="Gradle.ExtendedPokemonTest.getStat" />
+        <item itemvalue="Gradle.Tests in 'edu.northeastern.cs5500.starterbot'" />
         <item itemvalue="Gradle.WildPokemonControllerTest" />
-        <item itemvalue="Gradle.IndividualValueTest.testPercentageFormat" />
-        <item itemvalue="Gradle.IndividualValueTest.testPercentage" />
-        <item itemvalue="Gradle.IndividualValueTest.testRandom" />
-        <item itemvalue="Gradle.ExtendedPokemonTest.constructorFromIDTest" />
+        <item itemvalue="Gradle.WildPokemonControllerTest.wildPokemonUserInterface" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +227,8 @@
       <option name="presentableId" value="Default" />
       <updated>1649106819333</updated>
       <workItem from="1649106821416" duration="33418000" />
-      <workItem from="1649623489987" duration="6880000" />
+      <workItem from="1649623489987" duration="21114000" />
+      <workItem from="1649873765211" duration="9182000" />
     </task>
     <servers />
   </component>
@@ -228,14 +250,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonController.java</url>
-          <line>25</line>
-          <properties class="edu.northeastern.cs5500.starterbot.controller.WildPokemonController" method="setRandomPokemonID">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/MongoDBRepository.java</url>
           <line>26</line>
@@ -243,5 +257,8 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/edu_northeastern_cs5500_starterbot$Tests_in__edu_northeastern_cs5500_starterbot_.ic" NAME="Tests in 'edu.northeastern.cs5500.starterbot' Coverage Results" MODIFIED="1649880844198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
