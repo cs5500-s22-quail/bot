@@ -35,6 +35,12 @@ public class RepositoryModule {
     }
 
     @Provides
+    public GenericRepository<UserBalance> provideShopRepository(
+            MongoDBRepository<UserBalance> repository) {
+        return repository;
+    }
+
+    @Provides
     public Class<PokemonIV> providePokemonIV() {
         return PokemonIV.class;
     }
@@ -47,5 +53,10 @@ public class RepositoryModule {
     @Provides
     public Class<WildPokemon> provideWildPokemon() {
         return WildPokemon.class;
+    }
+
+    @Provides
+    public Class<UserBalance> provideUserBalance() {
+        return UserBalance.class;
     }
 }
