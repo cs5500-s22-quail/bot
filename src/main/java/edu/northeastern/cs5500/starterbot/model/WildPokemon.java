@@ -9,5 +9,7 @@ public class WildPokemon implements Model {
 
     String wildPokemonName;
 
+    PokemonIV pokemonIV;
+
     String discordChannel;
 }

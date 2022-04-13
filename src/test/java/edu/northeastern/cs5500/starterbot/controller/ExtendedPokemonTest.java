@@ -27,4 +27,15 @@ class ExtendedPokemonTest {
         ExtendedPokemon extendedPokemon = ExtendedPokemon.fromID(123);
         assertEquals("scyther", extendedPokemon.getSpeciesName());
     }
+
+    @Test
+    void getStat() {
+        ExtendedPokemon extendedPokemon = ExtendedPokemon.fromName("ditto");
+        assertEquals(48, extendedPokemon.getStatHp());
+        assertEquals(48, extendedPokemon.getStatAttack());
+        assertEquals(48, extendedPokemon.getStatDefense());
+        assertEquals(48, extendedPokemon.getStatSpeed());
+        assertEquals(48, extendedPokemon.getStatSpecialAttack());
+        assertEquals(48, extendedPokemon.getStatSpecialDefense());
+    }
 }
