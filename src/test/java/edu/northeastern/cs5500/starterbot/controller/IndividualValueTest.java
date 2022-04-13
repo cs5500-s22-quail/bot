@@ -33,7 +33,6 @@ class IndividualValueTest {
         double upperPercentage = 1.01;
         for (int i = 0; i < 5000; i++) {
             IndividualValue iv = IndividualValue.generateIV();
-            System.out.println(iv.getIVPercentage());
             if (iv.getIVPercentage() <= lowerPercentage) fail("percentage is lower than expected");
             if (iv.getIVPercentage() >= upperPercentage)
                 fail(

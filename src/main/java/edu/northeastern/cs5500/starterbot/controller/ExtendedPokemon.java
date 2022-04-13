@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import eu.iamgio.pokedex.connection.HttpConnection;
@@ -58,5 +59,42 @@ public class ExtendedPokemon {
     public String getSpeciesName() {
         JsonElement jsonElement = this.pokemonJson.getAsJsonObject("species").get("name");
         return jsonElement.getAsString();
+    }
+
+    @Nonnull
+    private Integer getStat(Integer id) {
+        JsonArray jsonArray = this.pokemonJson.getAsJsonArray("stats");
+        JsonElement jsonElement = jsonArray.get(id).getAsJsonObject().get("base_stat");
+        return jsonElement.getAsInt();
+    }
+
+    @Nonnull
+    public Integer getStatHp() {
+        return this.getStat(0);
+    }
+
+    @Nonnull
+    public Integer getStatAttack() {
+        return this.getStat(1);
+    }
+
+    @Nonnull
+    public Integer getStatDefense() {
+        return this.getStat(2);
+    }
+
+    @Nonnull
+    public Integer getStatSpecialAttack() {
+        return this.getStat(3);
+    }
+
+    @Nonnull
+    public Integer getStatSpecialDefense() {
+        return this.getStat(4);
+    }
+
+    @Nonnull
+    public Integer getStatSpeed() {
+        return this.getStat(5);
     }
 }
