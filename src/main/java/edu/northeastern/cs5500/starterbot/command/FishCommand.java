@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.controller.ShopController;
 import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,6 +16,8 @@ use "/fish" command to get some credits(random range from 0 - 100)
 @Singleton
 @Slf4j
 public class FishCommand implements Command {
+
+    @Inject ShopController shopController;
 
     @Inject
     public FishCommand() {}
@@ -32,6 +35,7 @@ public class FishCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /fish");
+        // need to be moved to a controller.
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("You threw your fishing rod...");
         eb.setImage(
@@ -44,6 +48,10 @@ public class FishCommand implements Command {
         }
         Random rand = new Random();
         int gotCredit = rand.nextInt(11) * 10;
+        // firstly check an user balance has already exist
+        String discordUserId = event.getUser().getId();
+        shopController.getBalanceForChannel(discordUserId);
+        shopController.addBalanceForChannel(discordUserId, gotCredit);
         eb.setTitle(":moneybag: You got " + gotCredit + " credits!");
         eb.setImage(null);
         event.getHook().editOriginalEmbeds(eb.build()).queue();
