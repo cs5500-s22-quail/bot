@@ -71,7 +71,7 @@ public class ShopController {
     @Nonnull
     public UserBalance addBalanceForChannel(String discordUserId, Integer valueToAdd) {
         Collection<UserBalance> userBalances = shopRepository.getAll();
-        UserBalance targetBalance = new UserBalance();
+        UserBalance targetBalance = getBalanceForChannel(discordUserId);
         for (UserBalance userBalance : userBalances) {
             if (userBalance.getDiscordUserId().equals(discordUserId)) {
                 targetBalance = userBalance;

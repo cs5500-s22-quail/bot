@@ -50,7 +50,6 @@ public class FishCommand implements Command {
         int gotCredit = rand.nextInt(11) * 10;
         // firstly check an user balance has already exist
         String discordUserId = event.getUser().getId();
-        shopController.getBalanceForChannel(discordUserId);
         shopController.addBalanceForChannel(discordUserId, gotCredit);
         eb.setTitle(":moneybag: You got " + gotCredit + " credits!");
         eb.setImage(null);
