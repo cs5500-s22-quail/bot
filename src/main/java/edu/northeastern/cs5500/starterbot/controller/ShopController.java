@@ -52,8 +52,9 @@ public class ShopController {
         // set the component for the EB
     }
 
+    // get the userbalance according to discordId
     @Nonnull
-    private UserBalance getBalanceForChannel(String discordUserId) {
+    public UserBalance getBalanceForChannel(String discordUserId) {
         Collection<UserBalance> userBalances = shopRepository.getAll();
         for (UserBalance userBalance : userBalances) {
             if (userBalance.getDiscordUserId().equals(discordUserId)) return userBalance;
@@ -65,5 +66,28 @@ public class ShopController {
         userBalance.setBalance(Integer.valueOf(100));
         shopRepository.add(userBalance);
         return userBalance;
+    }
+
+    @Nonnull
+    public UserBalance addBalanceForChannel(String discordUserId, Integer valueToAdd) {
+        Collection<UserBalance> userBalances = shopRepository.getAll();
+        UserBalance targetBalance = getBalanceForChannel(discordUserId);
+        for (UserBalance userBalance : userBalances) {
+            if (userBalance.getDiscordUserId().equals(discordUserId)) {
+                targetBalance = userBalance;
+            }
+        }
+        Integer currentBalance =
+                targetBalance.getBalance() == null ? 100 : targetBalance.getBalance();
+        targetBalance.setBalance(currentBalance);
+
+        if (Integer.MAX_VALUE - valueToAdd < currentBalance) {
+            throw new IllegalArgumentException(
+                    "The value cannot be added for exceeding Integer range!");
+        }
+        currentBalance += valueToAdd;
+        targetBalance.setBalance(currentBalance);
+        shopRepository.update(targetBalance);
+        return targetBalance;
     }
 }
