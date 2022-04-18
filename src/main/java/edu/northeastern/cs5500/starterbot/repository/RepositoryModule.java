@@ -2,10 +2,8 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
-import edu.northeastern.cs5500.starterbot.model.PokemonIV;
-import edu.northeastern.cs5500.starterbot.model.UserBalance;
-import edu.northeastern.cs5500.starterbot.model.UserPreference;
-import edu.northeastern.cs5500.starterbot.model.WildPokemon;
+import edu.northeastern.cs5500.starterbot.model.*;
+import edu.northeastern.cs5500.starterbot.service.PokemonService;
 
 @Module
 public class RepositoryModule {
@@ -30,8 +28,8 @@ public class RepositoryModule {
     }
 
     @Provides
-    public GenericRepository<PokemonIV> providePokemonIVRepository(
-            MongoDBRepository<PokemonIV> repository) {
+    public GenericRepository<UserPokemon> provideUserPokemonRepository(
+            MongoDBRepository<UserPokemon> repository) {
         return repository;
     }
 
@@ -39,11 +37,6 @@ public class RepositoryModule {
     public GenericRepository<UserBalance> provideShopRepository(
             MongoDBRepository<UserBalance> repository) {
         return repository;
-    }
-
-    @Provides
-    public Class<PokemonIV> providePokemonIV() {
-        return PokemonIV.class;
     }
 
     @Provides
@@ -57,7 +50,17 @@ public class RepositoryModule {
     }
 
     @Provides
+    public Class<UserPokemon> provideUserPokemon() {
+        return UserPokemon.class;
+    }
+
+    @Provides
     public Class<UserBalance> provideUserBalance() {
         return UserBalance.class;
+    }
+
+    @Provides
+    public Class<PokemonService> providePokemonService() {
+        return PokemonService.class;
     }
 }

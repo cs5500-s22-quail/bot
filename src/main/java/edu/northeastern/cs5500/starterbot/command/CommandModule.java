@@ -42,4 +42,10 @@ public class CommandModule {
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideCatchCommand(CatchCommand catchCommand) {
+        return catchCommand;
+    }
 }
