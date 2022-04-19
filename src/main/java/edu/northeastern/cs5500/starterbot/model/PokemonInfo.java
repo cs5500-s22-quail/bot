@@ -1,18 +1,20 @@
 package edu.northeastern.cs5500.starterbot.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
 
 @Data
-public class PokemonIV implements Model {
-    ObjectId id;
+public class PokemonInfo {
+    String name;
+    IndividualValue iv;
+    Integer level;
 
+    // Official website
+    String officialArtworkUrl;
+    // Stat
     Integer hp;
     Integer attack;
     Integer defense;
     Integer specialAttack;
     Integer specialDefense;
     Integer speed;
-    Double IVPercentage;
-    String IVPercentageFormat;
 }

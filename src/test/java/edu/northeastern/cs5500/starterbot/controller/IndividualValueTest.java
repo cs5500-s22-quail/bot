@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.starterbot.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.northeastern.cs5500.starterbot.model.IndividualValue;
 import org.junit.jupiter.api.Test;
 
 class IndividualValueTest {
@@ -11,7 +12,7 @@ class IndividualValueTest {
     @Test
     void testRandom() {
         for (int i = 0; i < 1000; i++) {
-            IndividualValue iv = IndividualValue.generateIV();
+            IndividualValue iv = new IndividualValue();
             if (iv.getHp() < MIN_IV || iv.getHp() > MAX_IV) fail("unexpected hp random number");
             if (iv.getAttack() < MIN_IV || iv.getAttack() > MAX_IV)
                 fail("unexpected attack random number");
@@ -32,7 +33,7 @@ class IndividualValueTest {
         double lowerPercentage = (double) Math.round(d1 * 10000) / 10000 - 0.01;
         double upperPercentage = 1.01;
         for (int i = 0; i < 5000; i++) {
-            IndividualValue iv = IndividualValue.generateIV();
+            IndividualValue iv = new IndividualValue();
             if (iv.getIVPercentage() <= lowerPercentage) fail("percentage is lower than expected");
             if (iv.getIVPercentage() >= upperPercentage)
                 fail(
@@ -44,7 +45,7 @@ class IndividualValueTest {
     @Test
     void testPercentageFormat() {
         for (int i = 0; i < 5000; i++) {
-            IndividualValue iv = IndividualValue.generateIV();
+            IndividualValue iv = new IndividualValue();
             String format = iv.getIVPercentageFormat();
             if (format.charAt(2) != '.' || format.charAt(format.length() - 1) != '%')
                 fail("Invalid format, Expected is xx.xx%, but actual is " + format);
