@@ -42,4 +42,10 @@ public class CommandModule {
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideTrainCommand(TrainCommand trainCommand) {
+        return trainCommand;
+    }
 }
