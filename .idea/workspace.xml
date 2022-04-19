@@ -6,18 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="61dc957d-cfc5-4eb5-bbd8-55cb206b30a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/CommandModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/CommandModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/service/PokemonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/IndividualValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/IndividualValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/PokemonIV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/UserPokemonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/UserPokemonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/UserPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/UserPokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/WildPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/model/WildPokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/RepositoryModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/RepositoryModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/ExtendedPokemonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/PokemonServiceInfoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/IndividualValueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/IndividualValueTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonInfoControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/PokemonServiceInfoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/PokemonServiceInfoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonInfoControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/WildPokemonInfoControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +50,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -104,8 +97,8 @@
       <recent name="edu.northeastern.cs5500.starterbot.service" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="edu.northeastern.cs5500.starterbot.model" />
       <recent name="edu.northeastern.cs5500.starterbot.controller" />
+      <recent name="edu.northeastern.cs5500.starterbot.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="edu.northeastern.cs5500.starterbot.command" />
@@ -113,13 +106,13 @@
       <recent name="edu.northeastern.cs5500.starterbot.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'edu.northeastern.cs5500.starterbot.controller'">
-    <configuration name="IndividualValueTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.UserPokemonControllerTest.isPossess">
+    <configuration name="PokemonServiceInfoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.IndividualValueTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.PokemonServiceInfoTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -135,12 +128,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PokemonServiceInfoTest.constructorFromIDTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserPokemonControllerTest.getUserPokemonForMemberID" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.PokemonServiceInfoTest.constructorFromIDTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.UserPokemonControllerTest.getUserPokemonForMemberID&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -156,12 +149,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Tests in 'edu.northeastern.cs5500.starterbot.controller'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserPokemonControllerTest.isPossess" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.*&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.UserPokemonControllerTest.isPossess&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -221,11 +214,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'edu.northeastern.cs5500.starterbot.controller'" />
-        <item itemvalue="Gradle.WildPokemonInfoControllerTest.updateWildPokemonForChannel" />
+        <item itemvalue="Gradle.UserPokemonControllerTest.isPossess" />
+        <item itemvalue="Gradle.UserPokemonControllerTest.getUserPokemonForMemberID" />
         <item itemvalue="Gradle.WildPokemonInfoControllerTest" />
-        <item itemvalue="Gradle.IndividualValueTest" />
-        <item itemvalue="Gradle.PokemonServiceInfoTest.constructorFromIDTest" />
+        <item itemvalue="Gradle.WildPokemonInfoControllerTest.updateWildPokemonForChannel" />
+        <item itemvalue="Gradle.PokemonServiceInfoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +233,7 @@
       <workItem from="1649106821416" duration="33418000" />
       <workItem from="1649623489987" duration="21114000" />
       <workItem from="1649873765211" duration="9182000" />
-      <workItem from="1650143101405" duration="19467000" />
+      <workItem from="1650143101405" duration="24964000" />
     </task>
     <servers />
   </component>
@@ -268,9 +261,9 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/repository/RepositoryModule.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/UserPokemonControllerTest.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

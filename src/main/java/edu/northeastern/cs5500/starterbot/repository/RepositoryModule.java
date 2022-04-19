@@ -3,7 +3,6 @@ package edu.northeastern.cs5500.starterbot.repository;
 import dagger.Module;
 import dagger.Provides;
 import edu.northeastern.cs5500.starterbot.model.*;
-import edu.northeastern.cs5500.starterbot.service.PokemonService;
 
 @Module
 public class RepositoryModule {
@@ -57,10 +56,5 @@ public class RepositoryModule {
     @Provides
     public Class<UserBalance> provideUserBalance() {
         return UserBalance.class;
-    }
-
-    @Provides
-    public Class<PokemonService> providePokemonService() {
-        return PokemonService.class;
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,9 @@ class WildPokemonInfoControllerTest {
 
     @BeforeEach
     void setUp() {
+
         this.wildPokemonController = new WildPokemonController(new InMemoryRepository<>());
+        this.wildPokemonController.pokemonService = new PokemonService();
     }
 
     @Test

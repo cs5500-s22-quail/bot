@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import eu.iamgio.pokedex.exception.PokedexException;
-import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 class PokemonServiceInfoTest {
     private static final int MAX_POKEMON_ID = 898;
 
-    @Inject PokemonService pokemonService;
+    PokemonService pokemonService = new PokemonService();
 
     @Test
     void constructorFromIDTest() {

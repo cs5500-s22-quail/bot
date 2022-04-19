@@ -20,7 +20,7 @@ public class UserPokemonController {
             UserPokemon userPokemon = new UserPokemon();
             userPokemon.setUserID("7777");
             userPokemon.setPokemonTeam(new ArrayList<>());
-            userPokemonRepository.add(userPokemon);
+            this.userPokemonRepository.add(userPokemon);
         }
     }
 
@@ -37,7 +37,6 @@ public class UserPokemonController {
         return userPokemon;
     }
 
-    @Nonnull
     public void addPokemon(PokemonInfo pokemonInfo, String userID) {
         if (this.isPossess(pokemonInfo.getName(), userID)) return;
         UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
@@ -49,6 +48,7 @@ public class UserPokemonController {
     @Nonnull
     public Boolean isPossess(String speciesName, String userID) {
         UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
+        if (userPokemon.getPokemonTeam() == null) userPokemon.setPokemonTeam(new ArrayList<>());
         for (PokemonInfo pokemonInfo : userPokemon.getPokemonTeam()) {
             if (pokemonInfo.getName().equals(speciesName)) return Boolean.TRUE;
         }
