@@ -1,5 +1,6 @@
-package edu.northeastern.cs5500.starterbot.controller;
+package edu.northeastern.cs5500.starterbot.model;
 
+import edu.northeastern.cs5500.starterbot.controller.Quality;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
@@ -14,8 +15,10 @@ public class IndividualValue {
     Integer specialAttack;
     Integer specialDefense;
     Integer speed;
+    // 0.3443123 -> 34.43%
     Double IVPercentage;
     String IVPercentageFormat;
+    Quality quality;
 
     private static final Integer MAX_IV = 31;
     private static final Integer MAX_POSSIBLE_IV = 30;
@@ -23,22 +26,19 @@ public class IndividualValue {
     private static final Integer NUMBER_OF_STATS = 6;
     private static final Integer DECIMAL_PLACES = 2;
 
-    private IndividualValue(
-            Integer hp,
-            Integer attack,
-            Integer defense,
-            Integer specialAttack,
-            Integer specialDefense,
-            Integer speed) {
-        this.hp = hp;
-        this.attack = attack;
-        this.defense = defense;
-        this.specialAttack = specialAttack;
-        this.specialDefense = specialDefense;
-        this.speed = speed;
+    public IndividualValue() {
+        this.hp = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
+        this.attack = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
+        this.defense = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
+        this.specialAttack =
+                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
+        this.specialDefense =
+                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
+        this.speed = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
         this.IVPercentage =
                 this.calculatePercentage(hp, attack, defense, specialAttack, specialDefense, speed);
         this.IVPercentageFormat = this.formatPercentage(this.IVPercentage);
+        this.quality = this.setQuality(this.IVPercentage * 100);
     }
 
     /** This double value will have 2 decimal places. */
@@ -56,19 +56,17 @@ public class IndividualValue {
         return percent;
     }
 
+    private Quality setQuality(Double ivpercentage) {
+        int value = ivpercentage.intValue();
+        if (value < 45) return Quality.GREEN;
+        if (value < 65) return Quality.BLUE;
+        if (value < 85) return Quality.PURPLE;
+        return Quality.RED;
+    }
+
     private String formatPercentage(Double value) {
         NumberFormat format = NumberFormat.getPercentInstance(Locale.US);
         format.setMinimumFractionDigits(DECIMAL_PLACES);
         return format.format(value);
-    }
-
-    public static IndividualValue generateIV() {
-        return new IndividualValue(
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1),
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1),
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1),
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1),
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1),
-                ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1));
     }
 }

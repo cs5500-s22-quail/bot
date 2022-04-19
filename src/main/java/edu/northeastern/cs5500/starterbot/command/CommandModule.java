@@ -48,4 +48,10 @@ public class CommandModule {
     public Command provideTrainCommand(TrainCommand trainCommand) {
         return trainCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideCatchCommand(CatchCommand catchCommand) {
+        return catchCommand;
+    }
 }

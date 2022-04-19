@@ -1,8 +1,9 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
 import edu.northeastern.cs5500.starterbot.command.Command;
-import edu.northeastern.cs5500.starterbot.controller.ExtendedPokemon;
+import edu.northeastern.cs5500.starterbot.controller.PokemonGenerator;
 import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
+import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import java.util.Collection;
 import java.util.Set;
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 public class MessageListener extends ListenerAdapter {
     @Inject WildPokemonController wildPokemonController;
+    @Inject PokemonGenerator pokemonGenerator;
 
     @Inject Set<Command> commands;
 
@@ -40,19 +42,10 @@ public class MessageListener extends ListenerAdapter {
 
     @Override
     public void onButtonClick(ButtonClickEvent event) {
-        if (event.getComponentId().equals("hello")) {
-            event.reply("Hello :)").queue();
-        } else if (event.getComponentId().equals("emoji")) {
-//            event.reply("xixixi :)");
-            //            log.info("event: /search");
+        if (event.getComponentId().equals("moneyMagic")) {
+            event.reply("MoneyMagic feature is developing...").queue();
+        } else if (event.getComponentId().equals("fight")) {
             EmbedBuilder embedBuilder = generateWildPokemonEmbeds(event);
-
-            try {
-                event.wait(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             // TODO: for now, event ends here by showing the wild pokemon image
             // Once changes for saving and calling existing pokemon are done,
             // needs to add logics for comparing level and showing the results
@@ -69,48 +62,23 @@ public class MessageListener extends ListenerAdapter {
     //
     //    }
 
-    private EmbedBuilder generateWildPokemonEmbeds(ButtonClickEvent event) {
-        String channelID = event.getMessageChannel().getId();
-        ExtendedPokemon extendedPokemon = wildPokemonController.setRandomPokemonID();
-        wildPokemonController.updateWildPokemonForChannel(channelID);
-
-        String officialArtworkUrl = extendedPokemon.getOfficialArtworkUrl();
-        WildPokemon wildPokemon = wildPokemonController.getWildPokemonForChannel(channelID);
+    //TODO: move to somewhere else
+    private EmbedBuilder generateWildPokemonEmbeds() {
+        WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
+        PokemonInfo fightPokemonInfo = fightPokemon.getPokemonInfo();
+        String officialArtworkUrl = fightPokemonInfo.getOfficialArtworkUrl();
 
         EmbedBuilder embedBuilder =
                 new EmbedBuilder()
-                        .setTitle("A wild pokemon has appeared!")
+                        .setTitle(fightPokemonInfo.getName() + " is fighting with your pokemon...")
                         .setDescription(
-                                extendedPokemon.getSpeciesName()
-                                        + "is fighting with your pokemon."
-                                        + "\n"
-                                        // TODO: change attributes for /fight usage
-                                        + ivUI(
-                                                "HP",
-                                                extendedPokemon.getStatHp(),
-                                                wildPokemon.getPokemonIV().getHp())
-                                        + ivUI(
-                                                "Attack",
-                                                extendedPokemon.getStatAttack(),
-                                                wildPokemon.getPokemonIV().getAttack())
-                                        + ivUI(
-                                                "Defense",
-                                                extendedPokemon.getStatDefense(),
-                                                wildPokemon.getPokemonIV().getDefense())
-                                        + ivUI(
-                                                "Sp.Atk",
-                                                extendedPokemon.getStatSpecialAttack(),
-                                                wildPokemon.getPokemonIV().getSpecialAttack())
-                                        + ivUI(
-                                                "Sp.Def",
-                                                extendedPokemon.getStatSpecialDefense(),
-                                                wildPokemon.getPokemonIV().getSpecialDefense())
-                                        + ivUI(
-                                                "Speed",
-                                                extendedPokemon.getStatSpeed(),
-                                                wildPokemon.getPokemonIV().getSpeed())
-                                        + "\nTotal IV: "
-                                        + wildPokemon.getPokemonIV().getIVPercentageFormat())
+                                // TODO: change attributes for /fight usage
+                                //                                        +
+                                // ivUIBundle(fightPokemonInfo)
+                                "HP: "
+                                        + fightPokemonInfo.getHp()
+                                        + " | Level: "
+                                        + fightPokemonInfo.getLevel())
                         .setImage(officialArtworkUrl);
 
         return embedBuilder;

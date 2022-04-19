@@ -30,7 +30,7 @@ public class TrainCommand implements Command {
                                         OptionType.STRING,
                                         "content",
                                         "The bot will reply to your command with the provided text")
-                                .setRequired(true));
+                                .setRequired(false));
     }
 
     @Override
@@ -38,13 +38,16 @@ public class TrainCommand implements Command {
         log.info("event: /train");
         event.reply("Click the button to say hello")
                 .addActionRow(
-                        Button.primary("hello", "MoneyMagic"), // Button with only a label
-                        Button.success(
-                                "emoji",
-                                Emoji.fromMarkdown(
-                                        "<:minn:245267426227388416>"))) // Button with only an emoji
+                        Button.primary("moneyMagic", "MoneyMagic"), // Button with only a label
+                        Button.danger(
+                                        "fight", "Fight"
+                                        //
+                                        // Emoji.fromMarkdown("<:minn:245267426227388416> Emoji")
+
+                                        // Button with only an emoji
+                                        )
+                                .withEmoji(Emoji.fromUnicode("U+2694")))
                 .queue();
-        event.reply(event.getOption("content").getAsString()).queue();
     }
 
     //    @Override

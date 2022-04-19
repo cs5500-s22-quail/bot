@@ -1,27 +1,27 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
-import java.util.Random;
+import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
+import edu.northeastern.cs5500.starterbot.model.WildPokemon;
+import edu.northeastern.cs5500.starterbot.service.PokemonService;
+import javax.inject.Inject;
 
 public class PokemonGenerator {
-  private static final int MAX_POKEMON_ID = 898;
-  private static final int MAX_POKEMON_LEVEL = 50;
+    @Inject PokemonService pokemonService;
+    private static final int MAX_POKEMON_ID = 898;
 
-  Integer randomPokemonID;
-  ExtendedPokemon extendedPokemon;
-  Integer level;
+    // constructor:
+    //    public PokemonGenerator() {}
+    @Inject
+    public PokemonGenerator(PokemonService pokemonService) {
+        this.pokemonService = pokemonService;
+    }
 
-  //constructor:
-  public PokemonGenerator(int level) {
-    Random rand = new Random();
-    this.randomPokemonID = rand.nextInt(MAX_POKEMON_ID + 1);
-    this.extendedPokemon = ExtendedPokemon.fromID(this.randomPokemonID);
-    this.level = level;
-  }
-
-  public PokemonGenerator() {
-    Random rand = new Random();
-    this.randomPokemonID = rand.nextInt(MAX_POKEMON_ID + 1);
-    this.extendedPokemon = ExtendedPokemon.fromID(this.randomPokemonID);
-    this.level = rand.nextInt(MAX_POKEMON_LEVEL + 1);
-  }
+    // get a random wildPokemon with random level
+    public WildPokemon getWildPokemon() {
+        WildPokemon wildPokemon = new WildPokemon();
+        PokemonInfo pokemonInfo =
+                pokemonService.fromIDWithRandomLevel((int) (Math.random() * MAX_POKEMON_ID) + 1);
+        wildPokemon.setPokemonInfo(pokemonInfo);
+        return wildPokemon;
+    }
 }
