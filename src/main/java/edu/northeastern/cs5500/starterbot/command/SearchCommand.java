@@ -202,5 +202,6 @@ public class SearchCommand implements Command, ButtonClickHandler {
             wildPokemonController.deletePokemonInfoForChannel(channelId);
         }
         event.getHook().editOriginalEmbeds(eb.build()).queue();
+
     }
 }

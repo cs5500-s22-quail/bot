@@ -7,8 +7,6 @@
     <list default="true" id="61dc957d-cfc5-4eb5-bbd8-55cb206b30a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/UserPokemonControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/UserPokemonControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -89,8 +87,8 @@
       <recent name="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="edu.northeastern.cs5500.starterbot.model" />
       <recent name="edu.northeastern.cs5500.starterbot.controller" />
+      <recent name="edu.northeastern.cs5500.starterbot.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="edu.northeastern.cs5500.starterbot.controller" />
@@ -98,7 +96,28 @@
       <recent name="edu.northeastern.cs5500.starterbot.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserPokemonControllerTest.addPokemon">
+  <component name="RunManager" selected="Gradle.BattleTest.pokemonVersePokemon">
+    <configuration name="BattleTest.pokemonVersePokemon" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.BattleTest.pokemonVersePokemon&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="ExtendedPokemonTest.getStat" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -126,27 +145,6 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.model.PokemonIVTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'edu.northeastern.cs5500.starterbot'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.*&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -206,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BattleTest.pokemonVersePokemon" />
         <item itemvalue="Gradle.UserPokemonControllerTest.addPokemon" />
         <item itemvalue="Gradle.UserPokemonControllerTest.updateCarriedPokemonForMemberID" />
         <item itemvalue="Gradle.PokemonIVTest" />
         <item itemvalue="Gradle.ExtendedPokemonTest.getStat" />
-        <item itemvalue="Gradle.Tests in 'edu.northeastern.cs5500.starterbot'" />
       </list>
     </recent_temporary>
   </component>
