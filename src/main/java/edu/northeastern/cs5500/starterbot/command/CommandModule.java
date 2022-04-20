@@ -57,6 +57,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public ButtonClickHandler provideSearchCommandClickHandler(SearchCommand searchCommand) {
+        return searchCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
     }
@@ -65,12 +71,6 @@ public class CommandModule {
     @IntoSet
     public Command provideTrainCommand(TrainCommand trainCommand) {
         return trainCommand;
-    }
-
-    @Provides
-    @IntoSet
-    public Command provideCatchCommand(CatchCommand catchCommand) {
-        return catchCommand;
     }
 
     @Provides
