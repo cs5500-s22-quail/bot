@@ -96,7 +96,7 @@
       <recent name="edu.northeastern.cs5500.starterbot.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BattleTest.pokemonVersePokemon">
+  <component name="RunManager" selected="Gradle.Tests in 'edu.northeastern.cs5500.starterbot.test'">
     <configuration name="BattleTest.pokemonVersePokemon" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -118,12 +118,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ExtendedPokemonTest.getStat" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PokemonIVTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.controller.ExtendedPokemonTest.getStat&quot;" />
+        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.model.PokemonIVTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -139,12 +139,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PokemonIVTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'edu.northeastern.cs5500.starterbot.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;edu.northeastern.cs5500.starterbot.model.PokemonIVTest&quot;" />
+        <option name="scriptParameters" value="--tests *" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -204,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'edu.northeastern.cs5500.starterbot.test'" />
         <item itemvalue="Gradle.BattleTest.pokemonVersePokemon" />
         <item itemvalue="Gradle.UserPokemonControllerTest.addPokemon" />
         <item itemvalue="Gradle.UserPokemonControllerTest.updateCarriedPokemonForMemberID" />
         <item itemvalue="Gradle.PokemonIVTest" />
-        <item itemvalue="Gradle.ExtendedPokemonTest.getStat" />
       </list>
     </recent_temporary>
   </component>
