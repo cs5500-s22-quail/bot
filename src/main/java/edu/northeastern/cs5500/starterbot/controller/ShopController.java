@@ -21,7 +21,6 @@ public class ShopController {
     GenericRepository<UserBalance> shopRepository;
     Integer userID;
     ArrayList<WildPokemon> previousPokemons;
-    ArrayList<ExtendedPokemon> previousExtendedPokemons;
     long previousVisitedTime;
     // use as an api
     @Inject WildPokemonController wildPokemonController;
@@ -32,7 +31,6 @@ public class ShopController {
     public ShopController(GenericRepository<UserBalance> shopRepository) {
         this.shopRepository = shopRepository;
         this.previousPokemons = new ArrayList<>(3);
-        this.previousExtendedPokemons = new ArrayList<>(3);
         // if this is the first time to use the shop feature, set it to default value of -1
         this.previousVisitedTime = -1;
     }
@@ -84,12 +82,9 @@ public class ShopController {
                 || currentTime - this.previousVisitedTime > TEN_MINUTES_IN_MILLISSECONDS) {
             // update the pokemons
             this.previousPokemons.clear();
-            this.previousExtendedPokemons.clear();
             this.previousVisitedTime = currentTime;
             for (int i = 0; i < 3; i++) {
-                ExtendedPokemon extendedPokemon = wildPokemonController.setRandomPokemonID();
                 wildPokemonController.updateWildPokemonForChannel(discordChannelID);
-                this.previousExtendedPokemons.add(extendedPokemon);
                 this.previousPokemons.add(
                         wildPokemonController.getWildPokemonForChannel(discordChannelID));
             }
@@ -135,16 +130,15 @@ public class ShopController {
             int upperBound = 100;
             int price = rand.nextInt(upperBound) + upperBound;
             WildPokemon currentOne = this.previousPokemons.get(i);
-            ExtendedPokemon extendedPokemom = this.previousExtendedPokemons.get(i);
             // for the specific attributes of the pokemon, we are not
             // disclosing to the user unless they buy it.
             currentEmbedBuilder.setTitle(
-                    "\n" + currentOne.getWildPokemonName() + "    Price: " + price);
-            pokemonsToBuy.append("HP: " + extendedPokemom.getStatHp());
-            pokemonsToBuy.append("\n" + "Attack: " + extendedPokemom.getStatAttack());
-            pokemonsToBuy.append("\n" + "Defense: " + extendedPokemom.getStatDefense());
+                    "\n" + currentOne.getPokemonInfo().getName() + "    Price: " + price);
+            pokemonsToBuy.append("HP: " + currentOne.getPokemonInfo().getHp());
+            pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
+            pokemonsToBuy.append("\n" + "Defense: " + currentOne.getPokemonInfo().getDefense());
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
-            currentEmbedBuilder.setThumbnail(extendedPokemom.getOfficialArtworkUrl());
+            currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
         }
 
         mb.setEmbeds(

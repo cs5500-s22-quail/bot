@@ -7,9 +7,7 @@ import org.bson.types.ObjectId;
 public class WildPokemon implements Model {
     ObjectId id;
 
-    String wildPokemonName;
-
-    PokemonIV pokemonIV;
+    PokemonInfo pokemonInfo;
 
     String discordChannel;
 }

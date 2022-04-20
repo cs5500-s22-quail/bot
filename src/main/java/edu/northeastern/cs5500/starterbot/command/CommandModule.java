@@ -57,7 +57,7 @@ public class CommandModule {
 
     @Provides
     @IntoSet
-    public Command provideShowCommand(ShowCommand showCommand) {
-        return showCommand;
+    public Command provideCatchCommand(CatchCommand catchCommand) {
+        return catchCommand;
     }
 }

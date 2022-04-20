@@ -2,27 +2,23 @@ package edu.northeastern.cs5500.starterbot.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.northeastern.cs5500.starterbot.model.PokemonIV;
+import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WildPokemonControllerTest {
+class WildPokemonInfoControllerTest {
 
     WildPokemonController wildPokemonController;
 
     @BeforeEach
     void setUp() {
-        this.wildPokemonController = new WildPokemonController(new InMemoryRepository<>());
-        this.wildPokemonController.setRandomPokemonID();
-    }
 
-    @Test
-    void setRandomPokemonID() {
-        this.wildPokemonController.setRandomPokemonID();
-        assertNotNull(this.wildPokemonController.getRandomPokemonID());
+        this.wildPokemonController = new WildPokemonController(new InMemoryRepository<>());
+        this.wildPokemonController.pokemonService = new PokemonService();
     }
 
     @Test
@@ -35,7 +31,7 @@ class WildPokemonControllerTest {
         for (WildPokemon wp : wildPokemons) {
             if (wp.getDiscordChannel().equals(testChannel)) wildPokemon = wp;
         }
-        PokemonIV pokemonIV = wildPokemon.getPokemonIV();
+        PokemonInfo pokemonIV = wildPokemon.getPokemonInfo();
         assertNotNull(pokemonIV);
     }
 
@@ -49,9 +45,10 @@ class WildPokemonControllerTest {
                 this.wildPokemonController.wildPokemonRepository.delete(wildPokemon.getId());
         }
 
-        assertNull(this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonIV());
+        assertNull(
+                this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonInfo());
         this.wildPokemonController.updateWildPokemonForChannel(testChannel);
         assertNotNull(
-                this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonIV());
+                this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonInfo());
     }
 }
