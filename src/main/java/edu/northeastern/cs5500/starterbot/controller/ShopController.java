@@ -110,8 +110,6 @@ public class ShopController {
 
         StringBuilder movesToBuy = new StringBuilder();
 
-        StringBuilder pokemonsToBuy = new StringBuilder();
-
         eb.setTitle("Welcome to the Shop!     " + preferredName)
                 .setDescription("Your current balance: " + currentBalance);
 
@@ -132,6 +130,7 @@ public class ShopController {
             WildPokemon currentOne = this.previousPokemons.get(i);
             // for the specific attributes of the pokemon, we are not
             // disclosing to the user unless they buy it.
+            StringBuilder pokemonsToBuy = new StringBuilder();
             currentEmbedBuilder.setTitle(
                     "\n" + currentOne.getPokemonInfo().getName() + "    Price: " + price);
             pokemonsToBuy.append("HP: " + currentOne.getPokemonInfo().getHp());
