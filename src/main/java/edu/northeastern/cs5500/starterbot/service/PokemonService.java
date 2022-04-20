@@ -21,11 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 public class PokemonService implements Service {
 
     private static final int MAX_POKEMON_ID = 898;
+    private static final int MAX_POKEMON_LEVEL = 50;
 
     @Inject
     public PokemonService() {}
 
+    // will always get a level1 Pokemon
     public PokemonInfo fromName(String name) {
+        return fromNameWithRandomLevel(name, false);
+    }
+
+    public PokemonInfo fromNameWithRandomLevel(String name, boolean randomLevel) {
         JsonObject json;
         try {
             json = (new HttpConnection("pokemon/" + name + "/")).getJson();
@@ -36,7 +42,12 @@ public class PokemonService implements Service {
         PokemonInfo pokemonInfo = new PokemonInfo();
 
         pokemonInfo.setName(this.getName(json));
-        pokemonInfo.setLevel(1);
+        if (randomLevel) {
+            int rand = (int) (Math.random() * MAX_POKEMON_LEVEL) + 1;
+            pokemonInfo.setLevel(rand);
+        } else {
+            pokemonInfo.setLevel(1);
+        }
         pokemonInfo.setIv(new IndividualValue());
         pokemonInfo.setOfficialArtworkUrl(this.getOfficialArtworkUrl(json));
 
@@ -53,6 +64,10 @@ public class PokemonService implements Service {
 
     public PokemonInfo fromID(Number ID) throws PokedexException {
         return this.fromName(String.valueOf(ID));
+    }
+
+    public PokemonInfo fromIDWithRandomLevel(Number ID) throws PokedexException {
+        return this.fromNameWithRandomLevel(String.valueOf(ID), true);
     }
 
     /**
