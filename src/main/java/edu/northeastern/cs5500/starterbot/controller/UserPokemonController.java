@@ -54,7 +54,7 @@ public class UserPokemonController {
     }
 
     @Nonnull
-    public Boolean hasCarriedPokemon(String userID){
+    public Boolean hasCarriedPokemon(String userID) {
         return this.getUserPokemonForMemberID(userID).getCarriedPokemon() != null;
     }
 

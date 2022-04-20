@@ -12,6 +12,7 @@ class UserPokemonControllerTest {
 
     UserPokemonController userPokemonController;
     PokemonService pokemonService = new PokemonService();
+
     @BeforeEach
     void setUp() {
         this.userPokemonController = new UserPokemonController(new InMemoryRepository<>());
@@ -33,7 +34,6 @@ class UserPokemonControllerTest {
         assertFalse(this.userPokemonController.hasCarriedPokemon("888"));
         userPokemonController.addPokemon(pokemonService.fromID(4), "888");
         assertTrue(this.userPokemonController.hasCarriedPokemon("888"));
-
     }
 
     @Test
@@ -45,11 +45,14 @@ class UserPokemonControllerTest {
     @Test
     void updateCarriedPokemonForMemberID() {
         UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("999");
-        assertThrows(IndexOutOfBoundsException.class, ()->userPokemonController.updateCarriedPokemonForMemberID("999", 1));
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> userPokemonController.updateCarriedPokemonForMemberID("999", 1));
         userPokemonController.addPokemon(pokemonService.fromID(4), "999");
         userPokemonController.addPokemon(pokemonService.fromID(5), "999");
         userPokemonController.updateCarriedPokemonForMemberID("999", 2);
-        assertEquals(userPokemonController.getUserPokemonForMemberID("999").getCarriedPokemon(),
+        assertEquals(
+                userPokemonController.getUserPokemonForMemberID("999").getCarriedPokemon(),
                 userPokemonController.getUserPokemonForMemberID("999").getPokemonTeam().get(2 - 1));
     }
 
