@@ -51,11 +51,11 @@ public class ShopController {
                         .build();
 
         Integer currentBalance =
-                getBalanceForChannel(discordUserId).getBalance() == null
+                getBalanceForUserId(discordUserId).getBalance() == null
                         ? 100
-                        : getBalanceForChannel(discordUserId).getBalance();
-        getBalanceForChannel(discordUserId).setBalance(currentBalance);
-        shopRepository.update(getBalanceForChannel(discordUserId));
+                        : getBalanceForUserId(discordUserId).getBalance();
+        getBalanceForUserId(discordUserId).setBalance(currentBalance);
+        shopRepository.update(getBalanceForUserId(discordUserId));
         eb.setTitle("Welcome to the Shop!     " + preferredName)
                 .setDescription("Your current balance: " + currentBalance);
         mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
@@ -102,11 +102,11 @@ public class ShopController {
         // NOT be updated.
 
         Integer currentBalance =
-                getBalanceForChannel(discordUserId).getBalance() == null
+                getBalanceForUserId(discordUserId).getBalance() == null
                         ? 100
-                        : getBalanceForChannel(discordUserId).getBalance();
-        getBalanceForChannel(discordUserId).setBalance(currentBalance);
-        shopRepository.update(getBalanceForChannel(discordUserId));
+                        : getBalanceForUserId(discordUserId).getBalance();
+        getBalanceForUserId(discordUserId).setBalance(currentBalance);
+        shopRepository.update(getBalanceForUserId(discordUserId));
 
         StringBuilder movesToBuy = new StringBuilder();
 
@@ -157,7 +157,7 @@ public class ShopController {
 
     // get the userbalance according to discordId
     @Nonnull
-    public UserBalance getBalanceForChannel(String discordUserId) {
+    public UserBalance getBalanceForUserId(String discordUserId) {
         Collection<UserBalance> userBalances = shopRepository.getAll();
         for (UserBalance userBalance : userBalances) {
             if (userBalance.getDiscordUserId().equals(discordUserId)) return userBalance;
@@ -172,9 +172,9 @@ public class ShopController {
     }
 
     @Nonnull
-    public UserBalance addBalanceForChannel(String discordUserId, Integer valueToAdd) {
+    public UserBalance updateBalanceForUserId(String discordUserId, Integer valueToAdd) {
         Collection<UserBalance> userBalances = shopRepository.getAll();
-        UserBalance targetBalance = getBalanceForChannel(discordUserId);
+        UserBalance targetBalance = getBalanceForUserId(discordUserId);
         for (UserBalance userBalance : userBalances) {
             if (userBalance.getDiscordUserId().equals(discordUserId)) {
                 targetBalance = userBalance;
