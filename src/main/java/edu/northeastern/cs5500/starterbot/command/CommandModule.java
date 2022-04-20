@@ -51,8 +51,20 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public ButtonClickHandler provideTrainCommandClickHandler(TrainCommand trainCommand) {
+        return trainCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideTrainCommand(TrainCommand trainCommand) {
+        return trainCommand;
     }
 
     @Provides

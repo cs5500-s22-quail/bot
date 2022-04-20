@@ -3,6 +3,8 @@ package edu.northeastern.cs5500.starterbot.listener;
 import edu.northeastern.cs5500.starterbot.command.ButtonClickHandler;
 import edu.northeastern.cs5500.starterbot.command.Command;
 import edu.northeastern.cs5500.starterbot.command.SelectionMenuHandler;
+import edu.northeastern.cs5500.starterbot.controller.PokemonGenerator;
+import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,6 +19,9 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 @Slf4j
 public class MessageListener extends ListenerAdapter {
+    @Inject WildPokemonController wildPokemonController;
+    @Inject PokemonGenerator pokemonGenerator;
+    @Inject EmbedBuilderGenerator embedBuilderGenerator;
 
     @Inject Set<Command> commands;
     @Inject Set<SelectionMenuHandler> selectionMenus;
