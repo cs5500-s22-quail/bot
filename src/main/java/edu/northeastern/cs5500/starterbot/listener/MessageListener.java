@@ -1,24 +1,31 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
+import edu.northeastern.cs5500.starterbot.command.ButtonClickHandler;
 import edu.northeastern.cs5500.starterbot.command.Command;
+import edu.northeastern.cs5500.starterbot.command.SelectionMenuHandler;
 import edu.northeastern.cs5500.starterbot.controller.PokemonGenerator;
 import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import net.dv8tion.jda.api.EmbedBuilder;
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
+@Slf4j
 public class MessageListener extends ListenerAdapter {
     @Inject WildPokemonController wildPokemonController;
     @Inject PokemonGenerator pokemonGenerator;
     @Inject EmbedBuilderGenerator embedBuilderGenerator;
 
     @Inject Set<Command> commands;
+    @Inject Set<SelectionMenuHandler> selectionMenus;
+    @Inject Set<ButtonClickHandler> buttons;
 
     @Inject
     public MessageListener() {
@@ -40,15 +47,34 @@ public class MessageListener extends ListenerAdapter {
     }
 
     @Override
-    public void onButtonClick(ButtonClickEvent event) {
-        if (event.getComponentId().equals("moneyMagic")) {
-            event.reply("MoneyMagic feature is developing...").queue(); // TODO: finishing...
-        } else if (event.getComponentId().equals("fight")) {
-            EmbedBuilder embedBuilder = embedBuilderGenerator.getFightPokemonEmbeds();
-            // TODO: for now, event ends here by showing the wild pokemon image
-            // Once changes for saving and calling existing pokemon are done,
-            // needs to add logics for comparing level and showing the results
-            event.replyEmbeds(embedBuilder.build()).queue();
+    public void onSelectionMenu(@Nonnull SelectionMenuEvent event) {
+        log.info("onSelectionMenu: {}", event.getComponent().getId());
+        String handlerName = event.getComponent().getId();
+
+        for (SelectionMenuHandler selectionMenuHandler : selectionMenus) {
+            log.info("selection menu is: ", selectionMenuHandler.getName());
+            if (selectionMenuHandler.getName().equals(handlerName)) {
+                selectionMenuHandler.onSelectionMenu(event);
+                return;
+            }
         }
+
+        log.error("Unknown button handler: {}", handlerName);
+    }
+
+    @Override
+    public void onButtonClick(@Nonnull ButtonClickEvent event) {
+        log.info("onButtonClick: {}", event.getButton().getId());
+        String id = event.getButton().getId();
+        String handlerName = id.split(":", 2)[0];
+
+        for (ButtonClickHandler buttonClickHandler : buttons) {
+            if (buttonClickHandler.getName().equals(handlerName)) {
+                buttonClickHandler.onButtonClick(event);
+                return;
+            }
+        }
+
+        log.error("Unknown button handler: {}", handlerName);
     }
 }

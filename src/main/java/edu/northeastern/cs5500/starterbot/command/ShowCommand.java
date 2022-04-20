@@ -5,43 +5,49 @@ import edu.northeastern.cs5500.starterbot.controller.UserPreferenceController;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 @Singleton
 @Slf4j
-public class ShopCommand implements Command, SelectionMenuHandler {
+public class ShowCommand implements Command, ButtonClickHandler {
 
     @Inject UserPreferenceController userPreferenceController;
     @Inject ShopController shopController;
 
     @Inject
-    public ShopCommand() {}
+    public ShowCommand() {}
 
     @Override
     public String getName() {
-        return "shop";
+        return "show";
     }
 
     @Override
     public CommandData getCommandData() {
         return new CommandData(
-                getName(), "Provide the balance of the user and instructions for further steps.");
+                getName(), "You could redeem your balance for the following moves and pokemons");
     }
 
     @Override
     public void onEvent(CommandInteraction event) {
-        log.info("event: /shop");
+        log.info("event: /show");
 
         String discordUserId = event.getUser().getId();
         String preferredName = userPreferenceController.getPreferredNameForUser(discordUserId);
+        String discordChannelId = event.getChannel().getId();
 
-        event.reply(shopController.getBalanceEB(discordUserId, preferredName).build()).queue();
+        event.reply(
+                        shopController
+                                .getShowEB(discordUserId, preferredName, discordChannelId)
+                                .build())
+                .queue();
     }
 
     @Override
-    public void onSelectionMenu(SelectionMenuEvent event) {
-        event.reply(event.getInteraction().getValues().get(0)).queue();
+    public void onButtonClick(ButtonClickEvent event) {
+        // TBD
+        event.reply(event.getButton().getLabel()).queue();
     }
 }
