@@ -63,6 +63,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public SelectionMenuHandler provideRedeemCommandClickHandler(RedeemCommand redeemCommand) {
+        return redeemCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
     }
@@ -83,5 +89,11 @@ public class CommandModule {
     @IntoSet
     public Command provideAllPokemonCommand(AllPokemonCommand allPokemonCommand) {
         return allPokemonCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideRedeemCommand(RedeemCommand redeemCommand) {
+        return redeemCommand;
     }
 }
