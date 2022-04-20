@@ -168,7 +168,7 @@ public class SearchCommand implements Command, ButtonClickHandler {
             return;
         }
 
-        shopController.updateBalanceForUserId(userId, -1);
+        shopController.updateBalanceForUserId(userId, -COST_PER_CATCH);
         EmbedBuilder eb =
                 new EmbedBuilder()
                         .setTitle("Catching the " + wildPokemon.getPokemonInfo().getName() + "...")

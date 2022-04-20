@@ -184,7 +184,7 @@ public class ShopController {
                 targetBalance.getBalance() == null ? 100 : targetBalance.getBalance();
         targetBalance.setBalance(currentBalance);
 
-        if (Integer.MAX_VALUE - currentBalance <   valueToAdd) {
+        if (Integer.MAX_VALUE - currentBalance < valueToAdd) {
             throw new IllegalArgumentException(
                     "The value cannot be added for exceeding Integer range!");
         }
@@ -194,5 +194,4 @@ public class ShopController {
         shopRepository.update(targetBalance);
         return targetBalance;
     }
-
 }

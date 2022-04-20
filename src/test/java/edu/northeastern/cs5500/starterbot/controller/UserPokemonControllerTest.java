@@ -34,6 +34,10 @@ class UserPokemonControllerTest {
         assertFalse(this.userPokemonController.hasCarriedPokemon("888"));
         userPokemonController.addPokemon(pokemonService.fromID(4), "888");
         assertTrue(this.userPokemonController.hasCarriedPokemon("888"));
+        userPokemonController.addPokemon(pokemonService.fromID(5), "888");
+        userPokemonController.addPokemon(pokemonService.fromID(6), "888");
+        assertEquals(
+                3, userPokemonController.getUserPokemonForMemberID("888").getPokemonTeam().size());
     }
 
     @Test
