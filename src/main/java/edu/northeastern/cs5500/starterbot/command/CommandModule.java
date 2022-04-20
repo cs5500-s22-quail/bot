@@ -60,4 +60,10 @@ public class CommandModule {
     public Command provideCatchCommand(CatchCommand catchCommand) {
         return catchCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideShowCommand(ShowCommand showCommand) {
+        return showCommand;
+    }
 }
