@@ -10,6 +10,7 @@ public class PokemonInfo {
 
     // Official website
     String officialArtworkUrl;
+
     // Stat
     Integer hp;
     Integer attack;

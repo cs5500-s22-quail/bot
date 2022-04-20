@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.controller.ShopController;
 import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
 import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
@@ -16,6 +17,9 @@ public class CatchCommand implements Command {
 
     @Inject UserPokemonController userPokemonController;
     @Inject WildPokemonController wildPokemonController;
+    @Inject ShopController shopController;
+
+    private static final int COST_PER_CATCH = 1;
 
     @Inject
     public CatchCommand() {}
@@ -27,15 +31,15 @@ public class CatchCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Spend some coins to try to catch the pokemon");
+        return new CommandData(getName(), "This will cost you " + COST_PER_CATCH + "coins.");
     }
 
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /catch");
-        String userId = event.getMessageChannel().getId();
+        String channelId = event.getMessageChannel().getId();
 
-        if (!wildPokemonController.hasWildPokemonForChannel(userId)) {
+        if (!wildPokemonController.hasWildPokemonForChannel(channelId)) {
             log.info("catching status: do not have wild pokemon in this channel");
             EmbedBuilder embedBuilder =
                     new EmbedBuilder()
@@ -44,8 +48,9 @@ public class CatchCommand implements Command {
             event.replyEmbeds(embedBuilder.build()).queue();
             return;
         }
+        String userId = event.getUser().getId();
 
-        WildPokemon wildPokemon = wildPokemonController.getWildPokemonForChannel(userId);
+        WildPokemon wildPokemon = wildPokemonController.getWildPokemonForChannel(channelId);
         if (userPokemonController.isPossess(wildPokemon.getPokemonInfo().getName(), userId)) {
             log.info("catching status: User already have this pokemon");
             EmbedBuilder embedBuilder =
@@ -53,9 +58,11 @@ public class CatchCommand implements Command {
             event.replyEmbeds(embedBuilder.build()).queue();
             return;
         }
+
         EmbedBuilder eb =
                 new EmbedBuilder()
-                        .setTitle("Catching the " + wildPokemon.getPokemonInfo().getName() + "...");
+                        .setTitle("Catching the " + wildPokemon.getPokemonInfo().getName() + "...")
+                        .setDescription("-" + COST_PER_CATCH + " coins, Your Current Balance is ");
 
         event.replyEmbeds(eb.build()).queue();
 
@@ -77,6 +84,8 @@ public class CatchCommand implements Command {
             eb =
                     new EmbedBuilder()
                             .setTitle("Congratulation! The pokemon has added to your pocket!");
+            userPokemonController.addPokemon(wildPokemon.getPokemonInfo(), userId);
+            wildPokemonController.deletePokemonInfoForChannel(channelId);
         }
         event.getHook().editOriginalEmbeds(eb.build()).queue();
     }

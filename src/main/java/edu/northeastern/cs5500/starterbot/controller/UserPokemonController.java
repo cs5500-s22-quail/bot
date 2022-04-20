@@ -42,7 +42,20 @@ public class UserPokemonController {
         UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
         ArrayList<PokemonInfo> list = userPokemon.getPokemonTeam();
         list.add(pokemonInfo);
+        if (userPokemon.getCarriedPokemon() == null) {
+            userPokemon.setCarriedPokemon(pokemonInfo);
+        }
         this.userPokemonRepository.update(userPokemon);
+    }
+
+    public void updateCarriedPokemonForMemberID(String userID, Integer index) {
+        UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
+        userPokemon.setCarriedPokemon(userPokemon.getPokemonTeam().get(index - 1));
+    }
+
+    @Nonnull
+    public Boolean hasCarriedPokemon(String userID) {
+        return this.getUserPokemonForMemberID(userID).getCarriedPokemon() != null;
     }
 
     @Nonnull
