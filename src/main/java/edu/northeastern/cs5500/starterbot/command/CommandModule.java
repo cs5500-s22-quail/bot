@@ -87,6 +87,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public Command provideAllPokemonCommand(AllPokemonCommand allPokemonCommand) {
+        return allPokemonCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideRedeemCommand(RedeemCommand redeemCommand) {
         return redeemCommand;
     }
