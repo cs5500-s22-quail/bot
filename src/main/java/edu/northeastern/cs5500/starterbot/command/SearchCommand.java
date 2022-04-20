@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.Quality;
+import edu.northeastern.cs5500.starterbot.controller.ShopController;
 import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
@@ -15,6 +16,9 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 @Slf4j
 public class SearchCommand implements Command {
     @Inject WildPokemonController wildPokemonController;
+    @Inject ShopController shopController;
+
+    private static final int COST_PER_CATCH = 1;
 
     @Inject
     public SearchCommand() {}
@@ -41,31 +45,47 @@ public class SearchCommand implements Command {
 
         EmbedBuilder embedBuilder =
                 new EmbedBuilder()
-                        .setTitle("A wild pokemon has appeared!")
-                        .setDescription(
-                                "Guess the pokemon and type /catch <pokemon> to catch the pokemon."
-                                        + wildPokemon.getPokemonInfo().getName()
-                                        + System.lineSeparator()
-                                        + ivUIBundle(wildPokemon.getPokemonInfo()))
+                        .setTitle("A " + wildPokemon.getPokemonInfo().getName() + " has appeared!")
                         .setImage(wildPokemon.getPokemonInfo().getOfficialArtworkUrl());
 
         Quality quality = wildPokemon.getPokemonInfo().getIv().getQuality();
+        String pokemonQuality = "";
         switch (quality) {
             case RED:
                 embedBuilder = embedBuilder.setColor(0xff210d);
+                pokemonQuality = "Legendary";
                 break;
             case PURPLE:
                 embedBuilder = embedBuilder.setColor(0xc30dff);
+                pokemonQuality = "Epic";
                 break;
             case BLUE:
                 embedBuilder = embedBuilder.setColor(0x0d7eff);
+                pokemonQuality = "Superior";
                 break;
             case GREEN:
                 embedBuilder = embedBuilder.setColor(0x0dff82);
+                pokemonQuality = "Good";
                 break;
             default:
                 break;
         }
+
+        embedBuilder.setDescription(
+                "Quality: "
+                        + pokemonQuality
+                        + System.lineSeparator()
+                        + ivUIBundle(wildPokemon.getPokemonInfo())
+                        + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "Use /catch command to catch the pokemon. "
+                        + System.lineSeparator()
+                        + "This will cost you "
+                        + COST_PER_CATCH
+                        + " coins. (Your Current Balance: "
+                        + shopController.getBalanceForChannel(event.getUser().getId()).getBalance()
+                        + " coins)");
+
         event.replyEmbeds(embedBuilder.build()).queue();
     }
 
@@ -82,7 +102,8 @@ public class SearchCommand implements Command {
                         pokemonInfo.getSpecialDefense(),
                         pokemonInfo.getIv().getSpecialDefense())
                 + ivUI("Speed", pokemonInfo.getSpeed(), pokemonInfo.getIv().getSpeed())
-                + "\nTotal IV: "
+                + System.lineSeparator()
+                + "Total IV: "
                 + pokemonInfo.getIv().getIVPercentageFormat();
     }
 

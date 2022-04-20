@@ -57,4 +57,10 @@ public class WildPokemonController {
     public Boolean hasWildPokemonForChannel(String discordChannelID) {
         return this.getWildPokemonForChannel(discordChannelID).getPokemonInfo() != null;
     }
+
+    @Nonnull
+    public void deletePokemonInfoForChannel(String discordChannelId) {
+        WildPokemon wildPokemon = this.getWildPokemonForChannel(discordChannelId);
+        wildPokemon.setPokemonInfo(null);
+    }
 }

@@ -10,5 +10,7 @@ public class UserPokemon implements Model {
 
     ArrayList<PokemonInfo> pokemonTeam;
 
+    PokemonInfo carriedPokemon;
+
     String userID;
 }
