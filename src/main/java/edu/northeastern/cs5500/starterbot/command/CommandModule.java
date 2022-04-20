@@ -39,7 +39,25 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public SelectionMenuHandler provideShopCommandMenuHandler(ShopCommand shopCommand) {
+        return shopCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public ButtonClickHandler provideShowCommandClickHandler(ShowCommand showCommand) {
+        return showCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideShopCommand(ShopCommand shopCommand) {
         return shopCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideShowCommand(ShowCommand showCommand) {
+        return showCommand;
     }
 }
