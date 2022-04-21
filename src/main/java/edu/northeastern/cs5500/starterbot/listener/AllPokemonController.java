@@ -24,11 +24,11 @@ public class AllPokemonController {
             list += "Level: " + pokemonInfo.getLevel() + " | ";
             list += "IV: " + pokemonInfo.getIv().getIVPercentageFormat() + "\n";
         }
+        EmbedBuilder embedBuilder = new EmbedBuilder()；
         if (list.equals("")) {
-
+            embedBuilder.setTitle("Ops, you haven't got a Pokemon yet.").setDescription("Try to search and catch one by: /search");
         }
-        EmbedBuilder embedBuilder =
-                new EmbedBuilder().setTitle("Your pokemon:").setDescription(list);
+        embedBuilder.setTitle("Your pokemon:").setDescription(list);
         return embedBuilder;
     }
 }
