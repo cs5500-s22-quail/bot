@@ -1,10 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.controller.Quality;
-import edu.northeastern.cs5500.starterbot.controller.ShopController;
-import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
-import edu.northeastern.cs5500.starterbot.controller.UserPreferenceController;
-import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
+import edu.northeastern.cs5500.starterbot.controller.*;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,6 +18,7 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
     @Inject UserPreferenceController userPreferenceController;
     @Inject ShopController shopController;
     @Inject UserPokemonController userPokemonController;
+    @Inject DisplayController displayController;
 
     @Inject
     public RedeemCommand() {}
@@ -111,7 +108,7 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
                         "Quality: "
                                 + pokemonQuality
                                 + System.lineSeparator()
-                                + ivUIBundle(wildPokemon.getPokemonInfo())
+                                + displayController.PokemonInfoUI(wildPokemon.getPokemonInfo())
                                 + System.lineSeparator());
                 mb.setEmbeds(embedBuilder.build());
 
@@ -126,27 +123,5 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
                                 + event.getInteraction().getValues().get(0)
                                 + " went wrong, try again.")
                 .queue();
-    }
-
-    private String ivUIBundle(PokemonInfo pokemonInfo) {
-        return ivUI("HP", pokemonInfo.getHp(), pokemonInfo.getIv().getHp())
-                + ivUI("Attack", pokemonInfo.getAttack(), pokemonInfo.getIv().getAttack())
-                + ivUI("Defense", pokemonInfo.getDefense(), pokemonInfo.getIv().getDefense())
-                + ivUI(
-                        "Sp.Atk",
-                        pokemonInfo.getSpecialAttack(),
-                        pokemonInfo.getIv().getSpecialAttack())
-                + ivUI(
-                        "Sp.Def",
-                        pokemonInfo.getSpecialDefense(),
-                        pokemonInfo.getIv().getSpecialDefense())
-                + ivUI("Speed", pokemonInfo.getSpeed(), pokemonInfo.getIv().getSpeed())
-                + System.lineSeparator()
-                + "Total IV: "
-                + pokemonInfo.getIv().getIVPercentageFormat();
-    }
-
-    private String ivUI(String statName, int baseStat, int iv) {
-        return System.lineSeparator() + statName + ": " + baseStat + " - IV: " + iv + "/31";
     }
 }
