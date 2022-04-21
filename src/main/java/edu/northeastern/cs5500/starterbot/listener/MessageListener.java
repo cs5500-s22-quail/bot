@@ -52,7 +52,7 @@ public class MessageListener extends ListenerAdapter {
         String handlerName = event.getComponent().getId();
 
         for (SelectionMenuHandler selectionMenuHandler : selectionMenus) {
-            log.info("selection menu is: ", selectionMenuHandler.getName());
+            log.info("selection menu is: " + selectionMenuHandler.getName());
             if (selectionMenuHandler.getName().equals(handlerName)) {
                 selectionMenuHandler.onSelectionMenu(event);
                 return;
