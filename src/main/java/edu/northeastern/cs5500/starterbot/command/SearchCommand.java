@@ -1,10 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.controller.Quality;
-import edu.northeastern.cs5500.starterbot.controller.ShopController;
-import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
-import edu.northeastern.cs5500.starterbot.controller.WildPokemonController;
-import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
+import edu.northeastern.cs5500.starterbot.controller.*;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -23,7 +19,7 @@ public class SearchCommand implements Command, ButtonClickHandler {
     @Inject WildPokemonController wildPokemonController;
     @Inject UserPokemonController userPokemonController;
     @Inject ShopController shopController;
-
+    @Inject DisplayController displayController;
     private static final int COST_PER_CATCH = 3;
 
     @Inject
@@ -81,7 +77,7 @@ public class SearchCommand implements Command, ButtonClickHandler {
                 "Quality: "
                         + pokemonQuality
                         + System.lineSeparator()
-                        + ivUIBundle(wildPokemon.getPokemonInfo())
+                        + displayController.PokemonInfoUI(wildPokemon.getPokemonInfo())
                         + System.lineSeparator()
                         + System.lineSeparator()
                         + "Click Catch button to catch the pokemon. "
@@ -101,28 +97,6 @@ public class SearchCommand implements Command, ButtonClickHandler {
                                 Button.secondary("search:letGo", "LetGo")));
 
         event.reply(mb.build()).queue();
-    }
-
-    public String ivUIBundle(PokemonInfo pokemonInfo) {
-        return ivUI("HP", pokemonInfo.getHp(), pokemonInfo.getIv().getHp())
-                + ivUI("Attack", pokemonInfo.getAttack(), pokemonInfo.getIv().getAttack())
-                + ivUI("Defense", pokemonInfo.getDefense(), pokemonInfo.getIv().getDefense())
-                + ivUI(
-                        "Sp.Atk",
-                        pokemonInfo.getSpecialAttack(),
-                        pokemonInfo.getIv().getSpecialAttack())
-                + ivUI(
-                        "Sp.Def",
-                        pokemonInfo.getSpecialDefense(),
-                        pokemonInfo.getIv().getSpecialDefense())
-                + ivUI("Speed", pokemonInfo.getSpeed(), pokemonInfo.getIv().getSpeed())
-                + System.lineSeparator()
-                + "Total IV: "
-                + pokemonInfo.getIv().getIVPercentageFormat();
-    }
-
-    public String ivUI(String statName, int baseStat, int iv) {
-        return System.lineSeparator() + statName + ": " + baseStat + " - IV: " + iv + "/31";
     }
 
     @Override
