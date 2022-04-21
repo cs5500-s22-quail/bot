@@ -11,7 +11,7 @@ class IndividualValueTest {
 
     @Test
     void testRandom() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 500; i++) {
             IndividualValue iv = new IndividualValue();
             if (iv.getHp() < MIN_IV || iv.getHp() > MAX_IV) fail("unexpected hp random number");
             if (iv.getAttack() < MIN_IV || iv.getAttack() > MAX_IV)
@@ -32,7 +32,7 @@ class IndividualValueTest {
         double d1 = (double) MIN_IV / (double) MAX_IV;
         double lowerPercentage = (double) Math.round(d1 * 10000) / 10000 - 0.01;
         double upperPercentage = 1.01;
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 500; i++) {
             IndividualValue iv = new IndividualValue();
             if (iv.getIVPercentage() <= lowerPercentage) fail("percentage is lower than expected");
             if (iv.getIVPercentage() >= upperPercentage)
@@ -44,7 +44,7 @@ class IndividualValueTest {
 
     @Test
     void testPercentageFormat() {
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 500; i++) {
             IndividualValue iv = new IndividualValue();
             String format = iv.getIVPercentageFormat();
             if (format.charAt(2) != '.' || format.charAt(format.length() - 1) != '%')

@@ -15,10 +15,6 @@ public class IndividualValue {
     Integer specialAttack;
     Integer specialDefense;
     Integer speed;
-    // 0.3443123 -> 34.43%
-    Double IVPercentage;
-    String IVPercentageFormat;
-    Quality quality;
 
     private static final Integer MAX_IV = 31;
     private static final Integer MAX_POSSIBLE_IV = 30;
@@ -35,12 +31,25 @@ public class IndividualValue {
         this.specialDefense =
                 ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
         this.speed = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
-        this.IVPercentage =
-                this.calculatePercentage(hp, attack, defense, specialAttack, specialDefense, speed);
-        this.IVPercentageFormat = this.formatPercentage(this.IVPercentage);
-        this.quality = this.setQuality(this.IVPercentage * 100);
     }
 
+    public Quality getQuality() {
+        return this.setQuality(this.getIVPercentage() * 100);
+    }
+
+    /**
+     * 0.3443123 -> 0.3443
+     *
+     * @return
+     */
+    public Double getIVPercentage() {
+        return this.calculatePercentage(hp, attack, defense, specialAttack, specialDefense, speed);
+    }
+
+    /** @return the format of IV Percentage; */
+    public String getIVPercentageFormat() {
+        return this.formatPercentage(this.getIVPercentage());
+    }
     /** This double value will have 2 decimal places. */
     private Double calculatePercentage(
             Integer hp,
