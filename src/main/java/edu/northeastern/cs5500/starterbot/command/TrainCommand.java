@@ -19,13 +19,18 @@ import net.dv8tion.jda.api.interactions.components.Button;
 @Singleton
 @Slf4j
 public class TrainCommand implements Command, ButtonClickHandler {
+
     //    @Inject EmbedBuilderGenerator embedBuilderGenerator;
-    @Inject UserPokemonController userPokemonController;
-    @Inject PokemonGenerator pokemonGenerator;
-    @Inject TrainController trainController;
+    @Inject
+    UserPokemonController userPokemonController;
+    @Inject
+    PokemonGenerator pokemonGenerator;
+    @Inject
+    TrainController trainController;
 
     @Inject
-    public TrainCommand() {}
+    public TrainCommand() {
+    }
 
     @Override
     public String getName() {
@@ -41,12 +46,12 @@ public class TrainCommand implements Command, ButtonClickHandler {
     public void onEvent(CommandInteraction event) {
         log.info("event: /train");
         event.reply("How do you want to level up your pokemon?")
-                .addActionRow(
-                        Button.primary(
-                                "train:moneyMagic", "MoneyMagic"), // Button with only a label
-                        Button.danger("train:fight", "Fight")
-                                .withEmoji(Emoji.fromUnicode("U+2694")))
-                .queue();
+            .addActionRow(
+                Button.primary(
+                    "train:moneyMagic", "MoneyMagic"), // Button with only a label
+                Button.danger("train:fight", "Fight")
+                    .withEmoji(Emoji.fromUnicode("U+2694")))
+            .queue();
     }
 
     @Override
@@ -54,27 +59,47 @@ public class TrainCommand implements Command, ButtonClickHandler {
         if (event.getComponentId().equals("train:moneyMagic")) {
             event.reply("MoneyMagic feature is developing...").queue(); // TODO: finishing...
         } else if (event.getComponentId().equals("train:fight")) {
-            WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
-            String userId = event.getUser().getId();
-            //            TrainController trainController = new TrainController(userId);
-            EmbedBuilder embedBuilder = trainController.getFightPokemonEmbeds(fightPokemon);
-            // TODO: for now, event ends here by showing the wild pokemon image
-            // Once changes for saving and calling existing pokemon are done,
-            // needs to add logics for comparing level and showing the results
-            event.replyEmbeds(embedBuilder.build()).queue();
+//            WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
+//            String userId = event.getUser().getId();
+//            //            TrainController trainController = new TrainController(userId);
+//            EmbedBuilder embedBuilder = trainController.getFightPokemonEmbeds(fightPokemon);
+//            // TODO: for now, event ends here by showing the wild pokemon image
+//            // Once changes for saving and calling existing pokemon are done,
+//            // needs to add logics for comparing level and showing the results
+//            event.replyEmbeds(embedBuilder.build()).queue();
+//
+//            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+//            PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
+//            int levelBefore = userPokemonInfo.getLevel();
+//            embedBuilder =
+//                    trainController.getFightResultEmbeds(
+//                            embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
+//            event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
+//            int levelAfter = userPokemonInfo.getLevel();
+//            if (levelBefore < levelAfter) {
+//                embedBuilder = trainController.getLevelUpEmbeds(embedBuilder, userPokemonInfo);
+//                event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
+        }
+    }
 
-            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
-            PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
-            int levelBefore = userPokemonInfo.getLevel();
-            embedBuilder =
-                    trainController.getFightResultEmbeds(
-                            embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
+    public void clickFight(ButtonClickEvent event) {
+        WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
+        String userId = event.getUser().getId();
+        //            TrainController trainController = new TrainController(userId);
+        EmbedBuilder embedBuilder = trainController.getFightPokemonEmbeds(fightPokemon);
+        event.replyEmbeds(embedBuilder.build()).queue();
+
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+        PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
+        int levelBefore = userPokemonInfo.getLevel();
+        embedBuilder =
+            trainController.getFightResultEmbeds(
+                embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
+        event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
+        int levelAfter = userPokemonInfo.getLevel();
+        if (levelBefore < levelAfter) {
+            embedBuilder = trainController.getLevelUpEmbeds(embedBuilder, userPokemonInfo);
             event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
-            int levelAfter = userPokemonInfo.getLevel();
-            if (levelBefore < levelAfter) {
-                embedBuilder = trainController.getLevelUpEmbeds(embedBuilder, userPokemonInfo);
-                event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
-            }
         }
     }
 }
