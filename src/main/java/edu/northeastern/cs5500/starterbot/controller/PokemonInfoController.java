@@ -21,5 +21,4 @@ public class PokemonInfoController {
         eb.setImage(pokemonInfo.getOfficialArtworkUrl());
         return eb;
     }
-
 }
