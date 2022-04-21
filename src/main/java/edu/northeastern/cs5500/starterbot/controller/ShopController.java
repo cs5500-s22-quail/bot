@@ -22,6 +22,7 @@ public class ShopController {
     Integer userID;
     ArrayList<WildPokemon> previousPokemons;
     long previousVisitedTime;
+    ArrayList<Integer> prices;
     // use as an api
     @Inject WildPokemonController wildPokemonController;
 
@@ -33,6 +34,7 @@ public class ShopController {
         this.previousPokemons = new ArrayList<>(3);
         // if this is the first time to use the shop feature, set it to default value of -1
         this.previousVisitedTime = -1;
+        this.prices = new ArrayList<>(3);
     }
 
     @Nonnull
@@ -59,12 +61,11 @@ public class ShopController {
                 .setDescription(
                         "Your current balance: "
                                 + currentBalance
-                                + "\n\n To view available pokemons, please choose [Show] in the drop down menu.\n"
-                                + "\n Or you could choose the [Redeem] to make the final purchase.");
+                                + "\n\n To view available pokemons, please Click the show button");
 
         eb.setImage(
                 "https://cdn.images.express.co.uk/img/dynamic/143/590x/Pokemon-Center-London-1192560.jpg?r=1571521317165");
-        mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
+        mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(Button.primary("shop:show", "show")));
 
         return mb;
 
@@ -88,11 +89,16 @@ public class ShopController {
                 || currentTime - this.previousVisitedTime > TEN_MINUTES_IN_MILLISSECONDS) {
             // update the pokemons
             this.previousPokemons.clear();
+            this.prices.clear();
             this.previousVisitedTime = currentTime;
             for (int i = 0; i < 3; i++) {
                 wildPokemonController.updateWildPokemonForChannel(discordChannelID);
                 this.previousPokemons.add(
                         wildPokemonController.getWildPokemonForChannel(discordChannelID));
+                Random rand = new Random();
+                int upperBound = 100;
+                int price = rand.nextInt(upperBound) + upperBound;
+                this.prices.add(price);
             }
         }
 
@@ -118,11 +124,11 @@ public class ShopController {
                 .setDescription(
                         "Your current balance: "
                                 + currentBalance
-                                + "\n\nHere are the pokemons on sale!"
-                                + "\nClick on the [Redeem] button to buy!"
-                                + "\nOr click on the [Return] button to go back to the previous page.");
+                                + "\n\nHere are some example pokemons!"
+                                + "\nUse /redeem Command to see what pokemons are on sale!");
 
         ArrayList<EmbedBuilder> ebArray = new ArrayList<>(3);
+
         for (int i = 0; i < 3; i++) {
             ebArray.add(new EmbedBuilder());
         }
@@ -132,9 +138,6 @@ public class ShopController {
             EmbedBuilder currentEmbedBuilder = ebArray.get(i);
             // for each pokemon, the price of it is a random number plus
             // 100 of balance.
-            Random rand = new Random();
-            int upperBound = 100;
-            int price = rand.nextInt(upperBound) + upperBound;
             WildPokemon currentOne = this.previousPokemons.get(i);
             // for the specific attributes of the pokemon, we are not
             // disclosing to the user unless they buy it.
@@ -162,7 +165,10 @@ public class ShopController {
                     break;
             }
             currentEmbedBuilder.setTitle(
-                    "\n" + currentOne.getPokemonInfo().getName() + "    Price: " + price);
+                    "\n"
+                            + currentOne.getPokemonInfo().getName()
+                            + "    Price: "
+                            + this.prices.get(i));
             pokemonsToBuy.append("Quality: " + pokemonQuality);
             pokemonsToBuy.append("\n\nHP: " + currentOne.getPokemonInfo().getHp());
             pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
@@ -177,14 +183,7 @@ public class ShopController {
         }
 
         mb.setEmbeds(
-                        eb.build(),
-                        ebArray.get(0).build(),
-                        ebArray.get(1).build(),
-                        ebArray.get(2).build())
-                .setActionRows(
-                        ActionRow.of(
-                                Button.primary("show:redeem", "Redeem"),
-                                Button.primary("show:return", "Return")));
+                eb.build(), ebArray.get(0).build(), ebArray.get(1).build(), ebArray.get(2).build());
 
         return mb;
 
@@ -207,11 +206,16 @@ public class ShopController {
                 || currentTime - this.previousVisitedTime > TEN_MINUTES_IN_MILLISSECONDS) {
             // update the pokemons
             this.previousPokemons.clear();
+            this.prices.clear();
             this.previousVisitedTime = currentTime;
             for (int i = 0; i < 3; i++) {
                 wildPokemonController.updateWildPokemonForChannel(discordChannelID);
                 this.previousPokemons.add(
                         wildPokemonController.getWildPokemonForChannel(discordChannelID));
+                Random rand = new Random();
+                int upperBound = 100;
+                int price = rand.nextInt(upperBound) + upperBound;
+                this.prices.add(price);
             }
         }
 
@@ -251,9 +255,6 @@ public class ShopController {
             EmbedBuilder currentEmbedBuilder = ebArray.get(i);
             // for each pokemon, the price of it is a random number plus
             // 100 of balance.
-            Random rand = new Random();
-            int upperBound = 100;
-            int price = rand.nextInt(upperBound) + upperBound;
             WildPokemon currentOne = this.previousPokemons.get(i);
             // for the specific attributes of the pokemon, we are not
             // disclosing to the user unless they buy it.
@@ -281,7 +282,10 @@ public class ShopController {
                     break;
             }
             currentEmbedBuilder.setTitle(
-                    "\n" + currentOne.getPokemonInfo().getName() + "    Price: " + price);
+                    "\n"
+                            + currentOne.getPokemonInfo().getName()
+                            + "    Price: "
+                            + this.prices.get(i));
             pokemonsToBuy.append("Quality: " + pokemonQuality);
             pokemonsToBuy.append("\n\nHP: " + currentOne.getPokemonInfo().getHp());
             pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
@@ -289,8 +293,14 @@ public class ShopController {
             pokemonsToBuy.append(
                     "\n"
                             + "Total IV "
-                            + Math.round(
-                                    currentOne.getPokemonInfo().getIv().getIVPercentage() * 100)
+                            + (double)
+                                            Math.round(
+                                                    currentOne
+                                                                    .getPokemonInfo()
+                                                                    .getIv()
+                                                                    .getIVPercentage()
+                                                            * 10000)
+                                    / 100
                             + "%");
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
             currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
