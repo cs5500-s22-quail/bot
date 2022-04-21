@@ -91,4 +91,20 @@ public class UserPokemonController {
                 return 10;
         }
     }
+
+    public void levelUp(UserPokemon userPokemon) {
+        PokemonInfo carriedPokemon = userPokemon.getCarriedPokemon();
+        carriedPokemon.setLevel(carriedPokemon.getLevel() + 1);
+
+        for (PokemonInfo pokemonInfo : userPokemon.getPokemonTeam()) {
+            System.out.println("test " + pokemonInfo.getName());
+            if (pokemonInfo.getName().equals(carriedPokemon.getName())) {
+                pokemonInfo.setLevel(carriedPokemon.getLevel());
+                System.out.println("Find the pokemon in team");
+                break;
+            }
+        }
+        userPokemonRepository.update(userPokemon);
+        // TODO IV update
+    }
 }

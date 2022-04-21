@@ -75,6 +75,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public Command providePokemonInfoCommand(PokemonInfoCommand pokemonInfoCommand) {
+        return pokemonInfoCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command provideShowCommand(ShowCommand showCommand) {
         return showCommand;
     }
