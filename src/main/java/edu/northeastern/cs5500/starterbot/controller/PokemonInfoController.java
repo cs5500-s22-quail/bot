@@ -17,30 +17,9 @@ public class PokemonInfoController {
         String name = pokemonInfo.getName();
 
         eb.setTitle("Level " + level + " " + name);
-        eb.setDescription(this.ivUIBundle());
+        eb.setDescription(new DisplayController().PokemonInfoUI(pokemonInfo));
         eb.setImage(pokemonInfo.getOfficialArtworkUrl());
         return eb;
     }
 
-    public String ivUIBundle() {
-        return ivUI("HP", pokemonInfo.getHp(), pokemonInfo.getIv().getHp())
-                + ivUI("Attack", pokemonInfo.getAttack(), pokemonInfo.getIv().getAttack())
-                + ivUI("Defense", pokemonInfo.getDefense(), pokemonInfo.getIv().getDefense())
-                + ivUI(
-                        "Sp.Atk",
-                        pokemonInfo.getSpecialAttack(),
-                        pokemonInfo.getIv().getSpecialAttack())
-                + ivUI(
-                        "Sp.Def",
-                        pokemonInfo.getSpecialDefense(),
-                        pokemonInfo.getIv().getSpecialDefense())
-                + ivUI("Speed", pokemonInfo.getSpeed(), pokemonInfo.getIv().getSpeed())
-                + System.lineSeparator()
-                + "Total IV: "
-                + pokemonInfo.getIv().getIVPercentageFormat();
-    }
-
-    public String ivUI(String statName, int baseStat, int iv) {
-        return System.lineSeparator() + statName + ": " + baseStat + " - IV: " + iv + "/31";
-    }
 }

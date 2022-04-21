@@ -41,13 +41,14 @@ public class TrainController {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        Battle battle = new Battle();
+        BattleController battleController = new BattleController();
         //        String userId = event.getUser().getId();
         //        PokemonInfo userPokemonInfo =
         //
         // userPokemonController.getUserPokemonForMemberID(userId).getCarriedPokemon();
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
-        Object[] battleRes = battle.pokemonVersePokemon(fightPokemonInfo, userPokemonInfo);
+        Object[] battleRes =
+                battleController.pokemonVersePokemon(fightPokemonInfo, userPokemonInfo);
         PokemonInfo winnerInfo = (PokemonInfo) battleRes[0];
         boolean userWin = winnerInfo == userPokemonInfo;
         if (userWin) {

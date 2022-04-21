@@ -3,7 +3,10 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import java.util.Random;
 
-public class Battle {
+public class BattleController {
+
+    PokemonInfo p1;
+    PokemonInfo p2;
 
     // key: winner PokemonInfo, Value: battle information
     public Object[] pokemonVersePokemon(PokemonInfo p1, PokemonInfo p2) {

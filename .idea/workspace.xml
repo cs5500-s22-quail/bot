@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="61dc957d-cfc5-4eb5-bbd8-55cb206b30a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/RedeemCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/RedeemCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/command/SearchCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/BattleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/PokemonInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/PokemonInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/TrainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northeastern/cs5500/starterbot/controller/TrainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/BattleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/northeastern/cs5500/starterbot/controller/BattleControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -91,9 +96,9 @@
       <recent name="edu.northeastern.cs5500.starterbot.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.northeastern.cs5500.starterbot.command" />
       <recent name="edu.northeastern.cs5500.starterbot.controller" />
       <recent name="edu.northeastern.cs5500.starterbot.model" />
-      <recent name="edu.northeastern.cs5500.starterbot.command" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Tests in 'edu.northeastern.cs5500.starterbot.test'">
@@ -253,7 +258,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/edu_northeastern_cs5500_starterbot$Tests_in__edu_northeastern_cs5500_starterbot_test_.ic" NAME="Tests in 'edu.northeastern.cs5500.starterbot.test' Coverage Results" MODIFIED="1649888392680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/edu_northeastern_cs5500_starterbot$Tests_in__edu_northeastern_cs5500_starterbot_test_.ic" NAME="Tests in 'edu.northeastern.cs5500.starterbot.test' Coverage Results" MODIFIED="1650497304969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/edu_northeastern_cs5500_starterbot$Tests_in__edu_northeastern_cs5500_starterbot_.ic" NAME="Tests in 'edu.northeastern.cs5500.starterbot' Coverage Results" MODIFIED="1649880844198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
