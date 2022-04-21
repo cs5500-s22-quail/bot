@@ -57,6 +57,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public ButtonClickHandler provideBattleCommandMenuHandler(BattleCommand battleCommand) {
+        return battleCommand;
+    }
+
+    @Provides
+    @IntoSet
     public SelectionMenuHandler provideRedeemCommandMenuHandler(RedeemCommand redeemCommand) {
         return redeemCommand;
     }
@@ -83,6 +89,12 @@ public class CommandModule {
     @IntoSet
     public Command provideShowCommand(ShowCommand showCommand) {
         return showCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideBattleCommand(BattleCommand battleCommand) {
+        return battleCommand;
     }
 
     @Provides

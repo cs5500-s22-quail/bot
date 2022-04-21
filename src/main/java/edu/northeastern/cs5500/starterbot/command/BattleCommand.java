@@ -1,16 +1,11 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.controller.PokemonGenerator;
-import edu.northeastern.cs5500.starterbot.controller.TrainController;
-import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
+import edu.northeastern.cs5500.starterbot.controller.*;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
-import edu.northeastern.cs5500.starterbot.model.UserPokemon;
-import edu.northeastern.cs5500.starterbot.model.WildPokemon;
+import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
@@ -20,10 +15,14 @@ import net.dv8tion.jda.api.interactions.components.Button;
 @Singleton
 @Slf4j
 public class BattleCommand implements Command, ButtonClickHandler {
-    //    @Inject EmbedBuilderGenerator embedBuilderGenerator;
+
     @Inject UserPokemonController userPokemonController;
     @Inject PokemonGenerator pokemonGenerator;
     @Inject TrainController trainController;
+    @Inject PokemonService pokemonService;
+    @Inject MultiUserController multiUserController;
+    @Inject DisplayController displayController;
+    @Inject BattleController battleController;
 
     @Inject
     public BattleCommand() {}
@@ -41,45 +40,25 @@ public class BattleCommand implements Command, ButtonClickHandler {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /battle");
-        event.reply("How do you want to level up your pokemon?")
+        String userName = "Unknown";
+        event.reply(userName + " want to battle with you. ")
                 .addActionRow(
-                        Button.primary("train:battle", "Battle"), // Button with only a label
-                        Button.secondary("train:decline", "Decline")
-                                .withEmoji(Emoji.fromUnicode("U+2694")))
+                        Button.primary("battle:pk", "Battle")
+                                .withEmoji(Emoji.fromUnicode("U+2694")), // Button with only a label
+                        Button.secondary("battle:decline", "Decline"))
                 .queue();
     }
 
     @Override
     public void onButtonClick(ButtonClickEvent event) {
-        if (event.getComponentId().equals("train:cancel")) {
+        if (event.getComponentId().equals("battle:decline")) {
             event.reply("Canceled the request...").queue(); // TODO: finishing...
-        } else if (event.getComponentId().equals("train:battle")) {
+        } else if (event.getComponentId().equals("battle:pk")) {
 
-            MessageBuilder mb = new MessageBuilder();
-            EmbedBuilder eb1 = new EmbedBuilder();
-            EmbedBuilder eb2 = new EmbedBuilder();
+            PokemonInfo p1 = multiUserController.getP1();
+            PokemonInfo p2 = multiUserController.getP2();
 
-            WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
-            String userId = event.getUser().getId();
-            //            TrainController trainController = new TrainController(userId);
-            EmbedBuilder embedBuilder = trainController.getFightPokemonEmbeds(fightPokemon);
-            // TODO: for now, event ends here by showing the wild pokemon image
-            // Once changes for saving and calling existing pokemon are done,
-            // needs to add logics for comparing level and showing the results
-            event.replyEmbeds(embedBuilder.build()).queue();
-
-            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
-            PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
-            int levelBefore = userPokemonInfo.getLevel();
-            embedBuilder =
-                    trainController.getFightResultEmbeds(
-                            embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
-            event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
-            int levelAfter = userPokemonInfo.getLevel();
-            if (levelBefore < levelAfter) {
-                embedBuilder = trainController.getLevelUpEmbeds(embedBuilder, userPokemonInfo);
-                event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
-            }
+            battleController.battleUI(p1, p2, event);
         }
     }
 }
