@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 class EmbedBuilderGeneratorTest {
 
-    EmbedBuilderGenerator embedBuilderGenerator;
+    AllPokemonController embedBuilderGenerator;
 
     @BeforeEach
     void setUp() {
-        this.embedBuilderGenerator = new EmbedBuilderGenerator();
+        this.embedBuilderGenerator = new AllPokemonController();
         this.embedBuilderGenerator.userPokemonController =
                 new UserPokemonController(new InMemoryRepository<>());
     }
