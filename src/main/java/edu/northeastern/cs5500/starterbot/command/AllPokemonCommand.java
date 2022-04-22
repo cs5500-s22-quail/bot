@@ -1,6 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.listener.EmbedBuilderGenerator;
+import edu.northeastern.cs5500.starterbot.listener.AllPokemonController;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ public class AllPokemonCommand implements Command {
     @Inject
     public AllPokemonCommand() {}
 
-    @Inject EmbedBuilderGenerator embedBuilderGenerator;
+    @Inject AllPokemonController embedBuilderGenerator;
 
     @Override
     public String getName() {
@@ -29,8 +29,6 @@ public class AllPokemonCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /allpokemon");
-        //        EmbedBuilderGenerator embedBuilderGenerator = new EmbedBuilderGenerator();
-        //        embedBuilderGenerator.getAllPokemonEmbeds(event.getUser());
         event.replyEmbeds(
                         embedBuilderGenerator.getAllPokemonEmbeds(event.getUser().getId()).build())
                 .queue();
