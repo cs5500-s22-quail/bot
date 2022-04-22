@@ -14,8 +14,7 @@ public class AllPokemonCommand implements Command {
     @Inject
     public AllPokemonCommand() {}
 
-    @Inject
-    AllPokemonController embedBuilderGenerator;
+    @Inject AllPokemonController embedBuilderGenerator;
 
     @Override
     public String getName() {

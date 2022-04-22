@@ -21,8 +21,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 public class MessageListener extends ListenerAdapter {
     @Inject WildPokemonController wildPokemonController;
     @Inject PokemonGenerator pokemonGenerator;
-    @Inject
-    AllPokemonController embedBuilderGenerator;
+    @Inject AllPokemonController embedBuilderGenerator;
 
     @Inject Set<Command> commands;
     @Inject Set<SelectionMenuHandler> selectionMenus;
