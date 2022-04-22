@@ -8,6 +8,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 
 public class TrainController {
 
+    @Inject BattleController battleController;
+
     UserPokemonController userPokemonController;
 
     @Inject
@@ -34,6 +36,11 @@ public class TrainController {
         return embedBuilder;
     }
 
+    //    public void showFightProcess(
+    //            ButtonClickEvent event, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
+    //        battleController.battleUI(fightPokemonInfo, userPokemon.getCarriedPokemon(), event);
+    //    }
+
     public EmbedBuilder getFightResultEmbeds(
             EmbedBuilder embedBuilder, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
         try {
@@ -42,10 +49,6 @@ public class TrainController {
             Thread.currentThread().interrupt();
         }
         BattleController battleController = new BattleController();
-        //        String userId = event.getUser().getId();
-        //        PokemonInfo userPokemonInfo =
-        //
-        // userPokemonController.getUserPokemonForMemberID(userId).getCarriedPokemon();
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
         Object[] battleRes =
                 battleController.pokemonVersePokemon(fightPokemonInfo, userPokemonInfo);
