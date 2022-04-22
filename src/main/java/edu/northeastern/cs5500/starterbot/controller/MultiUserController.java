@@ -3,12 +3,10 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import lombok.Data;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -17,6 +15,8 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 
 @Data
 public class MultiUserController {
+
+    @Inject UserPokemonController userPokemonController;
 
     PokemonInfo p1;
     PokemonInfo p2;
@@ -35,14 +35,16 @@ public class MultiUserController {
         eb.setTitle("Please choose the user you would like to battle with.");
         eb.setImage(
                 "https://static.fandomspot.com/images/09/2873/00-featured-battle-anime-pokemon-with-pikachu.jpg");
-        List<User> otherUsers = event.getJDA().getUsers();
-        List<Member> otherMembers = event.getGuild().getMembers();
-        ArrayList<String> otherUsersNames = new ArrayList<>();
+        // user userPokemon controller to get all the users.
         ArrayList<SelectOption> nameOptions = new ArrayList<>();
-        for (Member member : otherMembers) {
-            String currentName = member.getNickname();
+        ArrayList<String> usersIdList = userPokemonController.getUsersList(event.getUser().getId());
+        event.getGuild().getMembers();
+        for (String id : usersIdList) {
+
+            User user = event.getJDA().retrieveUserById(id).complete();
+            String currentName = user.getName();
             // if (currentName.toLowerCase().contains("bot")) continue;
-            otherUsersNames.add(currentName);
+
             nameOptions.add(SelectOption.of(currentName, currentName));
         }
         if (nameOptions.size() == 0) {
