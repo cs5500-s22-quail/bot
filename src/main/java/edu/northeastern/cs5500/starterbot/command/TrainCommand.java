@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.controller.BattleController;
 import edu.northeastern.cs5500.starterbot.controller.DisplayController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonGenerator;
 import edu.northeastern.cs5500.starterbot.controller.ShopController;
@@ -32,6 +33,7 @@ public class TrainCommand implements Command, ButtonClickHandler {
     @Inject TrainController trainController;
     @Inject ShopController shopController;
     @Inject DisplayController displayController;
+    @Inject BattleController battleController;
 
     @Inject
     public TrainCommand() {}
@@ -122,9 +124,19 @@ public class TrainCommand implements Command, ButtonClickHandler {
         UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
         int levelBefore = userPokemonInfo.getLevel();
+        battleController.battleUI(
+                fightPokemon.getPokemonInfo(), userPokemon.getCarriedPokemon(), event);
         embedBuilder =
                 trainController.getFightResultEmbeds(
                         embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
+        // TODO show the fight process here:
+        //        trainController.showFightProcess(event, fightPokemon.getPokemonInfo(),
+        // userPokemon);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
         event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
         int levelAfter = userPokemonInfo.getLevel();
 
