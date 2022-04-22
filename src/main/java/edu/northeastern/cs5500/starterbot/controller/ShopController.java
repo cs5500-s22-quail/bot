@@ -43,14 +43,6 @@ public class ShopController {
         EmbedBuilder eb = new EmbedBuilder();
         MessageBuilder mb = new MessageBuilder();
 
-        SelectionMenu menu =
-                SelectionMenu.create("shop")
-                        .setPlaceholder("Please choose your further step.")
-                        .addOption("Show", "show") // display all the items to buy
-                        .addOption(
-                                "Redeem", "redeem") // redeem a random list of pokemons with balance
-                        .build();
-
         Integer currentBalance =
                 getBalanceForUserId(discordUserId).getBalance() == null
                         ? 100
@@ -290,18 +282,11 @@ public class ShopController {
             pokemonsToBuy.append("\n\nHP: " + currentOne.getPokemonInfo().getHp());
             pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
             pokemonsToBuy.append("\n" + "Defense: " + currentOne.getPokemonInfo().getDefense());
-            pokemonsToBuy.append(
-                    "\n"
-                            + "Total IV "
-                            + (double)
-                                            Math.round(
-                                                    currentOne
-                                                                    .getPokemonInfo()
-                                                                    .getIv()
-                                                                    .getIVPercentage()
-                                                            * 10000)
-                                    / 100
-                            + "%");
+            long percentage =
+                    Math.round(currentOne.getPokemonInfo().getIv().getIVPercentage() * 10000);
+            long partA = percentage / 100;
+            long partB = percentage - partA * 100;
+            pokemonsToBuy.append("\n" + "Total IV " + partA + partB + "%");
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
             currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
         }

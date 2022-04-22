@@ -82,7 +82,7 @@ public class TrainController {
         PokemonInfoController pokemonInfoController = new PokemonInfoController(pokemonInfo);
         embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
         embedBuilder.setTitle(
-                "Your pokemon is level up!\n\nLevel "
+                "Your pokemon is leveled up!\n\nLevel "
                         + pokemonInfo.getLevel()
                         + " "
                         + pokemonInfo.getName());
