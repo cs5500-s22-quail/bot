@@ -51,13 +51,20 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public ButtonClickHandler provideBattleReceivedCommandClickHandler(
+            BattleReceivedCommand battleReceivedCommand) {
+        return battleReceivedCommand;
+    }
+
+    @Provides
+    @IntoSet
     public ButtonClickHandler provideSearchCommandClickHandler(SearchCommand searchCommand) {
         return searchCommand;
     }
 
     @Provides
     @IntoSet
-    public ButtonClickHandler provideBattleCommandMenuHandler(BattleCommand battleCommand) {
+    public SelectionMenuHandler provideBattleCommandMenuHandler(BattleCommand battleCommand) {
         return battleCommand;
     }
 
@@ -65,6 +72,12 @@ public class CommandModule {
     @IntoSet
     public SelectionMenuHandler provideRedeemCommandMenuHandler(RedeemCommand redeemCommand) {
         return redeemCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public SelectionMenuHandler provideGiftCommandMenuHandler(GiftCommand giftCommand) {
+        return giftCommand;
     }
 
     @Provides
@@ -107,5 +120,11 @@ public class CommandModule {
     @IntoSet
     public Command provideRedeemCommand(RedeemCommand redeemCommand) {
         return redeemCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideGiftCommand(GiftCommand giftCommand) {
+        return giftCommand;
     }
 }

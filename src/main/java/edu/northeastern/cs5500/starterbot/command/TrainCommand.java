@@ -52,7 +52,7 @@ public class TrainCommand implements Command, ButtonClickHandler {
     @Override
     public void onButtonClick(ButtonClickEvent event) {
         if (event.getComponentId().equals("train:moneyMagic")) {
-            event.reply("MoneyMagic feature is developing...").queue(); // TODO: finishing...
+            event.reply("MoneyMagic feature is under way...").queue(); // TODO: finishing...
         } else if (event.getComponentId().equals("train:fight")) {
             WildPokemon fightPokemon = pokemonGenerator.getWildPokemon();
             String userId = event.getUser().getId();

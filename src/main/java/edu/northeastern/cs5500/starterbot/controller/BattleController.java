@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.inject.Inject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
 public class BattleController {
@@ -14,7 +15,7 @@ public class BattleController {
     public BattleController() {}
 
     // key: winner PokemonInfo, Value: battle information
-    public void battleUI(PokemonInfo p1, PokemonInfo p2, ButtonClickEvent event) {
+    public Message battleUI(PokemonInfo p1, PokemonInfo p2, ButtonClickEvent event) {
         // Initial Status
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb1 = displayController.pokemonStatus(p1);
@@ -97,6 +98,7 @@ public class BattleController {
         eb1.setTitle("HP: " + hp[0] + "/" + p1.getHp());
         eb2.setTitle("HP: " + hp[1] + "/" + p1.getHp());
         event.getHook().editOriginalEmbeds(eb1.build(), eb2.build(), eb3.build()).queue();
+        return mb.build();
     }
 
     public Object[] pokemonVersePokemon(PokemonInfo p1, PokemonInfo p2) {

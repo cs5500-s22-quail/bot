@@ -26,6 +26,7 @@ public class MessageListener extends ListenerAdapter {
     @Inject Set<Command> commands;
     @Inject Set<SelectionMenuHandler> selectionMenus;
     @Inject Set<ButtonClickHandler> buttons;
+    // @Inject Set<PrivateMessageReceivedHandler> privateReceivedMessages;
 
     @Inject
     public MessageListener() {
@@ -77,4 +78,36 @@ public class MessageListener extends ListenerAdapter {
 
         log.error("Unknown button handler: {}", handlerName);
     }
+
+    // @Override
+    // public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
+
+    //     log.info("onPrivateMessageReceived: {}", event.getAuthor());
+    //     // if it is a message received, just end it.
+    //     if (event.getAuthor().isBot()) return;
+
+    //     String id = event.getMessageId();
+
+    //     String action = id.split(":", 3)[0];
+
+    //     // String originalSender = id.split(":", 3)[1];
+    //     // String reply = id.split(":", 3)[2];
+
+    //     // for the receiver, we would create a button for him to get
+    //     // the invitation detail and his choice to receive or not as
+    //     // a message to send back
+
+    //     // if the sender has the reply message received back, jump to the overriden handler
+    // method
+    //     for(PrivateMessageReceivedHandler privateMessageReceivedHandler :
+    // privateReceivedMessages) {
+    //         if(privateMessageReceivedHandler.getName().equals(action)) {
+    //             privateMessageReceivedHandler.onPrivateMessageReceived(event);
+    //             return;
+    //         }
+    //     }
+
+    //     log.error("Unknown message received handler: {}", action);
+
+    // }
 }
