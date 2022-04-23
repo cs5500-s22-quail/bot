@@ -102,7 +102,5 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         userPokemonController.updateUserPokemon(receiverUserPokemon);
 
         event.reply("Your pokemon " + chosenPokemonName + " has been gifted!").queue();
-    
-
     }
 }
