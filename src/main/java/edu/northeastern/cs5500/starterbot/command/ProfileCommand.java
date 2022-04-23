@@ -5,6 +5,8 @@ import edu.northeastern.cs5500.starterbot.controller.UserPreferenceController;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
@@ -36,10 +38,11 @@ public class ProfileCommand implements Command {
         String discordAvatarUrl = event.getUser().getAvatarUrl();
         String preferredName = userPreferenceController.getPreferredNameForUser(discordUserId);
 
-        event.replyEmbeds(
-                        profileController
-                                .getProfile(discordUserId, discordAvatarUrl, preferredName)
-                                .build())
-                .queue();
+        MessageBuilder mb = new MessageBuilder();
+        EmbedBuilder eb =
+                profileController.getProfile(discordUserId, discordAvatarUrl, preferredName);
+        mb.setEmbeds(eb.build());
+
+        event.reply(mb.build()).queue();
     }
 }

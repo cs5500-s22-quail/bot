@@ -5,14 +5,23 @@ import net.dv8tion.jda.api.EmbedBuilder;
 
 public class ProfileController {
 
+    @Inject ShopController shopController;
+    @Inject UserPokemonController userPokemonController;
+
     @Inject
     public ProfileController() {}
 
     public EmbedBuilder getProfile(
             String discordUserId, String discordAvatarUrl, String preferredName) {
-        int balance = 0; // the balance, initially set to 0. TBD
-        int pokemons = 0; // the captured pokemons, initially set to 0. TBD
-        int released = 0; // the released pokemons, initially set to 0. TBD
+        int balance =
+                shopController
+                        .getBalanceForUserId(discordUserId)
+                        .getBalance(); // the balance, initially set to 0. TBD
+        int pokemons =
+                userPokemonController
+                        .getUserPokemonForMemberID(discordUserId)
+                        .getPokemonTeam()
+                        .size(); // the captured pokemons, initially set to 0. TBD
         EmbedBuilder eb =
                 new EmbedBuilder()
                         .setTitle(preferredName + "'s Profile")
@@ -20,12 +29,9 @@ public class ProfileController {
                                 "Balance: "
                                         + String.valueOf(balance)
                                         + "\nCaptured Pokemons: "
-                                        + String.valueOf(pokemons)
-                                        + "\nReleased Pokemons: "
-                                        + String.valueOf(released)
-                                        + "\nTotal Pokemons: "
-                                        + String.valueOf(pokemons + released));
+                                        + String.valueOf(pokemons))
+                        .setThumbnail(discordAvatarUrl);
 
-        return eb.setThumbnail(discordAvatarUrl);
+        return eb;
     }
 }
