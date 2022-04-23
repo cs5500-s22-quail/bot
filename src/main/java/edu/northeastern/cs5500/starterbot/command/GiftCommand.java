@@ -38,7 +38,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
                 .addOptions(
                         new OptionData(
                                         OptionType.STRING,
-                                        "UserToGift",
+                                        "receiver",
                                         "Please type in the user name you would like to gift to.")
                                 .setRequired(true));
     }
