@@ -15,6 +15,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public Command provideSelectCommand(SelectCommand selectCommand) {
+        return selectCommand;
+    }
+
+    @Provides
+    @IntoSet
     public Command providePreferredNameCommand(PreferredNameCommand preferredNameCommand) {
         return preferredNameCommand;
     }
