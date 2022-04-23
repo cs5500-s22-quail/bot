@@ -79,7 +79,8 @@ public class BattleReceivedCommand implements ButtonClickHandler {
 
             // case 1 : Other users click the button
             if (battleRequest == null) {
-                event.reply("Sorry, @" + buttonClicker.getName() + " you are not been invited!").queue();
+                event.reply("Sorry, @" + buttonClicker.getName() + " you are not been invited!")
+                        .queue();
                 return;
             }
 
@@ -100,7 +101,11 @@ public class BattleReceivedCommand implements ButtonClickHandler {
             }
             // case 3 : The invitee click the button more than 1 time; (must happen after case 2)
             if (battleRequest.getIsBattle()) {
-                event.reply("@" + buttonClicker.getName() + "Your already accepted this invitation!").queue();
+                event.reply(
+                                "@"
+                                        + buttonClicker.getName()
+                                        + "Your already accepted this invitation!")
+                        .queue();
                 return;
             }
             String initiatorUserId =
