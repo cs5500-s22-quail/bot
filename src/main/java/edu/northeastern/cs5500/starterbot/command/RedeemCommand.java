@@ -75,11 +75,11 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
                 EmbedBuilder embedBuilder =
                         new EmbedBuilder()
                                 .setTitle(
-                                        "You have bought"
+                                        "You have bought "
                                                 + wildPokemon.getPokemonInfo().getName()
                                                 + " at "
                                                 + price
-                                                + "coins!\n")
+                                                + " coins!\n")
                                 .setImage(wildPokemon.getPokemonInfo().getOfficialArtworkUrl());
 
                 Quality quality = wildPokemon.getPokemonInfo().getIv().getQuality();

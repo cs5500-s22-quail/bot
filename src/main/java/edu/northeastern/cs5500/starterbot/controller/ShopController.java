@@ -165,11 +165,11 @@ public class ShopController {
             pokemonsToBuy.append("\n\nHP: " + currentOne.getPokemonInfo().getHp());
             pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
             pokemonsToBuy.append("\n" + "Defense: " + currentOne.getPokemonInfo().getDefense());
-            pokemonsToBuy.append(
-                    "\n"
-                            + "Total IV "
-                            + currentOne.getPokemonInfo().getIv().getIVPercentage() * 100
-                            + "%");
+            long percentage =
+                    Math.round(currentOne.getPokemonInfo().getIv().getIVPercentage() * 10000);
+            long partA = percentage / 100;
+            long partB = percentage - partA * 100;
+            pokemonsToBuy.append("\n" + "Total IV " + partA + "." + partB + "%");
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
             currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
         }
@@ -286,7 +286,7 @@ public class ShopController {
                     Math.round(currentOne.getPokemonInfo().getIv().getIVPercentage() * 10000);
             long partA = percentage / 100;
             long partB = percentage - partA * 100;
-            pokemonsToBuy.append("\n" + "Total IV " + partA + partB + "%");
+            pokemonsToBuy.append("\n" + "Total IV " + partA + "." + partB + "%");
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
             currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
         }
