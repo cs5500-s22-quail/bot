@@ -23,6 +23,6 @@ class EmbedBuilderGeneratorTest {
 
     @Test
     void getAllPokemonEmbeds() {
-        assertNotNull(this.embedBuilderGenerator.getAllPokemonEmbeds("7777"));
+        assertNotNull(this.embedBuilderGenerator.getAllPokemonEmbeds("7777", "7777"));
     }
 }

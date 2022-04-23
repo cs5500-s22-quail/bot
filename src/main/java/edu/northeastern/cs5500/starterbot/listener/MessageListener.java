@@ -60,7 +60,7 @@ public class MessageListener extends ListenerAdapter {
             }
         }
 
-        log.error("Unknown button handler: {}", handlerName);
+        log.error("Unknown Selction Menu handler: {}", handlerName);
     }
 
     @Override

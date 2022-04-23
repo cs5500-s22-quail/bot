@@ -134,7 +134,8 @@ public class SearchCommand implements Command, ButtonClickHandler {
         String userId = event.getUser().getId();
 
         WildPokemon wildPokemon = wildPokemonController.getWildPokemonForChannel(channelId);
-        if (userPokemonController.isPossess(wildPokemon.getPokemonInfo().getName(), userId)) {
+        if (userPokemonController.isPossess(
+                wildPokemon.getPokemonInfo().getName(), userId, event.getUser().getName())) {
             log.info("catching status: User already have this pokemon");
             EmbedBuilder embedBuilder =
                     new EmbedBuilder().setTitle("You already owned this pokemon!");
@@ -172,7 +173,8 @@ public class SearchCommand implements Command, ButtonClickHandler {
             eb =
                     new EmbedBuilder()
                             .setTitle("Congratulation! The pokemon has added to your pocket!");
-            userPokemonController.addPokemon(wildPokemon.getPokemonInfo(), userId);
+            userPokemonController.addPokemon(
+                    wildPokemon.getPokemonInfo(), userId, event.getUser().getName());
             wildPokemonController.deletePokemonInfoForChannel(channelId);
         }
         event.getHook().editOriginalEmbeds(eb.build()).queue();

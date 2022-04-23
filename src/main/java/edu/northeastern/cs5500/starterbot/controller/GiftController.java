@@ -17,8 +17,9 @@ public class GiftController {
     @Inject
     public GiftController() {}
 
-    public MessageBuilder getPokemonList(String discordUserId) {
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(discordUserId);
+    public MessageBuilder getPokemonList(String discordUserId, String userName) {
+        UserPokemon userPokemon =
+                userPokemonController.getUserPokemonForMemberID(discordUserId, userName);
 
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb = new EmbedBuilder();

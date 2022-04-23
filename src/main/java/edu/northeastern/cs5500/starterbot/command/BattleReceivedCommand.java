@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
@@ -57,22 +58,20 @@ public class BattleReceivedCommand implements ButtonClickHandler {
 
     @Override
     public void onButtonClick(ButtonClickEvent event) {
-        String id = event.getButton().getId();
-        String handlerName = id.split(":", 2)[1];
-        String userIdToSend = handlerName.split("-", 2)[1];
-
-        User userToSend = event.getJDA().getUserById(userIdToSend);
+        String id = event.getComponentId();
+        String handlerName = id.split(":", 2)[1]; // battle:accept
 
         if (handlerName.equals("accept")) {
 
             PokemonInfo p1 = multiUserController.getP1();
             PokemonInfo p2 = multiUserController.getP2();
 
-            Message toSend = battleController.battleUI(p1, p2, event);
+            battleController.battleUI(p1, p2, event);
 
-            event.reply(toSend);
-
-            sendMessage(userToSend, toSend);
+            // TextChannel textChannel =
+            //         event.getGuild().getTextChannelsByName("general", true).get(0);
+            TextChannel textChannel = event.getJDA().getTextChannelById("949784001453916264");
+            textChannel.sendMessage("MESSAGE").queue();
 
         } else {
             // send a message back to indicate decline
