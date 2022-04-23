@@ -17,12 +17,13 @@ public class GiftController {
     @Inject
     public GiftController() {}
 
-    public MessageBuilder getPokemonList(String discordUserId, String userName, String receiver) {
-        UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(discordUserId, userName);
+    public MessageBuilder getPokemonList(
+            String discordUserId, String userName, String receiver, String receiverId) {
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(discordUserId);
 
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb = new EmbedBuilder();
+
         eb.setTitle("Please choose one your pokemons to gift to ." + receiver)
                 .setDescription(
                         "\n\nPlease note that you can not give your carried pokemon to others");
@@ -43,7 +44,7 @@ public class GiftController {
         }
 
         SelectionMenu menu =
-                SelectionMenu.create("pokemon-list")
+                SelectionMenu.create("pokemon-" + receiverId)
                         .setPlaceholder("Please choose from the following pokemons to give\n")
                         .addOptions(nameOptions)
                         .build();
@@ -51,6 +52,4 @@ public class GiftController {
 
         return mb;
     }
-
-
 }

@@ -55,8 +55,7 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
         String pokemonNameChosen = event.getInteraction().getValues().get(0);
         for (WildPokemon wildPokemon : shopController.getPreviousPokemons()) {
             if (wildPokemon.getPokemonInfo().getName().equals(pokemonNameChosen)) {
-                userPokemonController.addPokemon(
-                        wildPokemon.getPokemonInfo(), discordUserId, event.getUser().getName());
+                userPokemonController.addPokemon(wildPokemon.getPokemonInfo(), discordUserId);
                 int index = shopController.getPreviousPokemons().indexOf(wildPokemon);
                 int price = shopController.getPrices().get(index);
                 // validate whether the price is affordable or not.
