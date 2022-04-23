@@ -45,11 +45,11 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
     @Override
     public void onEvent(CommandInteraction event) {
-        String receiver = event.getOption("UserToGift").getAsString();
+        String receiver = event.getOption("receiver").getAsString();
         List<Member> members = event.getGuild().getMembers();
         String receiverId = "";
         for (Member member : members) {
-            if (member.getNickname().equals(receiver)) receiverId = member.getId();
+            if (member.getUser().getName().equals(receiver)) receiverId = member.getId();
         }
 
         if (receiverId.length() == 0) {
@@ -70,6 +70,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         String chosenPokemonName = event.getInteraction().getValues().get(0);
         String senderId = event.getUser().getId();
 
+        log.info("onGiftSelectionMenu", event.getComponent().getId());
         String receiverId = event.getComponent().getId().split("-", 2)[1];
         UserPokemon receiverUserPokemon =
                 userPokemonController.getUserPokemonForMemberID(receiverId);
@@ -98,7 +99,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         userPokemonController.updateUserPokemon(senderUserPokemon);
         userPokemonController.updateUserPokemon(receiverUserPokemon);
 
-        event.reply("Your pokemon " + chosenPokemonName + " has been sent!");
+        event.reply("Your pokemon " + chosenPokemonName + " has been gifted!");
         // receiverUserPokemon.getPokemonTeam().
 
     }

@@ -51,6 +51,7 @@ public class MessageListener extends ListenerAdapter {
     public void onSelectionMenu(@Nonnull SelectionMenuEvent event) {
         log.info("onSelectionMenu: {}", event.getComponent().getId());
         String handlerName = event.getComponent().getId();
+        if (handlerName.contains("-")) handlerName = handlerName.split("-", 2)[0];
 
         for (SelectionMenuHandler selectionMenuHandler : selectionMenus) {
             log.info("selection menu is: " + selectionMenuHandler.getName());
