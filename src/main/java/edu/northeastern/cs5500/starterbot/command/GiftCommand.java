@@ -54,7 +54,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         }
 
         if (receiverId.length() == 0) {
-            event.reply("Your user name input is incorrect!");
+            event.reply("Your user name input is incorrect!").queue();
             return;
         }
 
@@ -72,7 +72,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         String chosenPokemonName = event.getInteraction().getValues().get(0);
         String senderId = event.getUser().getId();
 
-        log.info("onGiftSelectionMenu", event.getComponent().getId());
+        log.info("onGiftSelectionMenu" + event.getComponent().getId());
         String receiverId = event.getComponent().getId().split("-", 2)[1];
         UserPokemon receiverUserPokemon =
                 userPokemonController.getUserPokemonForMemberID(receiverId);
