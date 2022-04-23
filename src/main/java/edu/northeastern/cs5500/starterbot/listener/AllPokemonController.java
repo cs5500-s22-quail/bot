@@ -18,13 +18,17 @@ public class AllPokemonController {
         UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId, userName);
         ArrayList<PokemonInfo> userPokemonTeam = userPokemon.getPokemonTeam();
         String list = "";
+        int index = 0;
         for (PokemonInfo pokemonInfo : userPokemonTeam) {
-            list += "Name: " + pokemonInfo.getName() + " | ";
+            index++;
+            list += index + " | ";
+            list += "**" + pokemonInfo.getName() + "** —— ";
+            list += "Quality: " + pokemonInfo.getIv().getQuality() + " | ";
             list += "Level: " + pokemonInfo.getLevel() + " | ";
             list += "IV: " + pokemonInfo.getIv().getIVPercentageFormat() + "\n";
         }
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        if (list.equals("")) {
+        if (index == 0) {
             embedBuilder
                     .setTitle("Ops, you haven't got a Pokemon yet.")
                     .setDescription("Try to search and catch one by: /search");
