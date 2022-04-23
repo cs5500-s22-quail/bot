@@ -15,6 +15,8 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 @Component(modules = {CommandModule.class, RepositoryModule.class})
 @Singleton
@@ -42,6 +44,10 @@ public class Bot {
         }
         JDA jda =
                 JDABuilder.createLight(token, EnumSet.noneOf(GatewayIntent.class))
+                        .setChunkingFilter(
+                                ChunkingFilter.ALL) // enable member chunking for all guilds
+                        .setMemberCachePolicy(MemberCachePolicy.ALL) // ignored if chunking enabled
+                        .enableIntents(GatewayIntent.GUILD_MEMBERS)
                         .addEventListeners(messageListener)
                         .build();
 

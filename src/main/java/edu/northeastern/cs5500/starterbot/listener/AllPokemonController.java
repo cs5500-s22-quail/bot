@@ -14,8 +14,8 @@ public class AllPokemonController {
     @Inject
     public AllPokemonController() {}
 
-    public EmbedBuilder getAllPokemonEmbeds(String userId) {
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+    public EmbedBuilder getAllPokemonEmbeds(String userId, String userName) {
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId, userName);
         ArrayList<PokemonInfo> userPokemonTeam = userPokemon.getPokemonTeam();
         String list = "";
         for (PokemonInfo pokemonInfo : userPokemonTeam) {

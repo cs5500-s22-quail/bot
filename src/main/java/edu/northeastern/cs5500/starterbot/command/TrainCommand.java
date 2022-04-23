@@ -90,7 +90,9 @@ public class TrainCommand implements Command, ButtonClickHandler {
         String userId = event.getUser().getId();
         int userBalance = shopController.getBalanceForUserId(userId).getBalance();
         PokemonInfo pokemonInfo =
-                userPokemonController.getUserPokemonForMemberID(userId).getCarriedPokemon();
+                userPokemonController
+                        .getUserPokemonForMemberID(userId, event.getUser().getName())
+                        .getCarriedPokemon();
         int userPokemonLevel = pokemonInfo.getLevel();
         int toLevel = userPokemonLevel + 1;
         //        int price = 100 * (int) Math.pow(2, userPokemonLevel / 10);
@@ -121,7 +123,8 @@ public class TrainCommand implements Command, ButtonClickHandler {
         event.replyEmbeds(embedBuilder.build()).queue();
 
         // Step2: random pokemon fighting with user's pokemon
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+        UserPokemon userPokemon =
+                userPokemonController.getUserPokemonForMemberID(userId, event.getUser().getName());
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
         int levelBefore = userPokemonInfo.getLevel();
         battleController.battleUI(
@@ -154,7 +157,9 @@ public class TrainCommand implements Command, ButtonClickHandler {
         String userId = event.getUser().getId();
         try {
             shopController.updateBalanceForUserId(userId, -price);
-            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+            UserPokemon userPokemon =
+                    userPokemonController.getUserPokemonForMemberID(
+                            userId, event.getUser().getName());
             userPokemonController.levelUp(userPokemon);
             lastEvent
                     .getHook()

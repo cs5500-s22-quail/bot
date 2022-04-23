@@ -32,7 +32,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
     public void onEvent(CommandInteraction event) {
         log.info("event: /gift");
         String discordUserId = event.getUser().getId();
-        MessageBuilder mb = giftController.getPokemonList(discordUserId);
+        MessageBuilder mb = giftController.getPokemonList(discordUserId, event.getUser().getName());
         event.reply(mb.build()).queue();
     }
 

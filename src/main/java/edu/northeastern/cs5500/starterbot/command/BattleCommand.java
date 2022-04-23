@@ -66,20 +66,23 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                 .setAuthor(event.getUser().getName());
 
         UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(event.getUser().getId());
+                userPokemonController.getUserPokemonForMemberID(
+                        event.getUser().getId(), event.getUser().getName());
         PokemonInfo userPokeInfo = userPokemon.getCarriedPokemon();
 
         EmbedBuilder eb2 = displayController.pokemonStatus(userPokeInfo);
         mb.setEmbeds(eb.build(), eb2.build())
                 .setActionRows(
                         ActionRow.of(
-                                Button.primary(
-                                        "battle:accept" + "-" + event.getUser().getId(), "accept"),
-                                Button.secondary(
-                                        "battle:decline" + "-" + event.getUser().getId(),
-                                        "decline")));
+                                Button.primary("battle:accept", "accept"),
+                                Button.secondary("battle:decline", "decline")));
 
         sendMessage(receiver, mb.build());
+
+        MessageBuilder mb1 = new MessageBuilder();
+        EmbedBuilder eb1 = new EmbedBuilder();
+        eb1.setTitle("You invitation has been sent. Please wait for reply.");
+        event.reply(mb1.setEmbeds(eb1.build()).build()).queue();
 
         // if (event.getComponentId().equals("battle:decline")) {
 

@@ -30,7 +30,10 @@ public class AllPokemonCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /allpokemon");
         event.replyEmbeds(
-                        embedBuilderGenerator.getAllPokemonEmbeds(event.getUser().getId()).build())
+                        embedBuilderGenerator
+                                .getAllPokemonEmbeds(
+                                        event.getUser().getId(), event.getUser().getName())
+                                .build())
                 .queue();
     }
 }
