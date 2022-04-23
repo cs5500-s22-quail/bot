@@ -45,7 +45,7 @@ public class GiftController {
 
         SelectionMenu menu =
                 SelectionMenu.create("gift-" + discordUserId)
-                        .setPlaceholder("Please choose from the following pokemons to give\n")
+                        .setPlaceholder("Please choose one from the following pokemons to give\n")
                         .addOptions(nameOptions)
                         .build();
         mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
