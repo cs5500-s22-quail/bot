@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -62,7 +63,8 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         MessageBuilder mb =
                 giftController.getPokemonList(
                         discordUserId, event.getUser().getName(), receiver, receiverId);
-        event.reply(mb.build()).queue();
+        Message message = mb.build();
+        event.reply(message).queue();
     }
 
     @Override
@@ -88,7 +90,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         }
 
         if (chosenPokemonInfo == null) {
-            event.reply("There is something wrong with the pokemon chosen. Try again!");
+            event.reply("There is something wrong with the pokemon chosen. Try again!").queue();
         }
 
         // if matched one, give it to the receiver
@@ -99,8 +101,8 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         userPokemonController.updateUserPokemon(senderUserPokemon);
         userPokemonController.updateUserPokemon(receiverUserPokemon);
 
-        event.reply("Your pokemon " + chosenPokemonName + " has been gifted!");
-        // receiverUserPokemon.getPokemonTeam().
+        event.reply("Your pokemon " + chosenPokemonName + " has been gifted!").queue();
+    
 
     }
 }
