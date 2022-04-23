@@ -17,13 +17,14 @@ public class GiftController {
     @Inject
     public GiftController() {}
 
-    public MessageBuilder getPokemonList(String discordUserId, String userName) {
-        UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(discordUserId, userName);
+    public MessageBuilder getPokemonList(
+            String discordUserId, String userName, String receiver, String receiverId) {
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(discordUserId);
 
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Please choose one your pokemons to gift.")
+
+        eb.setTitle("Please choose one your pokemons to gift to ." + receiver)
                 .setDescription(
                         "\n\nPlease note that you can not give your carried pokemon to others");
         eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
@@ -43,7 +44,7 @@ public class GiftController {
         }
 
         SelectionMenu menu =
-                SelectionMenu.create("pokemon-list")
+                SelectionMenu.create("pokemon-" + receiverId)
                         .setPlaceholder("Please choose from the following pokemons to give\n")
                         .addOptions(nameOptions)
                         .build();
@@ -51,37 +52,4 @@ public class GiftController {
 
         return mb;
     }
-
-    // // we are supposed to send a message to another user
-    // MessageBuilder mb = new MessageBuilder();
-    // EmbedBuilder eb = new EmbedBuilder();
-    // eb.setTitle("Please choose the user you would like to battle with.");
-    // eb.setImage(
-    //
-    // "https://static.fandomspot.com/images/09/2873/00-featured-battle-anime-pokemon-with-pikachu.jpg");
-    // List<User> otherUsers = event.getJDA().getUsers();
-    // ArrayList<String> otherUsersNames = new ArrayList<>();
-    // ArrayList<SelectOption> nameOptions = new ArrayList<>();
-    // for (User user : otherUsers) {
-    //     String currentName = user.getName();
-    //     if (currentName.toLowerCase().contains("bot")) continue;
-    //     otherUsersNames.add(currentName);
-    //     nameOptions.add(SelectOption.of(currentName, currentName));
-    // }
-    // if (nameOptions.size() == 0) {
-    //     eb.setTitle("Sorry there is no friend to play with");
-    //     mb.setEmbeds(eb.build());
-    //     return mb;
-    // }
-
-    // SelectionMenu menu =
-    //         SelectionMenu.create("battleList")
-    //                 .setPlaceholder(
-    //                         "Please choose from the following users to launche a battle.\n")
-    //                 .addOptions(nameOptions)
-    //                 .build();
-    // mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
-
-    // return mb;
-
 }

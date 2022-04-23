@@ -66,8 +66,7 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                 .setAuthor(event.getUser().getName());
 
         UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(
-                        event.getUser().getId(), event.getUser().getName());
+                userPokemonController.getUserPokemonForMemberID(event.getUser().getId());
         PokemonInfo userPokeInfo = userPokemon.getCarriedPokemon();
 
         EmbedBuilder eb2 = displayController.pokemonStatus(userPokeInfo);
@@ -77,7 +76,9 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                                 Button.primary("battle:accept", "accept"),
                                 Button.secondary("battle:decline", "decline")));
 
-        sendMessage(receiver, mb.build());
+        Message message = mb.build();
+
+        sendMessage(receiver, message);
 
         MessageBuilder mb1 = new MessageBuilder();
         EmbedBuilder eb1 = new EmbedBuilder();
