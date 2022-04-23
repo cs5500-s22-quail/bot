@@ -24,7 +24,7 @@ public class GiftController {
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setTitle("Please choose one your pokemons to gift to ." + receiver)
+        eb.setTitle("Please choose one your pokemons to gift to " + receiver)
                 .setDescription(
                         "\n\nPlease note that you can not give your carried pokemon to others");
         eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
@@ -44,7 +44,7 @@ public class GiftController {
         }
 
         SelectionMenu menu =
-                SelectionMenu.create("pokemon-" + receiverId)
+                SelectionMenu.create("gift-" + discordUserId)
                         .setPlaceholder("Please choose from the following pokemons to give\n")
                         .addOptions(nameOptions)
                         .build();
