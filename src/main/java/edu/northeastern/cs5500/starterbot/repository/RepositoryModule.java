@@ -39,6 +39,17 @@ public class RepositoryModule {
     }
 
     @Provides
+    public GenericRepository<BattleRequest> provideBattleRequestRepository(
+            MongoDBRepository<BattleRequest> repository) {
+        return repository;
+    }
+
+    @Provides
+    public Class<BattleRequest> provideBattleRequest() {
+        return BattleRequest.class;
+    }
+
+    @Provides
     public Class<UserPreference> provideUserPreference() {
         return UserPreference.class;
     }

@@ -27,6 +27,8 @@ public class BattleCommand implements Command, SelectionMenuHandler {
     @Inject PokemonService pokemonService;
     @Inject MultiUserController multiUserController;
     @Inject DisplayController displayController;
+    @Inject BattleController battleController;
+    @Inject BattleRequestController battleRequestController;
 
     @Inject
     public BattleCommand() {}
@@ -51,6 +53,7 @@ public class BattleCommand implements Command, SelectionMenuHandler {
     @Override
     public void onSelectionMenu(SelectionMenuEvent event) {
         String chosenUser = event.getInteraction().getValues().get(0);
+        User initiator = event.getUser();
         User receiver = event.getJDA().getUsers().get(0);
         for (User user : event.getJDA().getUsers()) {
             if (user.getName().equals(chosenUser)) {
@@ -61,14 +64,17 @@ public class BattleCommand implements Command, SelectionMenuHandler {
 
         MessageBuilder mb = new MessageBuilder();
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle(event.getUser().getName() + " sent you a battle invitation with this pokemon!")
+        eb.setTitle(initiator.getName() + " sent you a battle invitation with this pokemon!")
                 .setDescription("Please choose from the following buttons")
-                .setAuthor(event.getUser().getName());
+                .setAuthor("@" + receiver.getName());
 
         UserPokemon userPokemon =
                 userPokemonController.getUserPokemonForMemberID(event.getUser().getId());
         PokemonInfo userPokeInfo = userPokemon.getCarriedPokemon();
-
+        if (userPokeInfo == null) {
+            event.reply("You do not have any pokemon yet. Go get a pokemon").queue();
+            return;
+        }
         EmbedBuilder eb2 = displayController.pokemonStatus(userPokeInfo);
         mb.setEmbeds(eb.build(), eb2.build())
                 .setActionRows(
@@ -76,14 +82,43 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                                 Button.primary("battle:accept", "accept"),
                                 Button.secondary("battle:decline", "decline")));
 
+        // setBattle
+        battleRequestController.setBattleRequestByUserId(receiver.getId(), initiator.getId());
+
         Message message = mb.build();
+        event.reply(message).queue();
 
-        sendMessage(receiver, message);
+        //        int count = 0;
+        //        while (count < 30) {
+        //            if (!battleRequest.getAcceptEventId().equals("Invalid")) {
+        //
+        //                PokemonInfo receiverPokemonInfo =
+        //                        userPokemonController
+        //                                .getUserPokemonForMemberID(receiver.getId(),
+        // receiver.getName())
+        //                                .getCarriedPokemon();
+        //
+        //                battleController.battleUI(userPokeInfo, receiverPokemonInfo, event);
+        //                battleRequestController.deleteRequestById(
+        //                        event.getId(), event.getGuild().getId(),
+        // event.getMessageChannel().getId());
+        //                return;
+        //            }
+        //            try {
+        //                Thread.sleep(1000);
+        //            } catch (InterruptedException ex) {
+        //                Thread.currentThread().interrupt();
+        //            }
+        //            count++;
+        //        }
 
-        MessageBuilder mb1 = new MessageBuilder();
-        EmbedBuilder eb1 = new EmbedBuilder();
-        eb1.setTitle("You invitation has been sent. Please wait for reply.");
-        event.reply(mb1.setEmbeds(eb1.build()).build()).queue();
+        //        MessageBuilder mb1 = new MessageBuilder();
+        //        EmbedBuilder eb1 = new EmbedBuilder();
+        //        eb1.setTitle(
+        //                receiver.getName()
+        //                        + "did not respond to your invitation. This request has been
+        // canceled");
+        //        event.reply(mb1.setEmbeds(eb1.build()).build()).queue();
 
         // if (event.getComponentId().equals("battle:decline")) {
 
@@ -99,5 +134,9 @@ public class BattleCommand implements Command, SelectionMenuHandler {
 
     public void sendMessage(User receiver, Message message) {
         receiver.openPrivateChannel().flatMap(channel -> channel.sendMessage(message)).queue();
+
+        //           .delay(30, TimeUnit.SECONDS) // RestAction<Message> with
+        //                // delayed response
+        //                .flatMap(Message::delete)
     }
 }
