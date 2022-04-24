@@ -50,7 +50,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         List<Member> members = event.getGuild().getMembers();
         String receiverId = "";
         for (Member member : members) {
-            if (member.getUser().getName().equals(receiver)) receiverId = member.getId();
+            if (member.getUser().getName().equals(receiver)) receiverId = member.getUser().getId();
         }
 
         if (receiverId.length() == 0) {
@@ -64,6 +64,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
                 giftController.getPokemonList(
                         discordUserId, event.getUser().getName(), receiver, receiverId);
         Message message = mb.build();
+
         event.reply(message).queue();
     }
 
@@ -72,7 +73,6 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         String chosenPokemonName = event.getInteraction().getValues().get(0);
         String senderId = event.getUser().getId();
 
-        log.info("onGiftSelectionMenu" + event.getComponent().getId());
         String receiverId = event.getComponent().getId().split("-", 2)[1];
         UserPokemon receiverUserPokemon =
                 userPokemonController.getUserPokemonForMemberID(receiverId);
