@@ -91,6 +91,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
         if (chosenPokemonInfo == null) {
             event.reply("There is something wrong with the pokemon chosen. Try again!").queue();
+            return;
         }
 
         // if matched one, give it to the receiver
