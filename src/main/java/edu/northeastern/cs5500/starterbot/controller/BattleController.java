@@ -49,6 +49,7 @@ public class BattleController {
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
+                    eb1.setTitle("HP: " + hp[0] + "/" + p1.getHp());
                     eb2.setTitle("HP: " + hp[1] + "/" + p1.getHp());
                     eb3.setDescription(info.toString());
                     event.getHook()
@@ -71,6 +72,7 @@ public class BattleController {
                         Thread.currentThread().interrupt();
                     }
                     eb1.setTitle("HP: " + hp[0] + "/" + p1.getHp());
+                    eb2.setTitle("HP: " + hp[1] + "/" + p1.getHp());
                     eb3.setDescription(info.toString());
                     event.getHook()
                             .editOriginalEmbeds(eb1.build(), eb2.build(), eb3.build())
