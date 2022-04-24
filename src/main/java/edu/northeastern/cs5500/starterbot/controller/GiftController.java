@@ -3,6 +3,8 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.inject.Inject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -28,12 +30,17 @@ public class GiftController {
                 .setDescription(
                         "\n\nPlease note that you can not give your carried pokemon to others");
         eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
+        eb.addField("gift", "gift", false);
         ArrayList<PokemonInfo> pokemons = userPokemon.getPokemonTeam();
         ArrayList<SelectOption> nameOptions = new ArrayList<>();
+        Set<String> pokemonSet = new HashSet<>();
         for (PokemonInfo pokemon : pokemons) {
             // could not give carried pokemon to others.
+            // pokemon with duplicates names will only have the first pokemon that shows up
             if (pokemon.getName().equals(userPokemon.getCarriedPokemon().getName())) continue;
             String currentName = pokemon.getName();
+            if (pokemonSet.contains(currentName)) continue;
+            pokemonSet.add(currentName);
             nameOptions.add(SelectOption.of(currentName, currentName));
         }
 
