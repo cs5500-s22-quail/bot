@@ -30,7 +30,6 @@ public class GiftController {
                 .setDescription(
                         "\n\nPlease note that you can not give your carried pokemon to others");
         eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
-        eb.addField("gift", "gift", false);
         ArrayList<PokemonInfo> pokemons = userPokemon.getPokemonTeam();
         ArrayList<SelectOption> nameOptions = new ArrayList<>();
         Set<String> pokemonSet = new HashSet<>();
