@@ -88,48 +88,12 @@ public class BattleCommand implements Command, SelectionMenuHandler {
         Message message = mb.build();
         event.reply(message).queue();
 
-        //        int count = 0;
-        //        while (count < 30) {
-        //            if (!battleRequest.getAcceptEventId().equals("Invalid")) {
-        //
-        //                PokemonInfo receiverPokemonInfo =
-        //                        userPokemonController
-        //                                .getUserPokemonForMemberID(receiver.getId(),
-        // receiver.getName())
-        //                                .getCarriedPokemon();
-        //
-        //                battleController.battleUI(userPokeInfo, receiverPokemonInfo, event);
-        //                battleRequestController.deleteRequestById(
-        //                        event.getId(), event.getGuild().getId(),
-        // event.getMessageChannel().getId());
-        //                return;
-        //            }
-        //            try {
-        //                Thread.sleep(1000);
-        //            } catch (InterruptedException ex) {
-        //                Thread.currentThread().interrupt();
-        //            }
-        //            count++;
-        //        }
-
-        //        MessageBuilder mb1 = new MessageBuilder();
-        //        EmbedBuilder eb1 = new EmbedBuilder();
-        //        eb1.setTitle(
-        //                receiver.getName()
-        //                        + "did not respond to your invitation. This request has been
-        // canceled");
-        //        event.reply(mb1.setEmbeds(eb1.build()).build()).queue();
-
-        // if (event.getComponentId().equals("battle:decline")) {
-
-        // } else if (event.getComponentId().equals("battle:pk")) {
-
-        //     PokemonInfo p1 = multiUserController.getP1();
-        //     PokemonInfo p2 = multiUserController.getP2();
-
-        //     battleController.battleUI(p1, p2, event);
-        // }
-
+        try {
+            Thread.sleep(40000);
+            battleRequestController.deleteRequestById(receiver.getId());
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void sendMessage(User receiver, Message message) {

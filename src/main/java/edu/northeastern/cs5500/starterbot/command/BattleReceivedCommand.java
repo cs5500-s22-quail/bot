@@ -134,7 +134,6 @@ public class BattleReceivedCommand implements ButtonClickHandler {
             mb.setEmbeds(eb.build());
         }
         // if handler is yes then trigger the battle
-
     }
 
     public void sendMessage(User receiver, Message message) {
