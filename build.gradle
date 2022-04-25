@@ -149,12 +149,12 @@ jacocoTestCoverageVerification {
 
             limit {
                 counter = 'LINE'
-                minimum = 0.1
+                minimum = 0.0
             }
 
             limit {
                 counter = 'BRANCH'
-                minimum = 0.1
+                minimum = 0.0
             }
         }
         rule {
@@ -162,7 +162,7 @@ jacocoTestCoverageVerification {
                 counter = 'CLASS'
                 excludes = ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
                             '**.listener.**', '**.command.**', '**.RepositoryModule', '**.DaggerBotComponent.**']
-                minimum = 1
+                minimum = 0
             }
         }
     }
