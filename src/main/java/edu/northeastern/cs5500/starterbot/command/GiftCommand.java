@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -38,15 +39,16 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         return new CommandData(getName(), "Gift a pokemon to one of the users.")
                 .addOptions(
                         new OptionData(
-                                        OptionType.STRING,
+                                        OptionType.USER,
                                         "receiver",
-                                        "Please type in the user name you would like to gift to.")
+                                        "Please chooose one of the users to gift.")
                                 .setRequired(true));
     }
 
     @Override
     public void onEvent(CommandInteraction event) {
-        String receiver = event.getOption("receiver").getAsString();
+        User receiverUser = event.getOption("receiver").getAsUser();
+        String receiver = receiverUser.getName();
         List<Member> members = event.getGuild().getMembers();
         String receiverId = "";
         for (Member member : members) {
