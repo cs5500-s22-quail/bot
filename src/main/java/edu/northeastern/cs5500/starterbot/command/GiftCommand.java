@@ -1,14 +1,16 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.controller.GiftController;
 import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -18,12 +20,14 @@ import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 
 @Singleton
 @Slf4j
 public class GiftCommand implements Command, SelectionMenuHandler {
 
-    @Inject GiftController giftController;
     @Inject UserPokemonController userPokemonController;
 
     @Inject
@@ -62,9 +66,43 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
         log.info("event: /gift");
         String discordUserId = event.getUser().getId();
-        MessageBuilder mb =
-                giftController.getPokemonList(
-                        discordUserId, event.getUser().getName(), receiver, receiverId);
+        MessageBuilder mb = new MessageBuilder();
+
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(discordUserId);
+
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setTitle("Please choose one your pokemons to gift to " + receiver)
+                .setDescription(
+                        "\n\nPlease note that you can not give your carried pokemon to others");
+        eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
+        ArrayList<PokemonInfo> pokemons = userPokemon.getPokemonTeam();
+        ArrayList<SelectOption> nameOptions = new ArrayList<>();
+        Set<String> pokemonSet = new HashSet<>();
+        for (PokemonInfo pokemon : pokemons) {
+            // could not give carried pokemon to others.
+            // pokemon with duplicates names will only have the first pokemon that shows up
+            if (pokemon.getName().equals(userPokemon.getCarriedPokemon().getName())) continue;
+            String currentName = pokemon.getName();
+            if (pokemonSet.contains(currentName)) continue;
+            pokemonSet.add(currentName);
+            nameOptions.add(SelectOption.of(currentName, currentName));
+        }
+
+        if (nameOptions.size() == 0) {
+            eb.setTitle("Sorry You do not have any pokemons to give");
+            mb.setEmbeds(eb.build());
+        } else {
+
+            SelectionMenu menu =
+                    SelectionMenu.create("gift-" + discordUserId)
+                            .setPlaceholder(
+                                    "Please choose one from the following pokemons to give\n")
+                            .addOptions(nameOptions)
+                            .build();
+            mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
+        }
+
         Message message = mb.build();
 
         event.reply(message).queue();
