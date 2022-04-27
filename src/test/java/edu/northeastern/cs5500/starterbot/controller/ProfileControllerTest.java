@@ -12,6 +12,9 @@ public class ProfileControllerTest {
         this.profileController = new ProfileController();
     }
 
+    /*
+    TODO: this test failed
+     */
     @Test
     public void testGetProfile() {
         this.profileController.getProfile("testDiscordId", "www.google.com", "Michael Gary Scott");

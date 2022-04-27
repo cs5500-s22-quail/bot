@@ -33,6 +33,22 @@ public class IndividualValue {
         this.speed = ThreadLocalRandom.current().nextInt(MIN_POSSIBLE_IV, MAX_POSSIBLE_IV + 1);
     }
 
+    public String getQualityName() {
+        Quality quality = this.getQuality();
+        switch (quality) {
+            case RED:
+                return "Legendary";
+            case PURPLE:
+                return "Epic";
+            case BLUE:
+                return "Superior";
+            case GREEN:
+                return "Good";
+            default:
+                return "";
+        }
+    }
+
     public Quality getQuality() {
         return this.setQuality(this.getIVPercentage() * 100);
     }

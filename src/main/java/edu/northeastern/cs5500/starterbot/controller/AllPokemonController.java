@@ -1,6 +1,5 @@
-package edu.northeastern.cs5500.starterbot.listener;
+package edu.northeastern.cs5500.starterbot.controller;
 
-import edu.northeastern.cs5500.starterbot.controller.UserPokemonController;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import javax.inject.Inject;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 public class AllPokemonController {
-    //    @Inject PokemonGenerator pokemonGenerator;
     @Inject UserPokemonController userPokemonController;
 
     @Inject
@@ -21,9 +19,9 @@ public class AllPokemonController {
         int index = 0;
         for (PokemonInfo pokemonInfo : userPokemonTeam) {
             index++;
-            list += index + " | ";
-            list += "**" + pokemonInfo.getName() + "** —— ";
-            list += "Quality: " + pokemonInfo.getIv().getQuality() + " | ";
+            list += index + " - ";
+            list += "**" + pokemonInfo.getName() + "** | ";
+            list += "Quality: " + pokemonInfo.getIv().getQualityName() + " | ";
             list += "Level: " + pokemonInfo.getLevel() + " | ";
             list += "IV: " + pokemonInfo.getIv().getIVPercentageFormat() + "\n";
         }
