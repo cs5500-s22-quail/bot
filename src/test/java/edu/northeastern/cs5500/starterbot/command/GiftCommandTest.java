@@ -17,10 +17,4 @@ public class GiftCommandTest {
 
         assertThat(name).isEqualTo(commandData.getName());
     }
-
-    @Test
-    void testOnEvent() {}
-
-    @Test
-    void testOnSelectionMenu() {}
 }
