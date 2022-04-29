@@ -13,13 +13,13 @@ import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import org.jetbrains.annotations.NotNull;
 
 @Singleton
 @Slf4j
 public class BattleReceivedCommand implements ButtonClickHandler {
 
-    @Inject BattleController battleController;
-    @Inject MultiUserController multiUserController;
+    @Inject EvenReplyHandler evenReplyHandler;
     @Inject BattleRequestController battleRequestController;
     @Inject UserPokemonController userPokemonController;
     // @Override
@@ -58,7 +58,7 @@ public class BattleReceivedCommand implements ButtonClickHandler {
     }
 
     @Override
-    public void onButtonClick(ButtonClickEvent event) {
+    public void onButtonClick(@NotNull ButtonClickEvent event) {
 
         // wait for battle request model updating
         try {
@@ -120,7 +120,8 @@ public class BattleReceivedCommand implements ButtonClickHandler {
                     userPokemonController
                             .getUserPokemonForMemberID(buttonClicker.getId())
                             .getCarriedPokemon();
-            battleController.battleUI(initiatorPokemonInfo, receiverPokemonInfo, event);
+
+            evenReplyHandler.battleUI(initiatorPokemonInfo, receiverPokemonInfo, event);
 
             battleRequestController.setHasBattled(receiverUserId);
 

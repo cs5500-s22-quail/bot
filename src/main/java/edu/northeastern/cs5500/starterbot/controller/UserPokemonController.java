@@ -42,20 +42,6 @@ public class UserPokemonController {
         this.userPokemonRepository.update(userPokemon);
     }
 
-    @Nonnull
-    public ArrayList<String> getUsersIdList(String userID) {
-        ArrayList<String> usersIdList = new ArrayList<>();
-        Collection<UserPokemon> userPokemons = this.userPokemonRepository.getAll();
-        for (UserPokemon userPokemon : userPokemons) {
-            if (userPokemon.getUserID().equals(userID)) {
-                continue;
-            }
-            usersIdList.add(userPokemon.getUserID());
-        }
-
-        return usersIdList;
-    }
-
     public void addPokemon(PokemonInfo pokemonInfo, String userID) {
         if (this.isPossess(pokemonInfo.getName(), userID)) return;
         UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
