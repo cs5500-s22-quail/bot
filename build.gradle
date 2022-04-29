@@ -91,6 +91,7 @@ test {
 
     jacoco {
         excludes += ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
+                     '**.BattleRequest', '**.PokemonInfo','**.UserBalance','**.UserPokemon','**.UserPreference','**.WildPokemon',
                      '**.listener.**', '**.command.**','**.RepositoryModule', '**.DaggerBotComponent.**']
     }
 }
@@ -120,7 +121,14 @@ jacocoTestReport {
                             '**/*_Factory*',
                             '**/MongoDBRepository.class',
                             '**/MongoDBService.class',
-                            '**/*Exception.class'
+                            '**/*Exception.class',
+
+                            '**/BattleRequest.class',
+                            '**/PokemonInfo.class',
+                            '**/UserBalance.class',
+                            '**/UserPokemon.class',
+                            '**/UserPreference.class',
+                            '**/WildPokemon.class',
                     ])
         }))
     }
@@ -144,24 +152,26 @@ jacocoTestCoverageVerification {
                     '**.*_Factory.**',
                     'edu.northeastern.cs5500.starterbot.repository.MongoDBRepository',
                     'edu.northeastern.cs5500.starterbot.service.MongoDBService',
-                    '**.*Exception'
+                    '**.*Exception',
+                    '**.BattleRequest', '**.PokemonInfo','**.UserBalance','**.UserPokemon','**.UserPreference','**.WildPokemon',
             ]
 
             limit {
                 counter = 'LINE'
-                minimum = 0.0
+                minimum = 0
             }
 
             limit {
                 counter = 'BRANCH'
-                minimum = 0.0
+                minimum = 0
             }
         }
         rule {
             limit {
                 counter = 'CLASS'
-                excludes = ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
-                            '**.listener.**', '**.command.**', '**.RepositoryModule', '**.DaggerBotComponent.**']
+                excludes =  ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
+                             '**.BattleRequest', '**.PokemonInfo','**.UserBalance','**.UserPokemon','**.UserPreference','**.WildPokemon',
+                             '**.listener.**', '**.command.**','**.RepositoryModule', '**.DaggerBotComponent.**']
                 minimum = 0
             }
         }
