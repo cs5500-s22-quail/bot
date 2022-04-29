@@ -1,5 +1,7 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static org.mockito.Mockito.*;
+
 import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +12,7 @@ class BattleControllerTest {
         BattleController battleController = new BattleController();
         PokemonService pokemonService = new PokemonService();
         Object[] info =
-                battleController.pokemonVersePokemon(
+                battleController.pokemonVersusPokemon(
                         pokemonService.fromID(30), pokemonService.fromID(100));
     }
 }

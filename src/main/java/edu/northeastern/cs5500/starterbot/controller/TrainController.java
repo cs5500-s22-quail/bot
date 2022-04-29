@@ -51,7 +51,7 @@ public class TrainController {
         BattleController battleController = new BattleController();
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
         Object[] battleRes =
-                battleController.pokemonVersePokemon(fightPokemonInfo, userPokemonInfo);
+                battleController.pokemonVersusPokemon(fightPokemonInfo, userPokemonInfo);
         PokemonInfo winnerInfo = (PokemonInfo) battleRes[0];
         boolean userWin = winnerInfo == userPokemonInfo;
         if (userWin) {

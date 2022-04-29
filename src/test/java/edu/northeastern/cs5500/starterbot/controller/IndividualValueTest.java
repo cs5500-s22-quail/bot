@@ -3,6 +3,8 @@ package edu.northeastern.cs5500.starterbot.controller;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.model.IndividualValue;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class IndividualValueTest {
@@ -50,5 +52,39 @@ class IndividualValueTest {
             if (format.charAt(2) != '.' || format.charAt(format.length() - 1) != '%')
                 fail("Invalid format, Expected is xx.xx%, but actual is " + format);
         }
+    }
+
+    @Test
+    void testGetQuality() {
+
+        Set<String> set = new HashSet<>();
+        set.add("Legendary");
+        set.add("Epic");
+        set.add("Superior");
+        set.add("Good");
+        for (int i = 0; i < 100; i++) {
+            IndividualValue individualValue = new IndividualValue();
+            assertTrue(set.contains(individualValue.getQualityName()));
+        }
+    }
+
+    @Test
+    void testData() {
+        IndividualValue individualValue = new IndividualValue();
+        IndividualValue individualValue1 = new IndividualValue();
+        assertNotEquals(individualValue, individualValue1);
+        assertNotNull(individualValue.toString());
+        assertNotNull(individualValue.getHp());
+        assertNotNull(individualValue.getAttack());
+        assertNotNull(individualValue.getDefense());
+        assertNotNull(individualValue.getSpeed());
+        assertNotNull(individualValue.getSpecialAttack());
+        assertNotNull(individualValue.getSpecialDefense());
+        individualValue.setAttack(1);
+        individualValue.setDefense(1);
+        individualValue.setSpecialAttack(1);
+        individualValue.setSpecialDefense(1);
+        individualValue.setHp(1);
+        individualValue.setSpeed(1);
     }
 }

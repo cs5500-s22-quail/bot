@@ -30,7 +30,6 @@ public class BattleCommand implements Command, SelectionMenuHandler {
     @Inject PokemonGenerator pokemonGenerator;
     @Inject TrainController trainController;
     @Inject PokemonService pokemonService;
-    @Inject MultiUserController multiUserController;
     @Inject DisplayController displayController;
     @Inject BattleController battleController;
     @Inject BattleRequestController battleRequestController;
@@ -87,18 +86,11 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                                 Button.primary("battle:accept", "accept"),
                                 Button.secondary("battle:decline", "decline")));
 
-        // setBattle
+        battleRequestController.deleteRequestById(receiver.getId());
         battleRequestController.setBattleRequestByUserId(receiver.getId(), initiator.getId());
 
         Message message = mb.build();
         event.reply(message).queue();
-
-        try {
-            Thread.sleep(40000);
-            battleRequestController.deleteRequestById(receiver.getId());
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
     }
 
     public void sendMessage(User receiver, Message message) {
