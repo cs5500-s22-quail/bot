@@ -10,7 +10,7 @@ class BattleControllerTest {
         BattleController battleController = new BattleController();
         PokemonService pokemonService = new PokemonService();
         Object[] info =
-                battleController.pokemonVersePokemon(
+                battleController.pokemonVersusPokemon(
                         pokemonService.fromID(30), pokemonService.fromID(100));
     }
 }

@@ -61,8 +61,33 @@ class UserPokemonControllerTest {
     }
 
     @Test
-    void attemptCatch() {}
+    void probability() {
+        assertEquals(userPokemonController.probability(Quality.RED), 2);
+        assertEquals(userPokemonController.probability(Quality.PURPLE), 3);
+        assertEquals(userPokemonController.probability(Quality.BLUE), 5);
+        assertEquals(userPokemonController.probability(Quality.GREEN), 7);
+    }
 
     @Test
-    void probability() {}
+    void testAttemptCatch() {
+        assertNotNull(userPokemonController.AttemptCatch(Quality.GREEN));
+        assertNotNull(userPokemonController.AttemptCatch(Quality.GREEN));
+        assertNotNull(userPokemonController.AttemptCatch(Quality.RED));
+    }
+
+    @Test
+    void updateUserPokemon() {
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("1111");
+        userPokemon.setCarriedPokemon(pokemonService.fromID(124));
+
+        this.userPokemonController.updateUserPokemon(userPokemon);
+        assertNotNull(userPokemon.getCarriedPokemon());
+    }
+
+    @Test
+    void levelUp() {
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("1111");
+        userPokemon.setCarriedPokemon(pokemonService.fromID(124));
+        this.userPokemonController.levelUp(userPokemon);
+    }
 }

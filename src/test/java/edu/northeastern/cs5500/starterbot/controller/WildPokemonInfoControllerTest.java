@@ -51,4 +51,14 @@ class WildPokemonInfoControllerTest {
         assertNotNull(
                 this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonInfo());
     }
+
+    @Test
+    void testHasPokemonForChannel() {
+        this.wildPokemonController.hasWildPokemonForChannel("0");
+    }
+
+    @Test
+    void testDeletePokemon() {
+        this.wildPokemonController.deletePokemonInfoForChannel("0");
+    }
 }

@@ -8,9 +8,7 @@ import java.util.Collection;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import lombok.Data;
 
-@Data
 public class WildPokemonController {
     @Inject PokemonService pokemonService;
 
@@ -58,9 +56,9 @@ public class WildPokemonController {
         return this.getWildPokemonForChannel(discordChannelID).getPokemonInfo() != null;
     }
 
-    @Nonnull
     public void deletePokemonInfoForChannel(String discordChannelId) {
         WildPokemon wildPokemon = this.getWildPokemonForChannel(discordChannelId);
         wildPokemon.setPokemonInfo(null);
+        this.wildPokemonRepository.update(wildPokemon);
     }
 }
