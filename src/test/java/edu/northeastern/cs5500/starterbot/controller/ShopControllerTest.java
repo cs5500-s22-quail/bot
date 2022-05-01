@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 public class ShopControllerTest {
 
     private ShopController shopController;
+    private static String uniqueId = "12sdlfhlsdngslfndslnbglsl";
 
     @BeforeEach
     void setUp() {
@@ -19,47 +21,20 @@ public class ShopControllerTest {
     void testGetBalanceForUserId() {
 
         // create a unique id
-        String uniqueId = "12sdlfhlsdngslfndslnbglsl";
+        
         assertNotNull(this.shopController.getBalanceForUserId(uniqueId));
         assertNotNull(this.shopController.getBalanceForUserId(uniqueId));
     }
 
-    @Test
-    void testGetPreviousPokemons() {}
 
     @Test
-    void testGetPreviousVisitedTime() {}
+    void testUpdateBalanceForUserId() {
+        shopController.updateBalanceForUserId(uniqueId, 0);
+    }
 
     @Test
-    void testGetPrices() {}
-
-    @Test
-    void testGetShopRepository() {}
-
-    @Test
-    void testGetUserID() {}
-
-    @Test
-    void testGetWildPokemonController() {}
-
-    @Test
-    void testSetPreviousPokemons() {}
-
-    @Test
-    void testSetPreviousVisitedTime() {}
-
-    @Test
-    void testSetPrices() {}
-
-    @Test
-    void testSetShopRepository() {}
-
-    @Test
-    void testSetUserID() {}
-
-    @Test
-    void testSetWildPokemonController() {}
-
-    @Test
-    void testUpdateBalanceForUserId() {}
+    void testUpdateBalanceForUserIdFail() {
+        assertThrows(IllegalArgumentException.class, () -> shopController.updateBalanceForUserId(uniqueId, -1100));
+        assertThrows(IllegalArgumentException.class, () -> shopController.updateBalanceForUserId(uniqueId, Integer.MAX_VALUE));
+    }
 }
