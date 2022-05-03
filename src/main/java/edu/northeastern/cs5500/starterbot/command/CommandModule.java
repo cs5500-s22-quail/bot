@@ -7,14 +7,11 @@ import dagger.multibindings.IntoSet;
 @Module
 public class CommandModule {
 
-
     @Provides
     @IntoSet
     public Command provideSelectCommand(SelectCommand selectCommand) {
         return selectCommand;
     }
-
-   
 
     @Provides
     @IntoSet
