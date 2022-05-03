@@ -74,7 +74,8 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
         eb.setTitle("Please choose one your pokemons to gift to " + receiver)
                 .setDescription(
-                        "\n\nPlease note that you can not give your carried pokemon to others");
+                        System.lineSeparator()
+                                + "Please note that you can not give your carried pokemon to others");
         eb.setImage("https://c.tenor.com/JdW7qW5GGMcAAAAM/christmas-pokemon.gif");
         ArrayList<PokemonInfo> pokemons = userPokemon.getPokemonTeam();
         ArrayList<SelectOption> nameOptions = new ArrayList<>();
@@ -95,7 +96,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         } else {
 
             SelectionMenu menu =
-                    SelectionMenu.create("gift-" + discordUserId)
+                    SelectionMenu.create("gift-" + receiverId)
                             .setPlaceholder(
                                     "Please choose one from the following pokemons to give\n")
                             .addOptions(nameOptions)
@@ -136,7 +137,10 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
         // if matched one, give it to the receiver
         senderPokemons.remove(chosenPokemonInfo);
-        receiverUserPokemon.getPokemonTeam().add(chosenPokemonInfo);
+        senderUserPokemon.setPokemonTeam(senderPokemons);
+        ArrayList<PokemonInfo> receiverPokemons = receiverUserPokemon.getPokemonTeam();
+        receiverPokemons.add(chosenPokemonInfo);
+        receiverUserPokemon.setPokemonTeam(receiverPokemons);
 
         // update the repository
         userPokemonController.updateUserPokemon(senderUserPokemon);

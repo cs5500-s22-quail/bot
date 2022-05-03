@@ -176,12 +176,16 @@ public class RedeemCommand implements Command, SelectionMenuHandler {
         shopController.getBalanceForUserId(discordUserId).setBalance(currentBalance);
         shopController.shopRepository.update(shopController.getBalanceForUserId(discordUserId));
 
-        eb.setTitle("Welcome to the Shop!     " + preferredName)
-                .setDescription(
-                        "Your current balance: "
-                                + currentBalance
-                                + "\n\nHere are the pokemons on sale!"
-                                + "\nPlease chooose one from the dropdown menu!");
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append("Your current balance: ");
+        sb1.append(currentBalance);
+        sb1.append(System.lineSeparator());
+        sb1.append(System.lineSeparator());
+        sb1.append("Here are the pokemons on sale!");
+        sb1.append(System.lineSeparator());
+        sb1.append("Please chooose one from the dropdown menu!");
+
+        eb.setTitle("Welcome to the Shop!     " + preferredName).setDescription(sb1.toString());
 
         ArrayList<EmbedBuilder> ebArray = new ArrayList<>(3);
 
