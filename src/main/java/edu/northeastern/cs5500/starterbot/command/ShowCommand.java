@@ -98,12 +98,16 @@ public class ShowCommand implements Command {
         shopController.getBalanceForUserId(discordUserId).setBalance(currentBalance);
         shopController.shopRepository.update(shopController.getBalanceForUserId(discordUserId));
 
-        eb.setTitle("Welcome to the Shop!     " + preferredName)
-                .setDescription(
-                        "Your current balance: "
-                                + currentBalance
-                                + "\n\nHere are some example pokemons!"
-                                + "\nUse /redeem Command to see what pokemons are on sale!");
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append("Your current balance: ");
+        sb1.append(currentBalance);
+        sb1.append(System.lineSeparator());
+        sb1.append(System.lineSeparator());
+        sb1.append("Here are some example pokemons!");
+        sb1.append(System.lineSeparator());
+        sb1.append("Use /redeem Command to see what pokemons are on sale!");
+
+        eb.setTitle("Welcome to the Shop!     " + preferredName).setDescription(sb1.toString());
 
         ArrayList<EmbedBuilder> ebArray = new ArrayList<>(3);
 
@@ -148,14 +152,25 @@ public class ShowCommand implements Command {
                             + "    Price: "
                             + shopController.prices.get(i));
             pokemonsToBuy.append("Quality: " + pokemonQuality);
-            pokemonsToBuy.append("\n\nHP: " + currentOne.getPokemonInfo().getHp());
-            pokemonsToBuy.append("\n" + "Attack: " + currentOne.getPokemonInfo().getAttack());
-            pokemonsToBuy.append("\n" + "Defense: " + currentOne.getPokemonInfo().getDefense());
+            pokemonsToBuy.append(System.lineSeparator());
+            pokemonsToBuy.append(System.lineSeparator());
+            pokemonsToBuy.append("HP: " + currentOne.getPokemonInfo().getHp());
+            pokemonsToBuy.append(System.lineSeparator());
+            pokemonsToBuy.append("Attack: ");
+            pokemonsToBuy.append(currentOne.getPokemonInfo().getAttack());
+            pokemonsToBuy.append(System.lineSeparator());
+            pokemonsToBuy.append("Defense: ");
+            pokemonsToBuy.append(currentOne.getPokemonInfo().getDefense());
             long percentage =
                     Math.round(currentOne.getPokemonInfo().getIv().getIVPercentage() * 10000);
             long partA = percentage / 100;
             long partB = percentage - partA * 100;
-            pokemonsToBuy.append("\n" + "Total IV " + partA + "." + partB + "%");
+            pokemonsToBuy.append(System.lineSeparator());
+            pokemonsToBuy.append("Total IV ");
+            pokemonsToBuy.append(partA);
+            pokemonsToBuy.append(".");
+            pokemonsToBuy.append(partB);
+            pokemonsToBuy.append("%");
             currentEmbedBuilder.setDescription(pokemonsToBuy.toString());
             currentEmbedBuilder.setThumbnail(currentOne.getPokemonInfo().getOfficialArtworkUrl());
         }

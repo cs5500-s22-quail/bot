@@ -73,11 +73,15 @@ public class ShopCommand implements Command, ButtonClickHandler {
         shopController.updateBalanceForUserId(
                 discordUserId,
                 currentBalance - shopController.getBalanceForUserId(discordUserId).getBalance());
-        eb.setTitle("Welcome to the Shop!     " + preferredName)
-                .setDescription(
-                        "Your current balance: "
-                                + currentBalance
-                                + "\n\n To view available pokemons, please Click the show button");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Your current balance: ");
+        sb.append(currentBalance);
+        sb.append(System.lineSeparator());
+        sb.append(System.lineSeparator());
+        sb.append("To view available pokemons, please Click the show button");
+
+        eb.setTitle("Welcome to the Shop!     " + preferredName).setDescription(sb.toString());
 
         eb.setImage(
                 "https://cdn.images.express.co.uk/img/dynamic/143/590x/Pokemon-Center-London-1192560.jpg?r=1571521317165");
@@ -136,12 +140,16 @@ public class ShopCommand implements Command, ButtonClickHandler {
         shopController.getBalanceForUserId(discordUserId).setBalance(currentBalance);
         shopController.shopRepository.update(shopController.getBalanceForUserId(discordUserId));
 
-        eb.setTitle("Welcome to the Shop!     " + preferredName)
-                .setDescription(
-                        "Your current balance: "
-                                + currentBalance
-                                + "\n\nHere are some example pokemons!"
-                                + "\nUse /redeem Command to see what pokemons are on sale!");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Your current balance: ");
+        sb.append(currentBalance);
+        sb.append(System.lineSeparator());
+        sb.append(System.lineSeparator());
+        sb.append("Here are some example pokemons!");
+        sb.append(System.lineSeparator());
+        sb.append("Use /redeem Command to see what pokemons are on sale!");
+
+        eb.setTitle("Welcome to the Shop!     " + preferredName).setDescription(sb.toString());
 
         ArrayList<EmbedBuilder> ebArray = new ArrayList<>(3);
 

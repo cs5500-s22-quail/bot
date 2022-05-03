@@ -7,11 +7,6 @@ import dagger.multibindings.IntoSet;
 @Module
 public class CommandModule {
 
-    @Provides
-    @IntoSet
-    public Command provideSayCommand(SayCommand sayCommand) {
-        return sayCommand;
-    }
 
     @Provides
     @IntoSet
@@ -19,11 +14,7 @@ public class CommandModule {
         return selectCommand;
     }
 
-    @Provides
-    @IntoSet
-    public Command providePreferredNameCommand(PreferredNameCommand preferredNameCommand) {
-        return preferredNameCommand;
-    }
+   
 
     @Provides
     @IntoSet
