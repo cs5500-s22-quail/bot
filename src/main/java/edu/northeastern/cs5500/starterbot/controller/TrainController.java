@@ -58,10 +58,7 @@ public class TrainController {
         boolean userWin = winnerInfo == userPokemonInfo;
         if (userWin) {
             embedBuilder.setDescription("Your pokemon " + userPokemonInfo.getName() + " win!");
-            // TODO: level up the pokemon
-            System.out.println("before level up: " + userPokemonInfo.getLevel());
             userPokemonController.levelUp(userPokemon);
-            System.out.println("after level up: " + userPokemonInfo.getLevel());
         } else {
             embedBuilder.setDescription(
                     "Your pokemon "

@@ -128,9 +128,6 @@ public class TrainCommand implements Command, ButtonClickHandler {
         embedBuilder =
                 trainController.getFightResultEmbeds(
                         embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
-        // TODO show the fight process here:
-        //        trainController.showFightProcess(event, fightPokemon.getPokemonInfo(),
-        // userPokemon);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ex) {
