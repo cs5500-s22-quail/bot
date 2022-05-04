@@ -49,7 +49,7 @@ public class FishCommand implements Command {
         int gotCredit = rand.nextInt(11) * 10;
         String discordUserId = event.getUser().getId();
         shopController.updateBalanceForUserId(discordUserId, gotCredit);
-        eb.setTitle(":moneybag: You got " + gotCredit + " credits!");
+        eb.setTitle(String.format(":moneybag: You got %s credits!", gotCredit));
         eb.setImage(null);
         event.getHook().editOriginalEmbeds(eb.build()).queue();
     }

@@ -27,9 +27,6 @@ public class TrainController {
                 new EmbedBuilder()
                         .setTitle(fightPokemonInfo.getName() + " is fighting with your pokemon...")
                         .setDescription(
-                                // TODO: change attributes for /fight usage
-                                //    +
-                                // ivUIBundle(fightPokemonInfo)
                                 "HP: "
                                         + fightPokemonInfo.getHp()
                                         + " | Level: "
@@ -37,11 +34,6 @@ public class TrainController {
                         .setImage(officialArtworkUrl);
         return embedBuilder;
     }
-
-    //    public void showFightProcess(
-    //            ButtonClickEvent event, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
-    //        battleController.battleUI(fightPokemonInfo, userPokemon.getCarriedPokemon(), event);
-    //    }
 
     public EmbedBuilder getFightResultEmbeds(
             EmbedBuilder embedBuilder, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
@@ -70,16 +62,14 @@ public class TrainController {
         return embedBuilder;
     }
 
-    public EmbedBuilder getLevelUpEmbeds(EmbedBuilder embedBuilder, PokemonInfo pokemonInfo) {
+    public EmbedBuilder getLevelUpEmbeds(PokemonInfo pokemonInfo) {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        //        embedBuilder.setTitle("Your pokemon is level up!").setDescription("Description for
-        // ...");
         PokemonInfoController pokemonInfoController = new PokemonInfoController(pokemonInfo);
-        embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
+        EmbedBuilder embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
         embedBuilder.setTitle(
                 "Your pokemon is leveled up!\n\nLevel "
                         + pokemonInfo.getLevel()

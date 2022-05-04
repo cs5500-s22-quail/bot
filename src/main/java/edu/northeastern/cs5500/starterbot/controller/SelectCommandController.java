@@ -24,7 +24,7 @@ public class SelectCommandController {
             embedBuilder.setTitle("Invalid input! Please enter an integer.");
             return embedBuilder;
         }
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberId(userId);
         ArrayList<PokemonInfo> userPokemonTeam = userPokemon.getPokemonTeam();
         int maxIndex = userPokemonTeam.size();
         if (maxIndex == 0) {
