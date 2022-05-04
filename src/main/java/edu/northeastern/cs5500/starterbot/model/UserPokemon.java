@@ -12,5 +12,5 @@ public class UserPokemon implements Model {
 
     PokemonInfo carriedPokemon;
 
-    String userID;
+    String userId;
 }

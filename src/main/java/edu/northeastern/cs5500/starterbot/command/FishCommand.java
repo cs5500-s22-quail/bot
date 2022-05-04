@@ -35,7 +35,6 @@ public class FishCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /fish");
-        // need to be moved to a controller.
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("You threw your fishing rod...");
         eb.setImage(
@@ -48,7 +47,6 @@ public class FishCommand implements Command {
         }
         Random rand = new Random();
         int gotCredit = rand.nextInt(11) * 10;
-        // firstly check an user balance has already exist
         String discordUserId = event.getUser().getId();
         shopController.updateBalanceForUserId(discordUserId, gotCredit);
         eb.setTitle(":moneybag: You got " + gotCredit + " credits!");

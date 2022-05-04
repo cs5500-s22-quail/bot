@@ -4,8 +4,10 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+@Singleton
 public class AllPokemonController {
     @Inject UserPokemonController userPokemonController;
 

@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
+@Singleton
 @Slf4j
 public class BattleRequestController {
     GenericRepository<BattleRequest> battleRequestGenericRepository;

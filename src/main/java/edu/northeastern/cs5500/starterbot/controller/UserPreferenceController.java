@@ -6,7 +6,9 @@ import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class UserPreferenceController {
 
     GenericRepository<UserPreference> userPreferenceRepository;

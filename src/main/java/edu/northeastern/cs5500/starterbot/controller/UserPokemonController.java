@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class UserPokemonController {
     GenericRepository<UserPokemon> userPokemonRepository;
 
@@ -18,7 +20,7 @@ public class UserPokemonController {
 
         if (this.userPokemonRepository.count() == 0) {
             UserPokemon userPokemon = new UserPokemon();
-            userPokemon.setUserID("7777");
+            userPokemon.setUserId("7777");
             userPokemon.setPokemonTeam(new ArrayList<>());
             this.userPokemonRepository.add(userPokemon);
         }
@@ -28,10 +30,10 @@ public class UserPokemonController {
     public UserPokemon getUserPokemonForMemberID(String userID) {
         Collection<UserPokemon> userPokemons = this.userPokemonRepository.getAll();
         for (UserPokemon userPokemon : userPokemons) {
-            if (userPokemon.getUserID().equals(userID)) return userPokemon;
+            if (userPokemon.getUserId().equals(userID)) return userPokemon;
         }
         UserPokemon userPokemon = new UserPokemon();
-        userPokemon.setUserID(userID);
+        userPokemon.setUserId(userID);
         userPokemon.setPokemonTeam(new ArrayList<>());
         this.userPokemonRepository.add(userPokemon);
         return userPokemon;

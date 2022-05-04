@@ -67,6 +67,6 @@ public class ShopControllerTest {
         assertNotNull(this.shopController.getShopRepository());
         assertNull(
                 this.shopController
-                        .getUserID()); // the UserId has not been instantiated, hence is null
+                        .getUserId()); // the UserId has not been instantiated, hence is null
     }
 }
