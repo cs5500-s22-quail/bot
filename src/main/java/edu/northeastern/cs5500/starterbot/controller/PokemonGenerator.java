@@ -11,8 +11,6 @@ public class PokemonGenerator {
     @Inject PokemonService pokemonService;
     private static final int MAX_POKEMON_ID = 898;
 
-    // constructor:
-    //    public PokemonGenerator() {}
     @Inject
     public PokemonGenerator(PokemonService pokemonService) {
         this.pokemonService = pokemonService;

@@ -98,7 +98,7 @@ public class TrainCommand implements Command, ButtonClickHandler {
                                         String.format(
                                                 "Do you want to cost %s coins to level up your pokemon to Level %s?",
                                                 price, toLevel))
-                                .setFooter("Your balance: " + userBalance + " coins")
+                                .setFooter(String.format("Your balance: %s coins", userBalance))
                                 .build())
                 .addActionRow(
                         Button.success(
@@ -154,16 +154,15 @@ public class TrainCommand implements Command, ButtonClickHandler {
             PokemonInfo pokemonInfoLevelup = userPokemon.getCarriedPokemon();
             eb.setTitle(":tada:Your pokemon has been up-leveled")
                     .setDescription(
-                            "Level "
-                                    + pokemonInfoLevelup.getLevel()
-                                    + " "
-                                    + pokemonInfoLevelup.getName()
-                                    + "\n"
+                            String.format(
+                                            "Level %s %s\n",
+                                            pokemonInfoLevelup.getLevel(),
+                                            pokemonInfoLevelup.getName())
                                     + displayController.PokemonInfoUI(pokemonInfoLevelup))
                     .setFooter(
-                            "Your current balance: "
-                                    + shopController.getBalanceForUserId(userId).getBalance()
-                                    + " coins")
+                            String.format(
+                                    "Your current balance: %s coins",
+                                    shopController.getBalanceForUserId(userId).getBalance()))
                     .setImage(pokemonInfoLevelup.getOfficialArtworkUrl());
             event.replyEmbeds(eb.build()).queue();
 

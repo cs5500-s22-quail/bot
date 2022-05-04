@@ -27,10 +27,9 @@ public class TrainController {
                 new EmbedBuilder()
                         .setTitle(fightPokemonInfo.getName() + " is fighting with your pokemon...")
                         .setDescription(
-                                "HP: "
-                                        + fightPokemonInfo.getHp()
-                                        + " | Level: "
-                                        + fightPokemonInfo.getLevel())
+                                String.format(
+                                        "HP: %s | Level: %s",
+                                        fightPokemonInfo.getHp(), fightPokemonInfo.getLevel()))
                         .setImage(officialArtworkUrl);
         return embedBuilder;
     }
@@ -53,9 +52,9 @@ public class TrainController {
             userPokemonController.levelUp(userPokemon);
         } else {
             embedBuilder.setDescription(
-                    "Your pokemon "
-                            + userPokemonInfo.getName()
-                            + " lost...Nice try and good luck next time!");
+                    String.format(
+                            "Your pokemon %s lost...Nice try and good luck next time!",
+                            userPokemonInfo.getName()));
         }
         embedBuilder.setTitle("The fight is over.").setImage(null);
 
@@ -71,10 +70,9 @@ public class TrainController {
         PokemonInfoController pokemonInfoController = new PokemonInfoController(pokemonInfo);
         EmbedBuilder embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
         embedBuilder.setTitle(
-                "Your pokemon is leveled up!\n\nLevel "
-                        + pokemonInfo.getLevel()
-                        + " "
-                        + pokemonInfo.getName());
+                String.format(
+                        "Your pokemon is leveled up!\n\nLevel %s %s",
+                        pokemonInfo.getLevel(), pokemonInfo.getName()));
         return embedBuilder;
     }
 }
