@@ -55,7 +55,7 @@ public class ProfileCommand implements Command {
                         .getBalance(); // the balance, initially set to 0. TBD
         int pokemons =
                 userPokemonController
-                        .getUserPokemonForMemberID(discordUserId)
+                        .getUserPokemonForMemberId(discordUserId)
                         .getPokemonTeam()
                         .size(); // the captured pokemons, initially set to 0. TBD
         StringBuilder sb = new StringBuilder();

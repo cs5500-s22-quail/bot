@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class WildPokemonController {
     @Inject PokemonService pokemonService;
 

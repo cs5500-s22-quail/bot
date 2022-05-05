@@ -33,7 +33,7 @@ public class PokemonInfoCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /pokemoninfo");
         UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(event.getUser().getId());
+                userPokemonController.getUserPokemonForMemberId(event.getUser().getId());
         PokemonInfo userPokeInfo = userPokemon.getCarriedPokemon();
         PokemonInfoController pokemonInfoController = new PokemonInfoController(userPokeInfo);
         event.replyEmbeds(pokemonInfoController.getPokemonInfoEmbed().build()).queue();

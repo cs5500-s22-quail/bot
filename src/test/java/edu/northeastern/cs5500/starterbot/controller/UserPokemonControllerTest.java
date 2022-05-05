@@ -19,25 +19,25 @@ class UserPokemonControllerTest {
     }
 
     @Test
-    void getUserPokemonForMemberID() {
-        assertNotNull(this.userPokemonController.getUserPokemonForMemberID("7777"));
+    void getUserPokemonForMemberId() {
+        assertNotNull(this.userPokemonController.getUserPokemonForMemberId("7777"));
         assertNotNull(
-                this.userPokemonController.getUserPokemonForMemberID("7777").getPokemonTeam());
-        assertNotNull(this.userPokemonController.getUserPokemonForMemberID("Random"));
+                this.userPokemonController.getUserPokemonForMemberId("7777").getPokemonTeam());
+        assertNotNull(this.userPokemonController.getUserPokemonForMemberId("Random"));
         assertNotNull(
-                this.userPokemonController.getUserPokemonForMemberID("Random").getPokemonTeam());
+                this.userPokemonController.getUserPokemonForMemberId("Random").getPokemonTeam());
     }
 
     @Test
     void addPokemon() {
-        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("888");
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("888");
         assertFalse(this.userPokemonController.hasCarriedPokemon("888"));
         userPokemonController.addPokemon(pokemonService.fromID(4), "888");
         assertTrue(this.userPokemonController.hasCarriedPokemon("888"));
         userPokemonController.addPokemon(pokemonService.fromID(5), "888");
         userPokemonController.addPokemon(pokemonService.fromID(6), "888");
         assertEquals(
-                3, userPokemonController.getUserPokemonForMemberID("888").getPokemonTeam().size());
+                3, userPokemonController.getUserPokemonForMemberId("888").getPokemonTeam().size());
     }
 
     @Test
@@ -48,16 +48,16 @@ class UserPokemonControllerTest {
 
     @Test
     void updateCarriedPokemonForMemberID() {
-        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("999");
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("999");
         assertThrows(
                 IndexOutOfBoundsException.class,
-                () -> userPokemonController.updateCarriedPokemonForMemberID("999", 1));
+                () -> userPokemonController.updateCarriedPokemonForMemberId("999", 1));
         userPokemonController.addPokemon(pokemonService.fromID(4), "999");
         userPokemonController.addPokemon(pokemonService.fromID(5), "999");
-        userPokemonController.updateCarriedPokemonForMemberID("999", 2);
+        userPokemonController.updateCarriedPokemonForMemberId("999", 2);
         assertEquals(
-                userPokemonController.getUserPokemonForMemberID("999").getCarriedPokemon(),
-                userPokemonController.getUserPokemonForMemberID("999").getPokemonTeam().get(2 - 1));
+                userPokemonController.getUserPokemonForMemberId("999").getCarriedPokemon(),
+                userPokemonController.getUserPokemonForMemberId("999").getPokemonTeam().get(2 - 1));
     }
 
     @Test
@@ -77,7 +77,7 @@ class UserPokemonControllerTest {
 
     @Test
     void updateUserPokemon() {
-        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("1111");
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("1111");
         userPokemon.setCarriedPokemon(pokemonService.fromID(124));
 
         this.userPokemonController.updateUserPokemon(userPokemon);
@@ -86,7 +86,7 @@ class UserPokemonControllerTest {
 
     @Test
     void levelUp() {
-        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberID("1111");
+        UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("1111");
         userPokemon.setCarriedPokemon(pokemonService.fromID(124));
         this.userPokemonController.levelUp(userPokemon);
     }
