@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.Data;
 
+@Singleton
 @Data
 public class ShopController {
 
