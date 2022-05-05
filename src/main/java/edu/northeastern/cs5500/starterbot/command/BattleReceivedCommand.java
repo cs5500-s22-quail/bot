@@ -114,11 +114,11 @@ public class BattleReceivedCommand implements ButtonClickHandler {
                             .getInitiatorUserId();
             PokemonInfo initiatorPokemonInfo =
                     userPokemonController
-                            .getUserPokemonForMemberID(initiatorUserId)
+                            .getUserPokemonForMemberId(initiatorUserId)
                             .getCarriedPokemon();
             PokemonInfo receiverPokemonInfo =
                     userPokemonController
-                            .getUserPokemonForMemberID(buttonClicker.getId())
+                            .getUserPokemonForMemberId(buttonClicker.getId())
                             .getCarriedPokemon();
 
             evenReplyHandler.battleUI(initiatorPokemonInfo, receiverPokemonInfo, event);

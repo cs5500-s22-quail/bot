@@ -37,7 +37,6 @@ public class SelectCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /select");
-        //        event.reply(event.getOption("content").getAsString()).queue();
         String userId = event.getUser().getId();
         String userSelect = event.getOption("content").getAsString();
         event.replyEmbeds(selectCommandController.getSelectEmbeds(userId, userSelect).build())

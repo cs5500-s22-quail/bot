@@ -26,7 +26,6 @@ public class TrainCommand implements Command, ButtonClickHandler {
     EmbedBuilder eb;
     SlashCommandEvent slashCommandEvent;
     ButtonClickEvent moneyMagicEvent;
-    //    @Inject EmbedBuilderGenerator embedBuilderGenerator;
     @Inject UserPokemonController userPokemonController;
     @Inject PokemonGenerator pokemonGenerator;
     @Inject TrainController trainController;
@@ -80,7 +79,7 @@ public class TrainCommand implements Command, ButtonClickHandler {
         } else if (event.getComponentId().equals("train:moneyLevelUp")) {
             clickMoneyLevelUp(event, moneyMagicEvent);
         } else if (event.getComponentId().equals("train:moneyCancel")) {
-            clickMoneyCancel(event, moneyMagicEvent);
+            clickMoneyCancel(moneyMagicEvent);
         }
     }
 
@@ -89,20 +88,17 @@ public class TrainCommand implements Command, ButtonClickHandler {
         String userId = event.getUser().getId();
         int userBalance = shopController.getBalanceForUserId(userId).getBalance();
         PokemonInfo pokemonInfo =
-                userPokemonController.getUserPokemonForMemberID(userId).getCarriedPokemon();
+                userPokemonController.getUserPokemonForMemberId(userId).getCarriedPokemon();
         int userPokemonLevel = pokemonInfo.getLevel();
         int toLevel = userPokemonLevel + 1;
-        //        int price = 100 * (int) Math.pow(2, userPokemonLevel / 10);
-        int basePrice = 10;
-        price = basePrice * (int) Math.pow(2, userPokemonLevel / 10);
+        final int BASE_PRICE = 10;
+        price = BASE_PRICE * (int) Math.pow(2, userPokemonLevel / 10);
         event.replyEmbeds(
                         eb.setTitle(
-                                        "Do you want to cost "
-                                                + price
-                                                + " coins to level up your pokemon to Level "
-                                                + toLevel
-                                                + "?")
-                                .setFooter("Your balance: " + userBalance + " coins")
+                                        String.format(
+                                                "Do you want to cost %s coins to level up your pokemon to Level %s?",
+                                                price, toLevel))
+                                .setFooter(String.format("Your balance: %s coins", userBalance))
                                 .build())
                 .addActionRow(
                         Button.success(
@@ -120,7 +116,7 @@ public class TrainCommand implements Command, ButtonClickHandler {
         event.replyEmbeds(embedBuilder.build()).queue();
 
         // Step2: random pokemon fighting with user's pokemon
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberId(userId);
         PokemonInfo userPokemonInfo = userPokemon.getCarriedPokemon();
         int levelBefore = userPokemonInfo.getLevel();
         evenReplyHandler.battleUI(
@@ -128,9 +124,6 @@ public class TrainCommand implements Command, ButtonClickHandler {
         embedBuilder =
                 trainController.getFightResultEmbeds(
                         embedBuilder, fightPokemon.getPokemonInfo(), userPokemon);
-        // TODO show the fight process here:
-        //        trainController.showFightProcess(event, fightPokemon.getPokemonInfo(),
-        // userPokemon);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ex) {
@@ -141,19 +134,17 @@ public class TrainCommand implements Command, ButtonClickHandler {
 
         // Step3:If the user win, show the pokemon info after updating
         if (levelBefore < levelAfter) {
-            embedBuilder = trainController.getLevelUpEmbeds(embedBuilder, userPokemonInfo);
+            embedBuilder = trainController.getLevelUpEmbeds(userPokemonInfo);
             event.getHook().editOriginalEmbeds(embedBuilder.build()).queue();
         }
     }
 
     public void clickMoneyLevelUp(ButtonClickEvent event, ButtonClickEvent lastEvent) {
-        // delete the price from the user balance -> succeed -> level up
-        //                                       -> faild  -> send message
         EmbedBuilder eb = new EmbedBuilder();
         String userId = event.getUser().getId();
         try {
             shopController.updateBalanceForUserId(userId, -price);
-            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+            UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberId(userId);
             userPokemonController.levelUp(userPokemon);
             lastEvent
                     .getHook()
@@ -161,19 +152,17 @@ public class TrainCommand implements Command, ButtonClickHandler {
                     .setActionRows()
                     .queue();
             PokemonInfo pokemonInfoLevelup = userPokemon.getCarriedPokemon();
-            //            String description = displayController.PokemonInfoUI(pokemonInfoLevelup);
             eb.setTitle(":tada:Your pokemon has been up-leveled")
                     .setDescription(
-                            "Level "
-                                    + pokemonInfoLevelup.getLevel()
-                                    + " "
-                                    + pokemonInfoLevelup.getName()
-                                    + "\n"
+                            String.format(
+                                            "Level %s %s\n",
+                                            pokemonInfoLevelup.getLevel(),
+                                            pokemonInfoLevelup.getName())
                                     + displayController.PokemonInfoUI(pokemonInfoLevelup))
                     .setFooter(
-                            "Your current balance: "
-                                    + shopController.getBalanceForUserId(userId).getBalance()
-                                    + " coins")
+                            String.format(
+                                    "Your current balance: %s coins",
+                                    shopController.getBalanceForUserId(userId).getBalance()))
                     .setImage(pokemonInfoLevelup.getOfficialArtworkUrl());
             event.replyEmbeds(eb.build()).queue();
 
@@ -182,12 +171,12 @@ public class TrainCommand implements Command, ButtonClickHandler {
         }
     }
 
-    public void clickMoneyCancel(ButtonClickEvent event, ButtonClickEvent lastEvent) {
+    public void clickMoneyCancel(ButtonClickEvent lastEvent) {
         EmbedBuilder eb = new EmbedBuilder();
         lastEvent
                 .getHook()
                 .editOriginalEmbeds(eb.setTitle("Canceled").build())
-                .setActionRows() // enable the button
+                .setActionRows()
                 .queue();
     }
 }
