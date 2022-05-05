@@ -4,6 +4,7 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+@Singleton
 public class PokemonInfoController {
 
     PokemonInfo pokemonInfo;
