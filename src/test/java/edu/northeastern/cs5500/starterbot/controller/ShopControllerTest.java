@@ -62,7 +62,7 @@ public class ShopControllerTest {
     @Test
     void testGettersForFields() {
         assertThat(this.shopController.getPreviousPokemons()).isNotNull();
-        assertNotNull(this.shopController.getPreviousPokemons());
+
 
         assertThat(this.shopController.getPreviousVisitedTime()).isNotNull();
 
