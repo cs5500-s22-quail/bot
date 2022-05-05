@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 class SelectCommandControllerTest {
 
     UserPokemonController userPokemonController;
-
     SelectCommandController selectCommandController;
-    //  GenericRepository<UserPokemon> userPokemonRepository;
 
     @BeforeEach
     void setUp() {
