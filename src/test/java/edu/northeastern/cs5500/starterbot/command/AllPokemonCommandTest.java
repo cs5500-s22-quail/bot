@@ -8,12 +8,11 @@ import org.junit.jupiter.api.Test;
 
 class AllPokemonCommandTest {
 
-  @Test
-  void getName() {
-    AllPokemonCommand allPokemonCommand = new AllPokemonCommand();
-    String name = allPokemonCommand.getName();
-    CommandData commandData = allPokemonCommand.getCommandData();
-    assertThat(name).isEqualTo(commandData.getName());
-  }
-
+    @Test
+    void getName() {
+        AllPokemonCommand allPokemonCommand = new AllPokemonCommand();
+        String name = allPokemonCommand.getName();
+        CommandData commandData = allPokemonCommand.getCommandData();
+        assertThat(name).isEqualTo(commandData.getName());
+    }
 }

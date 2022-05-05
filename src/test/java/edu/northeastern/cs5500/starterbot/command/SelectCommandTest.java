@@ -8,12 +8,11 @@ import org.junit.jupiter.api.Test;
 
 class SelectCommandTest {
 
-  @Test
-  void getName() {
-    SelectCommand selectCommand = new SelectCommand();
-    String name = selectCommand.getName();
-    CommandData commandData = selectCommand.getCommandData();
-    assertThat(name).isEqualTo(commandData.getName());
-  }
-
+    @Test
+    void getName() {
+        SelectCommand selectCommand = new SelectCommand();
+        String name = selectCommand.getName();
+        CommandData commandData = selectCommand.getCommandData();
+        assertThat(name).isEqualTo(commandData.getName());
+    }
 }

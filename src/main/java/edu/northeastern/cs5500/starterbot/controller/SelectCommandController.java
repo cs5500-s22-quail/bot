@@ -13,7 +13,9 @@ public class SelectCommandController {
     @Inject UserPokemonController userPokemonController;
 
     @Inject
-    public SelectCommandController() {}
+    public SelectCommandController(final UserPokemonController userPokemonController) {
+        this.userPokemonController = userPokemonController;
+    }
 
     public EmbedBuilder getSelectEmbeds(String userId, String userSelect) {
         EmbedBuilder embedBuilder = new EmbedBuilder();

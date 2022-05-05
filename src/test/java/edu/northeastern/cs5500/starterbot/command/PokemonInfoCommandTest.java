@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.junit.jupiter.api.Test;
 
-class TrainCommandTest {
+class PokemonInfoCommandTest {
 
     @Test
     void getName() {
-        TrainCommand trainCommand = new TrainCommand();
-        String name = trainCommand.getName();
-        CommandData commandData = trainCommand.getCommandData();
+        PokemonInfoCommand pokemonInfoCommand = new PokemonInfoCommand();
+        String name = pokemonInfoCommand.getName();
+        CommandData commandData = pokemonInfoCommand.getCommandData();
         assertThat(name).isEqualTo(commandData.getName());
     }
 }
