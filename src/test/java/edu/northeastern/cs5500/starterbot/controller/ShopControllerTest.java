@@ -1,9 +1,7 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,13 +22,13 @@ public class ShopControllerTest {
 
         // create a unique id
 
-        assertNotNull(this.shopController.getBalanceForUserId(uniqueId));
-        assertNotNull(this.shopController.getBalanceForUserId(uniqueId));
+        assertThat(this.shopController.getBalanceForUserId(uniqueId)).isNotNull();
+        assertThat(this.shopController.getBalanceForUserId(uniqueId)).isNotNull();
     }
 
     @Test
     void testUpdateBalanceForUserId() {
-        shopController.updateBalanceForUserId(uniqueId, 0);
+        assertThat(shopController.updateBalanceForUserId(uniqueId, 0));
     }
 
     @Test
@@ -46,9 +44,9 @@ public class ShopControllerTest {
     @Test
     void testEquals() {
         ShopController shopController2 = new ShopController(new InMemoryRepository<>());
-        assertNotEquals(shopController2, this.shopController);
+        assertThat(shopController2).isNotEqualTo(this.shopController);
         ShopController shopController3 = new ShopController(new InMemoryRepository<>());
-        assertNotEquals(shopController2, shopController3);
+        assertThat(shopController2).isNotEqualTo(shopController3);
         // since the inmemory repository does not have an overriden equals, hence equals does not
         // work.
 
@@ -57,16 +55,18 @@ public class ShopControllerTest {
     @Test
     void testHashCode() {
         ShopController shopController2 = new ShopController(new InMemoryRepository<>());
-        assertNotEquals(shopController2.hashCode(), this.shopController.hashCode());
+        assertThat(shopController2.hashCode()).isNotEqualTo(this.shopController.hashCode());
     }
 
     @Test
     void testGettersForFields() {
-        assertNotNull(this.shopController.getPreviousPokemons());
-        assertNotNull(this.shopController.getPreviousVisitedTime());
-        assertNotNull(this.shopController.getShopRepository());
-        assertNull(
-                this.shopController
-                        .getUserId()); // the UserId has not been instantiated, hence is null
+        assertThat(this.shopController.getPreviousPokemons()).isNotNull();
+
+        assertThat(this.shopController.getPreviousVisitedTime()).isNotNull();
+
+        assertThat(this.shopController.getShopRepository()).isNotNull();
+
+        assertThat(this.shopController.getUserId())
+                .isNull(); // the UserId has not been instantiated, hence is null
     }
 }
