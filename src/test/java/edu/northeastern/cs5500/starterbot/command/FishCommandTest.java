@@ -12,7 +12,6 @@ class FishCommandTest {
         FishCommand fishCommand = new FishCommand();
         String name = fishCommand.getName();
         CommandData commandData = fishCommand.getCommandData();
-
         assertThat(name).isEqualTo(commandData.getName());
     }
 }
