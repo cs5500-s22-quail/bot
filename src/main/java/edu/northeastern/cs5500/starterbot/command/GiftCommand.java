@@ -68,7 +68,7 @@ public class GiftCommand implements Command, SelectionMenuHandler {
         String discordUserId = event.getUser().getId();
         MessageBuilder mb = new MessageBuilder();
 
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(discordUserId);
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberId(discordUserId);
 
         EmbedBuilder eb = new EmbedBuilder();
 
@@ -116,9 +116,9 @@ public class GiftCommand implements Command, SelectionMenuHandler {
 
         String receiverId = event.getComponent().getId().split("-", 2)[1];
         UserPokemon receiverUserPokemon =
-                userPokemonController.getUserPokemonForMemberID(receiverId);
+                userPokemonController.getUserPokemonForMemberId(receiverId);
 
-        UserPokemon senderUserPokemon = userPokemonController.getUserPokemonForMemberID(senderId);
+        UserPokemon senderUserPokemon = userPokemonController.getUserPokemonForMemberId(senderId);
 
         ArrayList<PokemonInfo> senderPokemons = senderUserPokemon.getPokemonTeam();
 
