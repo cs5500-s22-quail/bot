@@ -22,32 +22,6 @@ public class BattleReceivedCommand implements ButtonClickHandler {
     @Inject EvenReplyHandler evenReplyHandler;
     @Inject BattleRequestController battleRequestController;
     @Inject UserPokemonController userPokemonController;
-    // @Override
-    // public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
-    //     String id = event.getMessageId();
-    //     String originalSender = id.split(":", 3)[1];
-    //     String reply = id.split(":", 3)[2];
-
-    //     // check if the receiver is the original sender.
-    //     String eventAuthor = event.getAuthor().getName();
-    //     if(eventAuthor.equals(originalSender)) {
-    //         // launch the battle if the reply is true;
-
-    //         if(reply.equals("true")) {
-
-    //             event.getJDA().getEventManager().handle(event);
-
-    //             // send the message back to the orginal user
-
-    //         } else {
-    //             // notify the user that the invitation has been declined.
-    //         }
-
-    //         return;
-    //     }
-
-    //     // if not, launch the invitation.
-    // }
 
     @Inject
     public BattleReceivedCommand() {}
@@ -61,11 +35,7 @@ public class BattleReceivedCommand implements ButtonClickHandler {
     public void onButtonClick(@NotNull ButtonClickEvent event) {
 
         // wait for battle request model updating
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+
         User buttonClicker = event.getUser();
 
         Date receiveTime = new Date();
@@ -78,9 +48,10 @@ public class BattleReceivedCommand implements ButtonClickHandler {
                     battleRequestController.getBattleRequestByReceiverUserId(receiverUserId);
 
             // case 1 : Other users click the button
-            if (battleRequest == null) {
-                event.reply("Sorry, @" + buttonClicker.getName() + " you are not been invited!")
+            if (battleRequest == null || battleRequest.getInitiatorUserId() == null) {
+                event.reply("Sorry, @" + buttonClicker.getName() + " you are not invited!")
                         .queue();
+                battleRequestController.deleteRequestById(buttonClicker.getId());
                 return;
             }
 
@@ -97,15 +68,14 @@ public class BattleReceivedCommand implements ButtonClickHandler {
             if (seconds > 60) {
                 event.reply("The request initiated in " + requestTime + " is no longer valid!")
                         .queue();
+                battleRequestController.deleteRequestById(buttonClicker.getId());
                 return;
             }
             // case 3 : The invitee click the button more than 1 time; (must happen after case 2)
             if (battleRequest.getIsBattle()) {
-                event.reply(
-                                "@"
-                                        + buttonClicker.getName()
-                                        + "Your already accepted this invitation!")
+                event.reply("@" + buttonClicker.getName() + "You already accepted this invitation!")
                         .queue();
+                battleRequestController.deleteRequestById(buttonClicker.getId());
                 return;
             }
             String initiatorUserId =
@@ -134,6 +104,8 @@ public class BattleReceivedCommand implements ButtonClickHandler {
                             + "\nYou could try another user.");
             mb.setEmbeds(eb.build());
         }
+
+        battleRequestController.deleteRequestById(buttonClicker.getId());
         // if handler is yes then trigger the battle
     }
 

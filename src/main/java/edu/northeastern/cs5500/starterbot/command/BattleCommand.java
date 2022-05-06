@@ -130,7 +130,7 @@ public class BattleCommand implements Command, SelectionMenuHandler {
         SelectionMenu menu =
                 SelectionMenu.create("battle")
                         .setPlaceholder(
-                                "Please choose from the following users to launche a battle.\n")
+                                "Please choose from the following users to launch a battle.\n")
                         .addOptions(nameOptions)
                         .build();
         mb.setEmbeds(eb.build()).setActionRows(ActionRow.of(menu));
