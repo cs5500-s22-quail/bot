@@ -4,13 +4,13 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import edu.northeastern.cs5500.starterbot.service.PokemonService;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class PokemonGenerator {
     @Inject PokemonService pokemonService;
     private static final int MAX_POKEMON_ID = 898;
 
-    // constructor:
-    //    public PokemonGenerator() {}
     @Inject
     public PokemonGenerator(PokemonService pokemonService) {
         this.pokemonService = pokemonService;

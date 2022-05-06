@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import lombok.Data;
 
+@Singleton
 @Data
 public class ShopController {
 
     public GenericRepository<UserBalance> shopRepository;
-    public Integer userID;
+    public Integer userId;
     public ArrayList<WildPokemon> previousPokemons;
     public long previousVisitedTime;
     public ArrayList<Integer> prices;

@@ -55,17 +55,19 @@ public class ProfileCommand implements Command {
                         .getBalance(); // the balance, initially set to 0. TBD
         int pokemons =
                 userPokemonController
-                        .getUserPokemonForMemberID(discordUserId)
+                        .getUserPokemonForMemberId(discordUserId)
                         .getPokemonTeam()
                         .size(); // the captured pokemons, initially set to 0. TBD
+        StringBuilder sb = new StringBuilder();
+        sb.append("Balance: ");
+        sb.append(String.valueOf(balance));
+        sb.append(System.lineSeparator());
+        sb.append("Captured Pokemons: ");
+        sb.append(String.valueOf(pokemons));
         EmbedBuilder eb =
                 new EmbedBuilder()
                         .setTitle(preferredName + "'s Profile")
-                        .setDescription(
-                                "Balance: "
-                                        + String.valueOf(balance)
-                                        + "\nCaptured Pokemons: "
-                                        + String.valueOf(pokemons))
+                        .setDescription(sb.toString())
                         .setThumbnail(discordAvatarUrl);
 
         return eb;

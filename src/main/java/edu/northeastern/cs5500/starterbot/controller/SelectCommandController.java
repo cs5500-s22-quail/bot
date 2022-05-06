@@ -4,14 +4,18 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+@Singleton
 public class SelectCommandController {
 
     @Inject UserPokemonController userPokemonController;
 
     @Inject
-    public SelectCommandController() {}
+    public SelectCommandController(final UserPokemonController userPokemonController) {
+        this.userPokemonController = userPokemonController;
+    }
 
     public EmbedBuilder getSelectEmbeds(String userId, String userSelect) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
@@ -22,7 +26,7 @@ public class SelectCommandController {
             embedBuilder.setTitle("Invalid input! Please enter an integer.");
             return embedBuilder;
         }
-        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberID(userId);
+        UserPokemon userPokemon = userPokemonController.getUserPokemonForMemberId(userId);
         ArrayList<PokemonInfo> userPokemonTeam = userPokemon.getPokemonTeam();
         int maxIndex = userPokemonTeam.size();
         if (maxIndex == 0) {

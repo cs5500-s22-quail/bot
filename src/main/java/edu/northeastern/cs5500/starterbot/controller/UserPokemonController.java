@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class UserPokemonController {
     GenericRepository<UserPokemon> userPokemonRepository;
 
@@ -25,13 +27,13 @@ public class UserPokemonController {
     }
 
     @Nonnull
-    public UserPokemon getUserPokemonForMemberID(String userID) {
+    public UserPokemon getUserPokemonForMemberId(String userId) {
         Collection<UserPokemon> userPokemons = this.userPokemonRepository.getAll();
         for (UserPokemon userPokemon : userPokemons) {
-            if (userPokemon.getUserID().equals(userID)) return userPokemon;
+            if (userPokemon.getUserID().equals(userId)) return userPokemon;
         }
         UserPokemon userPokemon = new UserPokemon();
-        userPokemon.setUserID(userID);
+        userPokemon.setUserID(userId);
         userPokemon.setPokemonTeam(new ArrayList<>());
         this.userPokemonRepository.add(userPokemon);
         return userPokemon;
@@ -42,9 +44,9 @@ public class UserPokemonController {
         this.userPokemonRepository.update(userPokemon);
     }
 
-    public void addPokemon(PokemonInfo pokemonInfo, String userID) {
-        if (this.isPossess(pokemonInfo.getName(), userID)) return;
-        UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
+    public void addPokemon(PokemonInfo pokemonInfo, String userId) {
+        if (this.isPossess(pokemonInfo.getName(), userId)) return;
+        UserPokemon userPokemon = this.getUserPokemonForMemberId(userId);
         ArrayList<PokemonInfo> list = userPokemon.getPokemonTeam();
         list.add(pokemonInfo);
         if (userPokemon.getCarriedPokemon() == null) {
@@ -53,19 +55,19 @@ public class UserPokemonController {
         this.userPokemonRepository.update(userPokemon);
     }
 
-    public void updateCarriedPokemonForMemberID(String userID, Integer index) {
-        UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
+    public void updateCarriedPokemonForMemberId(String userId, Integer index) {
+        UserPokemon userPokemon = this.getUserPokemonForMemberId(userId);
         userPokemon.setCarriedPokemon(userPokemon.getPokemonTeam().get(index - 1));
     }
 
     @Nonnull
-    public Boolean hasCarriedPokemon(String userID) {
-        return this.getUserPokemonForMemberID(userID).getCarriedPokemon() != null;
+    public Boolean hasCarriedPokemon(String userId) {
+        return this.getUserPokemonForMemberId(userId).getCarriedPokemon() != null;
     }
 
     @Nonnull
-    public Boolean isPossess(String speciesName, String userID) {
-        UserPokemon userPokemon = this.getUserPokemonForMemberID(userID);
+    public Boolean isPossess(String speciesName, String userId) {
+        UserPokemon userPokemon = this.getUserPokemonForMemberId(userId);
         if (userPokemon.getPokemonTeam() == null) userPokemon.setPokemonTeam(new ArrayList<>());
         for (PokemonInfo pokemonInfo : userPokemon.getPokemonTeam()) {
             if (pokemonInfo.getName().equals(speciesName)) return Boolean.TRUE;
@@ -102,14 +104,11 @@ public class UserPokemonController {
         carriedPokemon.setLevel(carriedPokemon.getLevel() + 1);
 
         for (PokemonInfo pokemonInfo : userPokemon.getPokemonTeam()) {
-            //            System.out.println("test " + pokemonInfo.getName());
             if (pokemonInfo.getName().equals(carriedPokemon.getName())) {
                 pokemonInfo.setLevel(carriedPokemon.getLevel());
-                //                System.out.println("Find the pokemon in team");
                 break;
             }
         }
         userPokemonRepository.update(userPokemon);
-        // TODO IV update
     }
 }

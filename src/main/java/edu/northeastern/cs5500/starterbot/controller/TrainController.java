@@ -4,8 +4,10 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
 import edu.northeastern.cs5500.starterbot.model.WildPokemon;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+@Singleton
 public class TrainController {
 
     @Inject BattleController battleController;
@@ -25,21 +27,12 @@ public class TrainController {
                 new EmbedBuilder()
                         .setTitle(fightPokemonInfo.getName() + " is fighting with your pokemon...")
                         .setDescription(
-                                // TODO: change attributes for /fight usage
-                                //    +
-                                // ivUIBundle(fightPokemonInfo)
-                                "HP: "
-                                        + fightPokemonInfo.getHp()
-                                        + " | Level: "
-                                        + fightPokemonInfo.getLevel())
+                                String.format(
+                                        "HP: %s | Level: %s",
+                                        fightPokemonInfo.getHp(), fightPokemonInfo.getLevel()))
                         .setImage(officialArtworkUrl);
         return embedBuilder;
     }
-
-    //    public void showFightProcess(
-    //            ButtonClickEvent event, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
-    //        battleController.battleUI(fightPokemonInfo, userPokemon.getCarriedPokemon(), event);
-    //    }
 
     public EmbedBuilder getFightResultEmbeds(
             EmbedBuilder embedBuilder, PokemonInfo fightPokemonInfo, UserPokemon userPokemon) {
@@ -56,36 +49,30 @@ public class TrainController {
         boolean userWin = winnerInfo == userPokemonInfo;
         if (userWin) {
             embedBuilder.setDescription("Your pokemon " + userPokemonInfo.getName() + " win!");
-            // TODO: level up the pokemon
-            System.out.println("before level up: " + userPokemonInfo.getLevel());
             userPokemonController.levelUp(userPokemon);
-            System.out.println("after level up: " + userPokemonInfo.getLevel());
         } else {
             embedBuilder.setDescription(
-                    "Your pokemon "
-                            + userPokemonInfo.getName()
-                            + " lost...Nice try and good luck next time!");
+                    String.format(
+                            "Your pokemon %s lost...Nice try and good luck next time!",
+                            userPokemonInfo.getName()));
         }
         embedBuilder.setTitle("The fight is over.").setImage(null);
 
         return embedBuilder;
     }
 
-    public EmbedBuilder getLevelUpEmbeds(EmbedBuilder embedBuilder, PokemonInfo pokemonInfo) {
+    public EmbedBuilder getLevelUpEmbeds(PokemonInfo pokemonInfo) {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        //        embedBuilder.setTitle("Your pokemon is level up!").setDescription("Description for
-        // ...");
         PokemonInfoController pokemonInfoController = new PokemonInfoController(pokemonInfo);
-        embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
+        EmbedBuilder embedBuilder = pokemonInfoController.getPokemonInfoEmbed();
         embedBuilder.setTitle(
-                "Your pokemon is leveled up!\n\nLevel "
-                        + pokemonInfo.getLevel()
-                        + " "
-                        + pokemonInfo.getName());
+                String.format(
+                        "Your pokemon is leveled up!\n\nLevel %s %s",
+                        pokemonInfo.getLevel(), pokemonInfo.getName()));
         return embedBuilder;
     }
 }

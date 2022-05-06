@@ -73,7 +73,7 @@ public class BattleCommand implements Command, SelectionMenuHandler {
                 .setAuthor("@" + receiver.getName());
 
         UserPokemon userPokemon =
-                userPokemonController.getUserPokemonForMemberID(event.getUser().getId());
+                userPokemonController.getUserPokemonForMemberId(event.getUser().getId());
         PokemonInfo userPokeInfo = userPokemon.getCarriedPokemon();
         if (userPokeInfo == null) {
             event.reply("You do not have any pokemon yet. Go get a pokemon").queue();
