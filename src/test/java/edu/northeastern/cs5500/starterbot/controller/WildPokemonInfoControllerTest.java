@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
@@ -32,7 +33,8 @@ class WildPokemonInfoControllerTest {
             if (wp.getDiscordChannel().equals(testChannel)) wildPokemon = wp;
         }
         PokemonInfo pokemonIV = wildPokemon.getPokemonInfo();
-        assertNotNull(pokemonIV);
+
+        assertThat(pokemonIV).isNotNull();
     }
 
     @Test
@@ -45,11 +47,19 @@ class WildPokemonInfoControllerTest {
                 this.wildPokemonController.wildPokemonRepository.delete(wildPokemon.getId());
         }
 
-        assertNull(
-                this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonInfo());
+        assertThat(
+                        this.wildPokemonController
+                                .getWildPokemonForChannel(testChannel)
+                                .getPokemonInfo())
+                .isNull();
+
         this.wildPokemonController.updateWildPokemonForChannel(testChannel);
-        assertNotNull(
-                this.wildPokemonController.getWildPokemonForChannel(testChannel).getPokemonInfo());
+
+        assertThat(
+                        this.wildPokemonController
+                                .getWildPokemonForChannel(testChannel)
+                                .getPokemonInfo())
+                .isNotNull();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.model.IndividualValue;
@@ -72,14 +73,16 @@ class IndividualValueTest {
     void testData() {
         IndividualValue individualValue = new IndividualValue();
         IndividualValue individualValue1 = new IndividualValue();
-        assertNotEquals(individualValue, individualValue1);
-        assertNotNull(individualValue.toString());
-        assertNotNull(individualValue.getHp());
-        assertNotNull(individualValue.getAttack());
-        assertNotNull(individualValue.getDefense());
-        assertNotNull(individualValue.getSpeed());
-        assertNotNull(individualValue.getSpecialAttack());
-        assertNotNull(individualValue.getSpecialDefense());
+        assertThat(individualValue).isNotEqualTo(individualValue1);
+
+        assertThat(individualValue.toString()).isNotNull();
+        assertThat(individualValue.getHp()).isNotNull();
+        assertThat(individualValue.getSpeed()).isNotNull();
+        assertThat(individualValue.getAttack()).isNotNull();
+        assertThat(individualValue.getDefense()).isNotNull();
+        assertThat(individualValue.getSpecialAttack()).isNotNull();
+        assertThat(individualValue.getSpecialDefense()).isNotNull();
+
         individualValue.setAttack(1);
         individualValue.setDefense(1);
         individualValue.setSpecialAttack(1);

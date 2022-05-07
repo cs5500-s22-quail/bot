@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class BattleRequestController {
         this.battleRequestGenericRepository = battleRequestGenericRepository;
     }
 
+    @Nullable
     public BattleRequest getBattleRequestByReceiverUserId(String receiverUserId) {
         Collection<BattleRequest> battleRequests = battleRequestGenericRepository.getAll();
         for (BattleRequest battleRequest : battleRequests) {
@@ -56,7 +58,11 @@ public class BattleRequestController {
 
     public void deleteRequestById(String receiverUserId) {
         BattleRequest battleRequest = this.getBattleRequestByReceiverUserId(receiverUserId);
-        battleRequestGenericRepository.delete(battleRequest.getId());
+
+        while (battleRequest != null) {
+            battleRequestGenericRepository.delete(battleRequest.getId());
+            battleRequest = this.getBattleRequestByReceiverUserId(receiverUserId);
+        }
     }
 
     public void setBattleRequestByUserId(String receiverUserId, String initiatorUserId) {

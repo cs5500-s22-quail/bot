@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.model.UserPokemon;
@@ -20,30 +21,32 @@ class UserPokemonControllerTest {
 
     @Test
     void getUserPokemonForMemberId() {
-        assertNotNull(this.userPokemonController.getUserPokemonForMemberId("7777"));
-        assertNotNull(
-                this.userPokemonController.getUserPokemonForMemberId("7777").getPokemonTeam());
-        assertNotNull(this.userPokemonController.getUserPokemonForMemberId("Random"));
-        assertNotNull(
-                this.userPokemonController.getUserPokemonForMemberId("Random").getPokemonTeam());
+        assertThat(this.userPokemonController.getUserPokemonForMemberId("7777")).isNotNull();
+        assertThat(this.userPokemonController.getUserPokemonForMemberId("7777").getPokemonTeam())
+                .isNotNull();
+        assertThat(this.userPokemonController.getUserPokemonForMemberId("Random")).isNotNull();
+        assertThat(this.userPokemonController.getUserPokemonForMemberId("Random").getPokemonTeam())
+                .isNotNull();
     }
 
     @Test
     void addPokemon() {
         UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("888");
-        assertFalse(this.userPokemonController.hasCarriedPokemon("888"));
+        assertThat(this.userPokemonController.hasCarriedPokemon("888")).isFalse();
+
         userPokemonController.addPokemon(pokemonService.fromID(4), "888");
-        assertTrue(this.userPokemonController.hasCarriedPokemon("888"));
+        assertThat(this.userPokemonController.hasCarriedPokemon("888")).isTrue();
         userPokemonController.addPokemon(pokemonService.fromID(5), "888");
         userPokemonController.addPokemon(pokemonService.fromID(6), "888");
-        assertEquals(
-                3, userPokemonController.getUserPokemonForMemberId("888").getPokemonTeam().size());
+
+        assertThat(userPokemonController.getUserPokemonForMemberId("888").getPokemonTeam().size())
+                .isEqualTo(3);
     }
 
     @Test
     void isPossess() {
-        assertFalse(this.userPokemonController.isPossess("random", "7777"));
-        assertFalse(this.userPokemonController.isPossess("random", "random"));
+        assertThat(this.userPokemonController.isPossess("random", "7777")).isFalse();
+        assertThat(this.userPokemonController.isPossess("random", "random")).isFalse();
     }
 
     @Test
@@ -55,33 +58,35 @@ class UserPokemonControllerTest {
         userPokemonController.addPokemon(pokemonService.fromID(4), "999");
         userPokemonController.addPokemon(pokemonService.fromID(5), "999");
         userPokemonController.updateCarriedPokemonForMemberId("999", 2);
-        assertEquals(
-                userPokemonController.getUserPokemonForMemberId("999").getCarriedPokemon(),
-                userPokemonController.getUserPokemonForMemberId("999").getPokemonTeam().get(2 - 1));
+        assertThat(userPokemonController.getUserPokemonForMemberId("999").getCarriedPokemon())
+                .isEqualTo(
+                        userPokemonController
+                                .getUserPokemonForMemberId("999")
+                                .getPokemonTeam()
+                                .get(2 - 1));
     }
 
     @Test
     void probability() {
-        assertEquals(userPokemonController.probability(Quality.RED), 2);
-        assertEquals(userPokemonController.probability(Quality.PURPLE), 3);
-        assertEquals(userPokemonController.probability(Quality.BLUE), 5);
-        assertEquals(userPokemonController.probability(Quality.GREEN), 7);
+        assertThat(userPokemonController.probability(Quality.RED)).isEqualTo(2);
+        assertThat(userPokemonController.probability(Quality.PURPLE)).isEqualTo(3);
+        assertThat(userPokemonController.probability(Quality.BLUE)).isEqualTo(5);
+        assertThat(userPokemonController.probability(Quality.GREEN)).isEqualTo(7);
     }
 
     @Test
     void testAttemptCatch() {
-        assertNotNull(userPokemonController.AttemptCatch(Quality.GREEN));
-        assertNotNull(userPokemonController.AttemptCatch(Quality.GREEN));
-        assertNotNull(userPokemonController.AttemptCatch(Quality.RED));
+        assertThat(userPokemonController.AttemptCatch(Quality.GREEN)).isNotNull();
+        assertThat(userPokemonController.AttemptCatch(Quality.RED)).isNotNull();
     }
 
     @Test
     void updateUserPokemon() {
         UserPokemon userPokemon = this.userPokemonController.getUserPokemonForMemberId("1111");
         userPokemon.setCarriedPokemon(pokemonService.fromID(124));
-
         this.userPokemonController.updateUserPokemon(userPokemon);
-        assertNotNull(userPokemon.getCarriedPokemon());
+
+        assertThat(userPokemon.getCarriedPokemon()).isNotNull();
     }
 
     @Test
