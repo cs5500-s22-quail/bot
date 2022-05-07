@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.service.PokemonService;
@@ -11,13 +12,13 @@ class DisplayControllerTest {
     void pokemonInfoUI() {
         DisplayController displayController = new DisplayController();
         PokemonService pokemonService = new PokemonService();
-        assertNotNull(displayController.PokemonInfoUI(pokemonService.fromID(12)));
+        assertThat(displayController.PokemonInfoUI(pokemonService.fromID(12))).isNotNull();
     }
 
     @Test
     void pokemonStatus() {
         DisplayController displayController = new DisplayController();
         PokemonService pokemonService = new PokemonService();
-        assertNotNull(displayController.pokemonStatus(pokemonService.fromID(12)));
+        assertThat(displayController.pokemonStatus(pokemonService.fromID(12))).isNotNull();
     }
 }

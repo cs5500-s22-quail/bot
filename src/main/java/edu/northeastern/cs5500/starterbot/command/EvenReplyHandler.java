@@ -4,10 +4,12 @@ import edu.northeastern.cs5500.starterbot.controller.BattleController;
 import edu.northeastern.cs5500.starterbot.controller.DisplayController;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
+@Singleton
 public class EvenReplyHandler {
 
     @Inject DisplayController displayController;

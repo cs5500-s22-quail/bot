@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
@@ -20,25 +21,26 @@ class PokemonServiceInfoTest {
 
     @Test
     void getOfficialArtworkUrl() {
-        assertEquals(
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-                pokemonService.fromID(4).getOfficialArtworkUrl());
+        assertThat(
+                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png")
+                .isEqualTo(pokemonService.fromID(4).getOfficialArtworkUrl());
     }
 
     @Test
     void getSpeciesName() {
 
-        assertEquals("scyther", pokemonService.fromID(123).getName());
+        assertThat("scyther").isEqualTo(pokemonService.fromID(123).getName());
     }
 
     @Test
     void getStat() {
         PokemonInfo extendedPokemon = pokemonService.fromName("ditto");
-        assertEquals(48, extendedPokemon.getHp());
-        assertEquals(48, extendedPokemon.getAttack());
-        assertEquals(48, extendedPokemon.getDefense());
-        assertEquals(48, extendedPokemon.getSpeed());
-        assertEquals(48, extendedPokemon.getSpecialAttack());
-        assertEquals(48, extendedPokemon.getSpecialDefense());
+
+        assertThat(48).isEqualTo(extendedPokemon.getHp());
+        assertThat(48).isEqualTo(extendedPokemon.getAttack());
+        assertThat(48).isEqualTo(extendedPokemon.getDefense());
+        assertThat(48).isEqualTo(extendedPokemon.getSpeed());
+        assertThat(48).isEqualTo(extendedPokemon.getSpecialAttack());
+        assertThat(48).isEqualTo(extendedPokemon.getSpecialDefense());
     }
 }

@@ -49,8 +49,7 @@ public class BattleReceivedCommand implements ButtonClickHandler {
 
             // case 1 : Other users click the button
             if (battleRequest == null || battleRequest.getInitiatorUserId() == null) {
-                event.reply("Sorry, @" + buttonClicker.getName() + " you are not invited!")
-                        .queue();
+                event.reply("Sorry, @" + buttonClicker.getName() + " you are not invited!").queue();
                 battleRequestController.deleteRequestById(buttonClicker.getId());
                 return;
             }
